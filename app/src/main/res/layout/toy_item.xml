@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:id="@+id/toy_item">
+
+    <ImageView
+        android:id="@+id/toy_image"
+        android:layout_width="71dp"
+        android:layout_height="94dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="23dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/toy_name"
+        android:layout_width="248dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="19dp"
+        app:layout_constraintBottom_toTopOf="@+id/toy_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.342"
+        app:layout_constraintStart_toEndOf="@+id/toy_image"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/toy_description"
+        android:layout_width="254dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="16dp"
+        android:text="Description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/feedToysFragment"
+        android:title="Toys"
+        android:icon="@drawable/ic_news"> </item>
+
+    <item android:id="@+id/addToysFragment"
+        android:title="Add toys"
+        android:icon="@drawable/ic_add"> </item>
+
+    <item android:id="@+id/savedToysFragment"
+        android:title="Favorite"
+        android:icon="@drawable/ic_favorite"> </item>
+
+    <!-- <item android:id="@+id/searchToysFragment"
+        android:title="Search toys"
+        android:icon="@drawable/ic_search"> </item> -->
+
+</menu>
