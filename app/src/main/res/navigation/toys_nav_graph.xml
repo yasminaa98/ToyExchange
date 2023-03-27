@@ -15,7 +15,11 @@
         android:label="FeedToysFragment" >
         <action
             android:id="@+id/action_feedToysFragment_to_detailsToysFragment"
-            app:destination="@id/detailsToysFragment" />
+            app:destination="@id/detailsToysFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/addToysFragment"
@@ -25,5 +29,13 @@
     <fragment
         android:id="@+id/detailsToysFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.DetailsToysFragment"
-        android:label="DetailsToysFragment" />
+        android:label="DetailsToysFragment" >
+        <action
+            android:id="@+id/action_detailsToysFragment_to_feedToysFragment2"
+            app:destination="@id/feedToysFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 </navigation>

@@ -1,6 +1,5 @@
 package com.example.toyexchange.Presentation.ToysViewModel
 
-import android.content.ClipData
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.util.Log
@@ -11,13 +10,15 @@ import androidx.lifecycle.viewModelScope
 import com.example.toyexchange.Data.Repository.ToysRepositoryImpl
 import com.example.toyexchange.Domain.model.Toy
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 class ToysViewModel() : ViewModel() {
     private val toysRepositoryImpl = ToysRepositoryImpl()
 
     private val _toys = MutableLiveData<List<Toy>>()
     val toys: LiveData<List<Toy>> = _toys
+
+    private val _toySelected = MutableLiveData<Toy>()
+    val toySelected: LiveData<Toy> = _toySelected
 
 
     // display toys List
@@ -39,5 +40,7 @@ class ToysViewModel() : ViewModel() {
             Log.e(ContentValues.TAG, "Failed to search for this toy", e)
         }
     }
+
+
 }
 

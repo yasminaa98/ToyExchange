@@ -16,5 +16,4 @@
     <!-- <item android:id="@+id/searchToysFragment"
         android:title="Search toys"
         android:icon="@drawable/ic_search"> </item> -->
-
 </menu>
