@@ -3,7 +3,6 @@ package com.example.toyexchange.Data.Repository
 import com.example.toyexchange.Data.remote.RetrofitClient
 import com.example.toyexchange.Data.remote.ToysApi
 import com.example.toyexchange.Domain.model.Toy
-import com.example.toyexchange.Domain.model.ToysList
 
 class ToysRepositoryImpl {
     private val apiService = RetrofitClient.retrofitInstance.create(ToysApi::class.java)
@@ -13,8 +12,8 @@ class ToysRepositoryImpl {
     suspend fun searchToys(name:String): List<Toy>{
         return apiService.searchToys(name)
     }
-    suspend fun getToydetailsById(id:Int):Toy{
+   /* suspend fun getToydetailsById(id:Int):Toy{
         return apiService.getToyDetailsById(id)
-    }
+    }*/
 
 }

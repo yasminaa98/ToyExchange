@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +20,7 @@ import com.example.toyexchange.Presentation.ToysViewModel.DetailsToyViewModel
 import com.example.toyexchange.Presentation.ToysViewModel.ToysViewModel
 import com.example.toyexchange.R
 import com.example.toyexchange.databinding.FeedToysFragmentBinding
+import com.example.toyexchange.theme.ui.MainActivity
 import com.example.trypostrequest.ui.adapter.ToysRecyclerViewAdapter
 
 
@@ -36,6 +38,8 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
         // create instance of viewmodel , the life cycle library creates it for us so if the viewmodel destroyed we don't need to recreated
         toysViewModel = ViewModelProvider(this).get(ToysViewModel::class.java)
         detailsToyViewModel = ViewModelProvider(this).get(DetailsToyViewModel::class.java)
+        (activity as MainActivity).setBottomNavigation(true)
+        (activity as MainActivity).setToolbar(false)
 
         /* toysRecyclerViewAdapter = ToysRecyclerViewAdapter(emptyList(),ToysRecyclerViewAdapter.OnClickListener{ photo ->
             Toast.makeText(context, "${photo.name}", Toast.LENGTH_SHORT).show() }) */
@@ -49,7 +53,9 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
                 toysRecyclerViewAdapter = ToysRecyclerViewAdapter(toys,
                     ToysRecyclerViewAdapter.OnClickListener{
                         clickedItem->
-                        val bundle = bundleOf("id" to clickedItem.id)
+                        val bundle = bundleOf("id" to clickedItem.id ,
+                            "name" to clickedItem.name, "description" to clickedItem.description,
+                        "price" to clickedItem.price)
                         findNavController().navigate(R.id.action_feedToysFragment_to_detailsToysFragment,bundle)
                 })
                 binding.toysList.adapter = toysRecyclerViewAdapter

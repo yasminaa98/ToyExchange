@@ -7,8 +7,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
         <ImageView
             android:id="@+id/toy_image"
             android:layout_width="wrap_content"
@@ -23,15 +21,6 @@
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteY="103dp"
             tools:srcCompat="@tools:sample/avatars" />
-
-        <RatingBar
-            android:id="@+id/rating_bar"
-            android:layout_width="247dp"
-            android:layout_height="60dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="647dp" />
 
         <TextView
             android:id="@+id/toy_name"
@@ -69,13 +58,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
-            android:text="Exchange"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.449"
             app:layout_constraintStart_toStartOf="parent"
+            android:drawable="@drawable/swap"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.797"
+            android:background="@drawable/button_shape"
             tools:ignore="MissingConstraints" />
 
         <TextView

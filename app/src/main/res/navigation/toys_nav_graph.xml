@@ -4,15 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toys_nav_graph"
     app:startDestination="@id/feedToysFragment">
-
     <fragment
         android:id="@+id/savedToysFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.SavedToysFragment"
-        android:label="SavedToysFragment" />
+        android:label="SavedToysFragment" >
+        <action
+            android:id="@+id/action_savedToysFragment_to_detailsToysFragment"
+            app:destination="@id/detailsToysFragment" />
+    </fragment>
     <fragment
         android:id="@+id/feedToysFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.FeedToysFragment"
-        android:label="FeedToysFragment" >
+        android:label="Toys Feed" >
         <action
             android:id="@+id/action_feedToysFragment_to_detailsToysFragment"
             app:destination="@id/detailsToysFragment"
@@ -24,18 +27,22 @@
     <fragment
         android:id="@+id/addToysFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.AddToysFragment"
-        android:label="ArticleTotFragment"
+        android:label="Add Toys "
     />
     <fragment
         android:id="@+id/detailsToysFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.DetailsToysFragment"
-        android:label="DetailsToysFragment" >
+        android:label="Toy Details" >
         <action
-            android:id="@+id/action_detailsToysFragment_to_feedToysFragment2"
+            android:id="@+id/action_detailsToysFragment_to_feedToysFragment"
             app:destination="@id/feedToysFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_in_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_in_left"/>
     </fragment>
+    <fragment
+        android:id="@+id/editProfilFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.EditProfilFragment"
+        android:label="Edit Profil" />
 </navigation>

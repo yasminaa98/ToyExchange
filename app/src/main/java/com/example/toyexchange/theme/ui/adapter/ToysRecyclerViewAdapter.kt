@@ -1,15 +1,11 @@
 package com.example.trypostrequest.ui.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.toyexchange.Domain.model.Toy
 import com.example.toyexchange.databinding.ToyItemBinding
-import com.example.toyexchange.theme.ui.adapter.OnClickListener
-import com.example.toyexchange.theme.ui.fragments.FeedToysFragment
 
 
 class ToysRecyclerViewAdapter(
