@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toys_nav_graph"
-    app:startDestination="@id/feedToysFragment">
+    app:startDestination="@id/signInFragment">
     <fragment
         android:id="@+id/savedToysFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.SavedToysFragment"
@@ -15,7 +15,7 @@
     <fragment
         android:id="@+id/feedToysFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.FeedToysFragment"
-        android:label="Toys Feed" >
+        android:label="𝐵𝑜𝑜𝒷𝒶" >
         <action
             android:id="@+id/action_feedToysFragment_to_detailsToysFragment"
             app:destination="@id/detailsToysFragment"
@@ -45,4 +45,20 @@
         android:id="@+id/editProfilFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.EditProfilFragment"
         android:label="Edit Profil" />
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.SignInFragment"
+        android:label="SignInFragment" >
+        <action
+            android:id="@+id/action_signInFragment_to_feedToysFragment"
+            app:destination="@id/feedToysFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.SignUpFragment"
+        android:label="SignUpFragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_feedToysFragment"
+            app:destination="@id/feedToysFragment" />
+    </fragment>
 </navigation>

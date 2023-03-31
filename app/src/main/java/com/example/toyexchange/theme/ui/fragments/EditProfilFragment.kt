@@ -21,6 +21,8 @@ class EditProfilFragment : Fragment(R.layout.profil_edit_fragment) {
     ): View? {
         val binding = ProfilEditFragmentBinding.inflate(inflater, container, false)
         (activity as MainActivity).setBottomNavigation(true)
+
+
         return binding.root
     }
 

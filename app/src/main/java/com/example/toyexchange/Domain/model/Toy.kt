@@ -1,14 +1,17 @@
 package com.example.toyexchange.Domain.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-
+@Entity(tableName="toysInformation")
 data class Toy(
+    @SerializedName("id")
+    @PrimaryKey
+    var id: Int,
     @SerializedName("category")
     val category: String,
     @SerializedName("description")
     val description: String,
-    @SerializedName("id")
-    var id: Int,
     @SerializedName("image_url")
     val image_url: String,
     @SerializedName("name")

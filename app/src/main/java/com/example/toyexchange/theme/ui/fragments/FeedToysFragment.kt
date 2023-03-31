@@ -37,7 +37,6 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
         val binding = FeedToysFragmentBinding.inflate(inflater, container, false)
         // create instance of viewmodel , the life cycle library creates it for us so if the viewmodel destroyed we don't need to recreated
         toysViewModel = ViewModelProvider(this).get(ToysViewModel::class.java)
-        detailsToyViewModel = ViewModelProvider(this).get(DetailsToyViewModel::class.java)
         (activity as MainActivity).setBottomNavigation(true)
         (activity as MainActivity).setToolbar(false)
 
@@ -55,7 +54,8 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
                         clickedItem->
                         val bundle = bundleOf("id" to clickedItem.id ,
                             "name" to clickedItem.name, "description" to clickedItem.description,
-                        "price" to clickedItem.price)
+                        "price" to clickedItem.price,"category" to clickedItem.category,
+                            "image_url" to clickedItem.image_url)
                         findNavController().navigate(R.id.action_feedToysFragment_to_detailsToysFragment,bundle)
                 })
                 binding.toysList.adapter = toysRecyclerViewAdapter
