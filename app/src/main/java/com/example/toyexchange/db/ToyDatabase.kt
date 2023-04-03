@@ -1,7 +1,6 @@
 package com.example.toyexchange.db
 
 import android.content.Context
-import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -29,7 +28,6 @@ abstract class ToyDatabase : RoomDatabase(){
                     .build()
                 }
             return INSTANCE as ToyDatabase
-            Log.i("db created","hi")
 
         }
 

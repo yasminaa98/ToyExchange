@@ -1,4 +1,4 @@
-package com.example.toyexchange.Data.remote
+package com.example.toyexchange.data.remote
 
 import com.example.toyexchange.Domain.model.Toy
 import retrofit2.http.GET

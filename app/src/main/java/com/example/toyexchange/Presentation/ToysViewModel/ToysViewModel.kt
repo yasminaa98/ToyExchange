@@ -7,7 +7,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.toyexchange.Data.Repository.ToysRepositoryImpl
+import com.example.toyexchange.Common.Resource
+import com.example.toyexchange.data.Repository.ToysRepositoryImpl
 import com.example.toyexchange.Domain.model.Toy
 import kotlinx.coroutines.launch
 
@@ -26,6 +27,7 @@ class ToysViewModel() : ViewModel() {
         viewModelScope.launch {
             try {
                 _toys.value = toysRepositoryImpl.getToys()
+                
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to fetch toys", e)
             }
