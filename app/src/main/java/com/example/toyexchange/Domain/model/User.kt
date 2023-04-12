@@ -6,11 +6,11 @@ data class User(
     @SerializedName("homeAddress")
     val homeAddress:String,
     @SerializedName("email")
-    val email:Int,
+    val email:String,
     @SerializedName("id")
     var id: Int,
-    @SerializedName("image_url")
-    val image_url: String,
+   /* @SerializedName("image_url")
+    val image_url: String, */
     @SerializedName("firstname")
     val firstname: String,
     @SerializedName("lastname")
@@ -23,6 +23,6 @@ data class User(
     val phone: Int,
     @SerializedName("avgResponseTime")
     val avgResponseTime: String,
-    @SerializedName("description")
-    val description: String
+   /* @SerializedName("description")
+    val description: String */
 )

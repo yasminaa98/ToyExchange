@@ -12,12 +12,18 @@ data class Toy(
     val category: String,
     @SerializedName("description")
     val description: String,
-    @SerializedName("image_url")
+    @SerializedName("picture")
     val image_url: String,
     @SerializedName("name")
     val name: String,
     @SerializedName("price")
-    val price: Double,
+    val price: String,
+    @SerializedName("state")
+    val state: String,
+    @SerializedName("ageChild")
+    val age_child: String,
+    @SerializedName("ageToy")
+    val age_toy: String,
    /* @SerializedName("owner")
     val owner:User */
 

@@ -10,4 +10,5 @@
     <color name="pink">#f5beb4</color>
     <color name="bleu">#cbf6db</color>
     <color name="green">#9bc472</color>
+    <color name="transparent">#809bc472</color>
 </resources>

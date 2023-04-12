@@ -9,7 +9,7 @@ data class UserLoginResponse(
     val username:String,
     @SerializedName("email")
     val email:String,
-    @SerializedName("accessToken")
+    @SerializedName("token")
     val auth_token:String
 
 )

@@ -1,10 +1,12 @@
 package com.example.toyexchange.theme.ui.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.core.os.bundleOf
@@ -12,6 +14,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.models.SlideModel
 import com.example.toyexchange.Presentation.ToysViewModel.ToysViewModel
 import com.example.toyexchange.R
 import com.example.toyexchange.databinding.FeedToysFragmentBinding
@@ -30,9 +34,23 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
         toysViewModel = ViewModelProvider(this).get(ToysViewModel::class.java)
         (activity as MainActivity).setBottomNavigation(true)
         (activity as MainActivity).setToolbar(false)
+        val imageList=ArrayList<SlideModel>()
+        imageList.clear()
+        imageList.add(SlideModel(R.drawable.img1))
+        imageList.add(SlideModel(R.drawable.img2))
+        imageList.add(SlideModel(R.drawable.img3))
+        imageList.add(SlideModel(R.drawable.img4))
+        imageList.add(SlideModel(R.drawable.img1))
+
+        binding.imageSlider.setImageList(imageList, ScaleTypes.FIT)
 
         /* toysRecyclerViewAdapter = ToysRecyclerViewAdapter(emptyList(),ToysRecyclerViewAdapter.OnClickListener{ photo ->
             Toast.makeText(context, "${photo.name}", Toast.LENGTH_SHORT).show() }) */
+        //get the stored token
+        val sharedPreferences =
+            requireActivity().getSharedPreferences("authToken", Context.MODE_PRIVATE)
+        val token =sharedPreferences.getString("authToken",null)
+
         binding.toysList.apply {
             layoutManager = LinearLayoutManager(this.context)
 
@@ -51,7 +69,7 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
                 })
                 binding.toysList.adapter = toysRecyclerViewAdapter
             })
-            toysViewModel.fetchToys()
+            toysViewModel.fetchToys(token.toString())
             Log.i("toys fetched", "toys fetched")
 
 
@@ -71,6 +89,48 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
                     return false
                 }
             })
+            //filter by category
+            val checkboxListener = CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+                val category = when (buttonView.tag) {
+                    "musical" -> "musical"
+                    "learning" -> "learning"
+                    "electronic" -> "electronic"
+                    else -> ""
+                }
+
+                if (isChecked) {
+                    if (toysViewModel.toys.value?.isEmpty() == true) {
+
+                        Toast.makeText(context, "this toy is unavailable", Toast.LENGTH_LONG).show()
+                    } else {
+                        toysViewModel.searchToysByCategory(category)
+
+                    }
+                }
+
+            }
+
+            binding.musical.setOnCheckedChangeListener(checkboxListener)
+            binding.puzzel.setOnCheckedChangeListener(checkboxListener)
+            binding.electronic.setOnCheckedChangeListener(checkboxListener)
+            binding.learning.setOnCheckedChangeListener(checkboxListener)
+
+
+
+            /*binding.musical.setOnCheckedChangeListener{ _,isChecked ->
+                if(isChecked) {
+                    if (toysViewModel.toys.value?.isEmpty() == true) {
+                        Toast.makeText(context, "this toy is unavailable", Toast.LENGTH_LONG).show()
+                    } else {
+                        toysViewModel.searchToysByCategory("musical")
+                    }
+                }
+                else{
+                    toysViewModel.fetchToys()
+
+                }
+            } */
+
 
             return binding.root
         }

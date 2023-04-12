@@ -1,6 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/green">
+
+        <EditText
+            android:id="@+id/toy_state"
+            android:layout_width="293dp"
+            android:layout_height="50dp"
+            android:background="@drawable/user_profil_shape"
+            android:ems="10"
+            android:hint="State"
+            android:inputType="textPersonName"
+            android:textColor="#60953A"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.406"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.395"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/toy_description"
+            android:layout_width="293dp"
+            android:layout_height="50dp"
+            android:background="@drawable/user_profil_shape"
+            android:ems="10"
+            android:hint="Description"
+            android:inputType="textPersonName"
+            android:textColor="#60953A"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.406"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.58"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/signUp_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/category_clicked"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.061"
+            tools:ignore="MissingConstraints"
+            tools:srcCompat="@tools:sample/avatars" />
+
+
+        <EditText
+            android:id="@+id/child_age"
+            android:layout_width="293dp"
+            android:layout_height="48dp"
+            android:background="@drawable/user_profil_shape"
+            android:ems="10"
+            android:hint="child age"
+            android:inputType="phone"
+            android:textColor="#60953A"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.427"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.871"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/toy_age"
+            android:layout_width="293dp"
+            android:layout_height="48dp"
+            android:background="@drawable/user_profil_shape"
+            android:ems="10"
+            android:hint="Toy age"
+            android:inputType="phone"
+            android:textColor="#60953A"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.427"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.775"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/price"
+            android:layout_width="293dp"
+            android:layout_height="50dp"
+            android:background="@drawable/user_profil_shape"
+            android:ems="10"
+            android:hint="Estimed price"
+            android:inputType="number"
+            android:textColor="#60953A"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.406"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.676"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/add_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/pink"
+            android:text="Next"
+            android:textColor="#60953A"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.976"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/toy_name"
+            android:layout_width="293dp"
+            android:layout_height="58dp"
+            android:layout_marginStart="48dp"
+            android:autofillHints="no"
+            android:background="@drawable/user_profil_shape"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:textColor="#60953A"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.292" />
+
+        <EditText
+            android:id="@+id/toy_category"
+            android:layout_width="293dp"
+            android:layout_height="50dp"
+            android:background="@drawable/user_profil_shape"
+            android:ems="10"
+            android:hint="Category"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.406"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.486" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

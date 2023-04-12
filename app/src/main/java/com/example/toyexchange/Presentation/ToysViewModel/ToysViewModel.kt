@@ -18,18 +18,22 @@ class ToysViewModel() : ViewModel() {
     private val _toys = MutableLiveData<List<Toy>>()
     val toys: LiveData<List<Toy>> = _toys
 
-    private val _toySelected = MutableLiveData<Toy>()
-    val toySelected: LiveData<Toy> = _toySelected
+   /* private val _toySelected = MutableLiveData<Toy>()
+    val toySelected: LiveData<Toy> = _toySelected */
 
 
     // display toys List
-    fun fetchToys() {
+    fun fetchToys(token:String) {
         viewModelScope.launch {
+            var result = toysRepositoryImpl.getToys("$token")
             try {
-                _toys.value = toysRepositoryImpl.getToys()
-                
+                if (result.body() != null) {
+                    _toys.postValue(result.body())
+                } else {
+                    Log.i("body empty", result.message())
+                }
             } catch (e: Exception) {
-                Log.e(TAG, "Failed to fetch toys", e)
+                Log.e(ContentValues.TAG, "Failed to fetch toys", e)
             }
         }
     }
@@ -40,6 +44,14 @@ class ToysViewModel() : ViewModel() {
 
         } catch (e: Exception) {
             Log.e(ContentValues.TAG, "Failed to search for this toy", e)
+        }
+    }
+    fun searchToysByCategory(category:String)=viewModelScope.launch{
+        try {
+            _toys.value = toysRepositoryImpl.searchToys(category).filter { it.category.contains(category, ignoreCase = true)}
+
+        } catch (e: Exception) {
+            Log.e(ContentValues.TAG, "Failed to search for this category", e)
         }
     }
 

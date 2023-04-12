@@ -1,28 +1,28 @@
 package com.example.toyexchange.data.remote
 
+import com.example.toyexchange.Domain.model.Annonce
 import com.example.toyexchange.Domain.model.Toy
-import retrofit2.http.GET
-import retrofit2.http.Query
+import com.google.gson.JsonObject
+import retrofit2.Response
+import retrofit2.http.*
 
 interface ToysApi {
-   /* @POST("/toys.json?key=ae86fe50")
-    suspend fun addToys(@Body toys: Toy): List<Toy> */
-    @GET("/toys.json?key=ae86fe50")
-    suspend fun getToys():List<Toy>
-    @GET("/toys.json?key=ae86fe50")
-    suspend fun searchToys(@Query("name") name:String) :List<Toy>
-  /*  @GET("/toys.json?key=ae86fe50")
-    suspend fun getToyDetailsById(@Query("id") id:Int):Toy*/
+    @POST("api/annonces/add")
+    suspend fun addToy(
+        @Header("Authorization") token: String,
+        @Body annonce: Annonce
+    ): Response<JsonObject>
 
+    @GET("api/annonces/getAll")
+    suspend fun getToys(@Header("Authorization") token: String): Response<List<Toy>>
 
+    @GET("api/annonces/getAll")
+    suspend fun searchToys(@Query("name") name: String): List<Toy>
 
-
-
-
-
-
-
-
+    @GET("api/annonces/getAll")
+    suspend fun searchToysByCategory(@Query("category") category: String): List<Toy>
+    /*  @GET("/toys.json?key=ae86fe50")
+      suspend fun getToyDetailsById(@Query("id") id:Int):Toy*/
 
 
 }

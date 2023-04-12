@@ -97,11 +97,11 @@ dependencies {
     implementation "androidx.room:room-runtime:2.5.0"
     implementation "androidx.room:room-ktx:2.5.0"
     kapt "androidx.room:room-compiler:2.5.0"
+    //image slide
+    implementation "com.github.denzcoskun:ImageSlideshow:0.1.0"
+
 
     //safe args
     //implementation "androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3"
-
-
-
 
 }
