@@ -59,6 +59,12 @@
         <action
             android:id="@+id/action_signInFragment_to_addToysFragment"
             app:destination="@id/addToysFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_modifyAnnonceFragment"
+            app:destination="@id/modifyAnnonceFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_editProfilFragment"
+            app:destination="@id/editProfilFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -84,4 +90,16 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
+    <fragment
+        android:id="@+id/myAnnoncesFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.MyAnnoncesFragment"
+        android:label="My toy annonces" >
+        <action
+            android:id="@+id/action_myAnnoncesFragment_to_modifyAnnonceFragment"
+            app:destination="@id/modifyAnnonceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modifyAnnonceFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.ModifyAnnonceFragment"
+        android:label="Modify annonce" />
 </navigation>

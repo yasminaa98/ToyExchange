@@ -100,7 +100,6 @@ dependencies {
     //image slide
     implementation "com.github.denzcoskun:ImageSlideshow:0.1.0"
 
-
     //safe args
     //implementation "androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3"
 

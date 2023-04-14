@@ -34,6 +34,7 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
         toysViewModel = ViewModelProvider(this).get(ToysViewModel::class.java)
         (activity as MainActivity).setBottomNavigation(true)
         (activity as MainActivity).setToolbar(false)
+        //image slider
         val imageList=ArrayList<SlideModel>()
         imageList.clear()
         imageList.add(SlideModel(R.drawable.img1))

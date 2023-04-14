@@ -23,6 +23,11 @@ interface ToysApi {
     suspend fun searchToysByCategory(@Query("category") category: String): List<Toy>
     /*  @GET("/toys.json?key=ae86fe50")
       suspend fun getToyDetailsById(@Query("id") id:Int):Toy*/
+    @PUT("api/annonces/{id_annonce}/modify")
+    suspend fun modifyAnnonce(
+        @Header("Authorization") token: String,
+        @Path("id_annonce") idAnnonce:String ,
+    @Body annonce: Annonce):Response<JsonObject>
 
 
 }

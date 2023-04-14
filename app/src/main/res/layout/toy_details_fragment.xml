@@ -6,91 +6,107 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/pink">
+        android:background="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/annonce_home"
             android:layout_width="match_parent"
-            android:layout_height="447dp"
+            android:layout_height="0dp"
             android:background="@drawable/recyclerview_shape"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="-2dp">
+            android:backgroundTint="@color/bleu"
+            app:layout_constraintBottom_toTopOf="@+id/linear"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
 
 
             <TextView
                 android:id="@+id/toy_description"
-                android:layout_width="0dp"
-                android:layout_height="54dp"
-                android:layout_gravity="center_horizontal"
-
-                android:layout_marginBottom="20dp"
-                android:text="description"
-
-                app:layout_constraintBottom_toTopOf="@+id/toy_price"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="31dp" />
-
-            <CheckBox
-                android:id="@+id/checkBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:button="@drawable/wishlist_selector"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="164dp"
+                android:text="description"
+
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/toy_image"
-                tools:layout_editor_absoluteY="67dp" />
+                app:layout_constraintHorizontal_bias="0.153"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints" />
 
             <TextView
                 android:id="@+id/toy_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="20dp"
                 android:text="price"
                 android:textSize="20sp"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="32dp"
-                tools:layout_editor_absoluteY="153dp" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/toy_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.109"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints" />
 
             <TextView
                 android:id="@+id/toy_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="20dp"
                 android:text="name"
-
+                android:textSize="50sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/toy_description"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.303"
+                app:layout_constraintHorizontal_bias="0.139"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toy_image"
-                app:layout_constraintVertical_bias="0.786"
                 app:layout_constraintWidth_percent="0.8"
                 tools:ignore="MissingConstraints" />
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/category_clicked"
-                android:drawable="@drawable/swap"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.576"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.596" />
-
             <ImageView
                 android:id="@+id/toy_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:layout_editor_absoluteX="170dp"
-                tools:layout_editor_absoluteY="67dp"
+                android:layout_width="414dp"
+                android:layout_height="199dp"
+                android:background="@drawable/top_layout_shape"
+                app:layout_constraintBottom_toTopOf="@+id/toy_price"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="0dp"
                 tools:srcCompat="@tools:sample/avatars" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="0dp">
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:button="@drawable/wishlist_selector"
+                android:layout_marginLeft="30dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="60dp"
+                android:backgroundTint="@color/pink"
+                android:text="Exchange"
+                android:background="@drawable/rectangle_corners"/>
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

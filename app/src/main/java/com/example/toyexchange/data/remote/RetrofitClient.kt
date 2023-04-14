@@ -12,8 +12,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import kotlin.coroutines.coroutineContext
 
 object RetrofitClient {
-   // private lateinit var sharedPreferences: SharedPreferences
-  /*  fun initSharedPreferences(context: Context) {
+    // private lateinit var sharedPreferences: SharedPreferences
+    /*  fun initSharedPreferences(context: Context) {
         sharedPreferences = context.getSharedPreferences("authToken", Context.MODE_PRIVATE)
     }
 
@@ -29,7 +29,7 @@ object RetrofitClient {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             //.client(httpClient)
-          /*  .client(
+            /*  .client(
                 OkHttpClient.Builder()
                     .addInterceptor{
                         chain ->  chain.proceed(chain.request().newBuilder().also {
@@ -48,31 +48,32 @@ object RetrofitClient {
 
             .build()
     }
-    val retrofitInstanceLogin: Retrofit by lazy {
-        Retrofit.Builder()
-            .baseUrl(BASE_URL)
-           // .client(httpClient)
-          /*  .client(
-                OkHttpClient.Builder()
-                    .addInterceptor{
-                            chain ->  chain.proceed(chain.request().newBuilder().also {
-                        it.addHeader("Authorization","Bearer $authToken")
-                    }.build())
-                    }.also {
-                            client ->
-                        if(BuildConfig.DEBUG){
-                            val logging=HttpLoggingInterceptor()
-                            logging.setLevel((HttpLoggingInterceptor.Level.BODY))
-                            client.addInterceptor(logging)
-                        }
-                    }.build()
-            ) */
+}
+       /*  val retrofitInstanceLogin: Retrofit by lazy {
+            Retrofit.Builder()
+                .baseUrl(BASE_URL)
+               .client(httpClient)
+               .client(
+                    OkHttpClient.Builder()
+                        .addInterceptor{
+                                chain ->  chain.proceed(chain.request().newBuilder().also {
+                            it.addHeader("Authorization","Bearer $authToken")
+                        }.build())
+                        }.also {
+                                client ->
+                            if(BuildConfig.DEBUG){
+                                val logging=HttpLoggingInterceptor()
+                                logging.setLevel((HttpLoggingInterceptor.Level.BODY))
+                                client.addInterceptor(logging)
+                            }
+                        }.build()
+                )
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-    }
+    } */
 
-    //val toysApi: ToysApi = retrofitInstance.create(ToysApi::class.java)
 
-}
+
+
 

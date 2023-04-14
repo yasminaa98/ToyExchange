@@ -10,13 +10,13 @@
     android:background="@color/green">
 
     <EditText
-        android:id="@+id/user_surname"
+        android:id="@+id/lastname"
         android:layout_width="293dp"
         android:layout_height="50dp"
         android:background="@drawable/user_profil_shape"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="User name"
+        android:hint="Surname"
         android:textColor="#60953A"
 
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,13 +27,13 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/user_age"
+        android:id="@+id/response"
         android:layout_width="293dp"
         android:layout_height="50dp"
         android:background="@drawable/user_profil_shape"
         android:ems="10"
         android:inputType="number"
-        android:text="Age"
+        android:hint="Average response time"
         android:textColor="#60953A"
 
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,7 +63,7 @@
         android:background="@drawable/user_profil_shape"
         android:ems="10"
         android:inputType="phone"
-        android:text="Phone Number"
+        android:hint="Phone Number"
         android:textColor="#60953A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,14 +74,14 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/user_name"
+        android:id="@+id/firstname"
         android:layout_width="293dp"
         android:layout_height="50dp"
         android:autofillHints="no"
         android:background="@drawable/user_profil_shape"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:hint="Name"
         android:textColor="#60953A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -91,13 +91,13 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/user_location"
+        android:id="@+id/address"
         android:layout_width="293dp"
         android:layout_height="50dp"
         android:background="@drawable/user_profil_shape"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Location"
+        android:hint="Location"
         android:textColor="#60953A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

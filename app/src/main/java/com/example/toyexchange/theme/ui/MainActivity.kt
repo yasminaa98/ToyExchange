@@ -19,8 +19,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-
 private lateinit var binding: ActivityMainBinding
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -48,10 +48,14 @@ class SignInFragment: Fragment(R.layout.sign_in_fragment) {
                 requireActivity().getSharedPreferences("authToken", Context.MODE_PRIVATE)
                 val editor = sharedPreferences.edit()
                 editor.putString("authToken", it.auth_token)
+                editor.putString("username",it.username)
+                editor.putLong("iduser",it.id)
                  editor.apply()
                     Log.i("token",it.auth_token)
-                Log.i("toked stored",sharedPreferences.getString("authToken",null).toString())
-                findNavController().navigate(R.id.action_signInFragment_to_feedToysFragment)
+                Log.i("username",it.username)
+                Log.i("token stored",sharedPreferences.getString("authToken",null).toString())
+                Log.i("username stored",sharedPreferences.getString("username",null).toString())
+                findNavController().navigate(R.id.action_signInFragment_to_editProfilFragment)
         }
             else{
                 Toast.makeText(requireContext(),"the user is failed to login",Toast.LENGTH_LONG).show()
