@@ -14,7 +14,9 @@ import com.example.toyexchange.Presentation.ToysViewModel.SignUpViewModel
 import com.example.toyexchange.R
 import com.example.toyexchange.databinding.SignUpFragmentBinding
 import com.google.android.material.tabs.TabLayout
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignUpFragment:Fragment(R.layout.sign_up_fragment) {
 
 

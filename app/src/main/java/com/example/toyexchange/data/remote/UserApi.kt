@@ -25,7 +25,7 @@ interface UserApi {
     @PUT("/accounts/{id_user}/update-homeaddress")
     suspend fun updateHomeAddress(
         @Path("id_user") idUser:Long,
-        @Query("newLastName") newLastName:String):Response<JsonObject>
+        @Query("newHomeAddress") newHomeAddress:String):Response<JsonObject>
 
 
 

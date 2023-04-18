@@ -5,7 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.toyexchange.db.ToyDatabase
 
 @Suppress("UNCHECKED_CAST")
-class DetailsToyViewModelFactory(private val toyDatabase: ToyDatabase
+class DetailsToyViewModelFactory (private val toyDatabase: ToyDatabase
+
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return DetailsToyViewModel(toyDatabase) as T

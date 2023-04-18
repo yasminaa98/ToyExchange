@@ -15,8 +15,9 @@ import com.example.toyexchange.R
 import com.example.toyexchange.databinding.AddPasswordFragmentBinding
 import com.example.toyexchange.databinding.SignUpFragmentBinding
 import com.google.android.material.tabs.TabLayout
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.sign
-
+@AndroidEntryPoint
 class AddPasswordFragment : Fragment(R.layout.add_password_fragment) {
     private lateinit var signUpViewModel:SignUpViewModel
     override fun onCreateView(

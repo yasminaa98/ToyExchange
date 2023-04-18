@@ -21,8 +21,9 @@ import com.example.toyexchange.R
 import com.example.toyexchange.databinding.FeedToysFragmentBinding
 import com.example.toyexchange.theme.ui.MainActivity
 import com.example.trypostrequest.ui.adapter.ToysRecyclerViewAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
 
     private lateinit var toysViewModel: ToysViewModel

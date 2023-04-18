@@ -10,10 +10,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.toyexchange.Domain.model.*
 import com.example.toyexchange.data.Repository.ToysRepositoryImpl
 import com.google.gson.JsonObject
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+@HiltViewModel
 
-class AddToyViewModel : ViewModel() {
-    private val toysRepositoryImpl = ToysRepositoryImpl()
+class AddToyViewModel @Inject constructor(
+    private val toysRepositoryImpl:ToysRepositoryImpl ): ViewModel() {
 
     private val _msg = MutableLiveData<JsonObject>()
     val adding_msg: LiveData<JsonObject> = _msg

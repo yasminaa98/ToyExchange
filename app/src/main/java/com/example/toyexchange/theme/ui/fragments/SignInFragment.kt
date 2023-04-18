@@ -17,8 +17,9 @@ import com.example.toyexchange.Presentation.ToysViewModel.LoginViewModel
 import com.example.toyexchange.R
 import com.example.toyexchange.data.remote.RetrofitClient
 import com.example.toyexchange.databinding.SignInFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
-
+@AndroidEntryPoint
 class SignInFragment: Fragment(R.layout.sign_in_fragment) {
 
     private lateinit var loginViewModel: LoginViewModel
@@ -49,10 +50,11 @@ class SignInFragment: Fragment(R.layout.sign_in_fragment) {
                 val editor = sharedPreferences.edit()
                 editor.putString("authToken", it.auth_token)
                 editor.putString("username",it.username)
-                editor.putLong("iduser",it.id)
+                editor.putLong("idUser", it.id)
                  editor.apply()
                     Log.i("token",it.auth_token)
                 Log.i("username",it.username)
+                Log.i("iduser",it.id.toString())
                 Log.i("token stored",sharedPreferences.getString("authToken",null).toString())
                 Log.i("username stored",sharedPreferences.getString("username",null).toString())
                 findNavController().navigate(R.id.action_signInFragment_to_editProfilFragment)

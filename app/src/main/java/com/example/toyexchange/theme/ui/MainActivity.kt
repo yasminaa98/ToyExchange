@@ -16,11 +16,12 @@ import com.example.toyexchange.databinding.ActivityMainBinding
 import com.example.toyexchange.theme.ui.fragments.AddPasswordFragment
 import com.example.toyexchange.theme.ui.fragments.SignUpFragment
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 private lateinit var binding: ActivityMainBinding
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

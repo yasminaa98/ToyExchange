@@ -15,7 +15,9 @@ import com.example.toyexchange.Presentation.ToysViewModel.AddToyViewModel
 import com.example.toyexchange.Presentation.ToysViewModel.ModifyAnnonceViewModel
 import com.example.toyexchange.R
 import com.example.toyexchange.databinding.AddToyFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ModifyAnnonceFragment: Fragment(R.layout.modify_annonce_fragment) {
     private lateinit var modifyAnnonceViewModel: ModifyAnnonceViewModel
 

@@ -10,10 +10,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.toyexchange.Common.Resource
 import com.example.toyexchange.data.Repository.ToysRepositoryImpl
 import com.example.toyexchange.Domain.model.Toy
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ToysViewModel() : ViewModel() {
-    private val toysRepositoryImpl = ToysRepositoryImpl()
+@HiltViewModel
+class ToysViewModel @Inject constructor(
+    private val toysRepositoryImpl:ToysRepositoryImpl
+) : ViewModel() {
 
     private val _toys = MutableLiveData<List<Toy>>()
     val toys: LiveData<List<Toy>> = _toys

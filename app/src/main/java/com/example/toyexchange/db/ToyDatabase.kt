@@ -15,7 +15,7 @@ abstract class ToyDatabase : RoomDatabase(){
     abstract fun toyDao():ToyDao
     // now we will create a fun to return an instance of this database class
     // we will write that fun in companion object so we can call this fun by the name of this class
-    companion object{
+     companion object{
         @Volatile // any changes on this instance from any thread will be visible by any other thread
         var INSTANCE:ToyDatabase?=null
         @Synchronized // only one thread can have instance of this room db
@@ -34,3 +34,4 @@ abstract class ToyDatabase : RoomDatabase(){
 
         }
 }
+

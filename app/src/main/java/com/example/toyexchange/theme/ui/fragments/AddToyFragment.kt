@@ -20,7 +20,9 @@ import com.example.toyexchange.Presentation.ToysViewModel.SignUpViewModel
 import com.example.toyexchange.R
 import com.example.toyexchange.data.remote.RetrofitClient
 import com.example.toyexchange.databinding.AddToyFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddToyFragment: Fragment(R.layout.add_toy_fragment) {
     private lateinit var addToyViewModel: AddToyViewModel
 

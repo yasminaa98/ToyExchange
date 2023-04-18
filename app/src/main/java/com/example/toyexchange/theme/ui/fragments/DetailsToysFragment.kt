@@ -17,7 +17,10 @@ import com.example.toyexchange.databinding.ToyDetailsFragmentBinding
 import com.example.toyexchange.db.ToyDatabase
 import com.example.toyexchange.theme.ui.MainActivity
 import com.example.trypostrequest.ui.adapter.ToysRecyclerViewAdapter
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class DetailsToysFragment : Fragment(R.layout.toy_item) {
     private lateinit var detailsToyViewModel: DetailsToyViewModel
     lateinit var toys_recycler: RecyclerView
@@ -31,10 +34,10 @@ class DetailsToysFragment : Fragment(R.layout.toy_item) {
     ): View? {
         val binding = ToyDetailsFragmentBinding.inflate(inflater, container, false)
         val toyDatabase = ToyDatabase.getInstance(requireContext())
+
         val detailsViewModelFactory = DetailsToyViewModelFactory(toyDatabase)
         detailsToyViewModel =
-            ViewModelProvider(this, detailsViewModelFactory)[DetailsToyViewModel::class.java]
-        //onFavoriteClick()
+            ViewModelProvider(this, detailsViewModelFactory)[DetailsToyViewModel::class.java] //onFavoriteClick()
         //maintain checkbox state :
         val toyId = arguments?.getInt("id")
         val sharedPreferences =

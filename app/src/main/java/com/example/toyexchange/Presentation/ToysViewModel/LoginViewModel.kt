@@ -9,10 +9,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.toyexchange.Domain.model.Request
 import com.example.toyexchange.Domain.model.UserLoginResponse
 import com.example.toyexchange.data.Repository.ToysRepositoryImpl
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+@HiltViewModel
 
-class LoginViewModel : ViewModel() {
-    private val toysRepositoryImpl = ToysRepositoryImpl()
+class LoginViewModel @Inject constructor(
+    private val toysRepositoryImpl:ToysRepositoryImpl): ViewModel() {
 
     private val _token = MutableLiveData<UserLoginResponse>()
     val token: LiveData<UserLoginResponse> = _token

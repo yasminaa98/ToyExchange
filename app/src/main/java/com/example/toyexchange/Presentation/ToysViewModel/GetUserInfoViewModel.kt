@@ -9,17 +9,20 @@ import androidx.lifecycle.viewModelScope
 import com.example.toyexchange.Domain.model.Toy
 import com.example.toyexchange.Domain.model.User
 import com.example.toyexchange.data.Repository.ToysRepositoryImpl
+import com.google.gson.JsonObject
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+@HiltViewModel
 
-class GetUserInfoViewModel :ViewModel(){
-    private val toysRepositoryImpl = ToysRepositoryImpl()
+class GetUserInfoViewModel @Inject constructor(
+    private val toysRepositoryImpl:ToysRepositoryImpl) :ViewModel(){
 
     private val _info = MutableLiveData<User>()
     val info: LiveData<User> = _info
 
-    /* private val _toySelected = MutableLiveData<Toy>()
-     val toySelected: LiveData<Toy> = _toySelected */
-
+    private val _msg = MutableLiveData<JsonObject>()
+    val msg : LiveData<JsonObject> = _msg
 
     // display toys List
     fun getUserInfo(username:String) {
@@ -34,6 +37,51 @@ class GetUserInfoViewModel :ViewModel(){
                 }
             } catch (e: Exception) {
                 Log.e(ContentValues.TAG, "Failed to fetch toys", e)
+            }
+        }
+    }
+    fun updateFirstName(iduser:Long,newFirstName:String){
+        viewModelScope.launch {
+            var result=toysRepositoryImpl.updateFirstname(iduser,newFirstName)
+            Log.i("result",result.toString())
+            try {
+                if (result.body() != null) {
+                    _msg.postValue(result.body())
+                } else {
+                    Log.i("body empty", result.message())
+                }
+            } catch (e: Exception) {
+                Log.e(ContentValues.TAG, "Failed to update firstname", e)
+            }
+        }
+    }
+    fun updateLastName(iduser:Long,newLastName:String){
+        viewModelScope.launch {
+            var result=toysRepositoryImpl.updateFirstname(iduser,newLastName)
+            Log.i("result",result.toString())
+            try {
+                if (result.body() != null) {
+                    _msg.postValue(result.body())
+                } else {
+                    Log.i("body empty", result.message())
+                }
+            } catch (e: Exception) {
+                Log.e(ContentValues.TAG, "Failed to update lastname", e)
+            }
+        }
+    }
+    fun updateHomeAddress(iduser:Long,newHomeAddress:String){
+        viewModelScope.launch {
+            var result=toysRepositoryImpl.updateFirstname(iduser,newHomeAddress)
+            Log.i("result",result.toString())
+            try {
+                if (result.body() != null) {
+                    _msg.postValue(result.body())
+                } else {
+                    Log.i("body empty", result.message())
+                }
+            } catch (e: Exception) {
+                Log.e(ContentValues.TAG, "Failed to update home address", e)
             }
         }
     }

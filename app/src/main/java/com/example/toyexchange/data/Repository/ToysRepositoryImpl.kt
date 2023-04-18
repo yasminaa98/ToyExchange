@@ -10,9 +10,13 @@ import com.example.toyexchange.data.remote.UserApi
 import com.google.gson.JsonObject
 import kotlinx.coroutines.runBlocking
 import retrofit2.Response
+import retrofit2.http.Path
+import retrofit2.http.Query
+import javax.inject.Inject
 
-class ToysRepositoryImpl {
-    private val apiService = RetrofitClient.retrofitInstance.create(ToysApi::class.java)
+class ToysRepositoryImpl @Inject constructor(
+    private val apiService:ToysApi
+) {
     private val apiLoginService=RetrofitClient.retrofitInstance.create(AuthApi::class.java)
     private val apiAccountService=RetrofitClient.retrofitInstance.create(UserApi::class.java)
     suspend fun getToys(token: String): Response<List<Toy>> {
@@ -42,5 +46,20 @@ class ToysRepositoryImpl {
     }
     suspend fun getUser(username:String):Response<User>{
         return apiAccountService.getUserByUsername(username)
+    }
+    suspend fun updateFirstname(
+        idUser:Long,
+        newFirstName:String):Response<JsonObject>{
+        return apiAccountService.updateFirstname(idUser,newFirstName)
+    }
+    suspend fun updateLastname(
+        idUser:Long,
+        newLastName:String):Response<JsonObject>{
+        return apiAccountService.updateLastname(idUser,newLastName)
+    }
+    suspend fun updateHomeAddress(
+        idUser:Long,
+        newHomeAddress:String):Response<JsonObject>{
+        return apiAccountService.updateHomeAddress(idUser,newHomeAddress)
     }
 }
