@@ -18,7 +18,7 @@ class ModifyAnnonceViewModel@Inject constructor(
 
     private val _msg = MutableLiveData<JsonObject>()
     val msg: LiveData<JsonObject> = _msg
-    fun modifyAnnonce(token:String,idAnnonce:String,annonce: Annonce){
+    fun modifyAnnonce(token:String,idAnnonce:Long,annonce: Annonce){
         viewModelScope.launch {
             var result=toysRepositoryImpl.modifyAnnonce(token,idAnnonce,annonce)
             Log.i("result",result.toString())

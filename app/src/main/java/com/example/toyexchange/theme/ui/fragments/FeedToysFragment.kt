@@ -34,7 +34,7 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
         // create instance of viewmodel , the life cycle library creates it for us so if the viewmodel destroyed we don't need to recreated
         toysViewModel = ViewModelProvider(this).get(ToysViewModel::class.java)
         (activity as MainActivity).setBottomNavigation(true)
-        (activity as MainActivity).setToolbar(false)
+        (activity as MainActivity).setToolbar(true)
         //image slider
         val imageList=ArrayList<SlideModel>()
         imageList.clear()
@@ -43,7 +43,6 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
         imageList.add(SlideModel(R.drawable.img3))
         imageList.add(SlideModel(R.drawable.img4))
         imageList.add(SlideModel(R.drawable.img1))
-
         binding.imageSlider.setImageList(imageList, ScaleTypes.FIT)
 
         /* toysRecyclerViewAdapter = ToysRecyclerViewAdapter(emptyList(),ToysRecyclerViewAdapter.OnClickListener{ photo ->

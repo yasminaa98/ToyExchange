@@ -7,14 +7,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/annonces_list"
+            android:id="@+id/auctions_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/green"
+            android:background="@color/white"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
             tools:ignore="MissingConstraints,NotSibling"
             tools:layout_editor_absoluteX="0dp"
-            tools:listitem="@layout/my_annonce_item" />
+            tools:listitem="@layout/auction_item" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

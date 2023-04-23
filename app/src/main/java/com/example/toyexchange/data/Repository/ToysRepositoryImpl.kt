@@ -41,7 +41,7 @@ class ToysRepositoryImpl @Inject constructor(
     suspend fun addToy(token:String,annonce: Annonce):Response<JsonObject>{
         return apiService.addToy(token,annonce)
     }
-    suspend fun modifyAnnonce(token:String,idAnnonce:String,annonce:Annonce):Response<JsonObject>{
+    suspend fun modifyAnnonce(token:String,idAnnonce:Long,annonce:Annonce):Response<JsonObject>{
         return apiService.modifyAnnonce(token,idAnnonce,annonce)
     }
     suspend fun getUser(username:String):Response<User>{
@@ -62,4 +62,7 @@ class ToysRepositoryImpl @Inject constructor(
         newHomeAddress:String):Response<JsonObject>{
         return apiAccountService.updateHomeAddress(idUser,newHomeAddress)
     }
+
+    suspend fun getUserAnnonces(token: String):Response<List<Annonce>>{
+        return apiService.getUserAnnonces(token)   }
 }

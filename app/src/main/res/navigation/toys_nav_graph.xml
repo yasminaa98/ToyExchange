@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toys_nav_graph"
-    app:startDestination="@id/signInFragment">
+    app:startDestination="@id/feedToysFragment">
     <fragment
         android:id="@+id/savedToysFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.SavedToysFragment"
@@ -97,9 +97,18 @@
         <action
             android:id="@+id/action_myAnnoncesFragment_to_modifyAnnonceFragment"
             app:destination="@id/modifyAnnonceFragment" />
+        <action
+            android:id="@+id/action_myAnnoncesFragment_to_detailsToysFragment"
+            app:destination="@id/detailsToysFragment" />
     </fragment>
     <fragment
         android:id="@+id/modifyAnnonceFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.ModifyAnnonceFragment"
         android:label="Modify annonce" />
+    <fragment
+        android:id="@+id/auctionFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.AuctionFragment"
+        android:label="AuctionFragment" >
+
+    </fragment>
 </navigation>

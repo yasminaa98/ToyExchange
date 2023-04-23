@@ -46,7 +46,7 @@ class AddToyFragment: Fragment(R.layout.add_toy_fragment) {
             val category=binding.toyCategory.text.toString()
             val state=binding.toyState.text.toString()
             val description=binding.toyDescription.text.toString()
-            val annonce= Annonce(category,description,name,price,state,child_age,toy_age)
+            val annonce= Annonce(1,category,description,"",name,price,state,child_age,toy_age)
             addToyViewModel.addToy(token.toString(),annonce)
         }
         addToyViewModel.adding_msg.observe(viewLifecycleOwner , Observer {

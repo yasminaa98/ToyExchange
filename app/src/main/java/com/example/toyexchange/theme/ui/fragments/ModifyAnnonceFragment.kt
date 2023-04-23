@@ -11,10 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.toyexchange.Domain.model.Annonce
-import com.example.toyexchange.Presentation.ToysViewModel.AddToyViewModel
 import com.example.toyexchange.Presentation.ToysViewModel.ModifyAnnonceViewModel
 import com.example.toyexchange.R
 import com.example.toyexchange.databinding.AddToyFragmentBinding
+import com.example.toyexchange.databinding.ModifyAnnonceFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,12 +27,30 @@ class ModifyAnnonceFragment: Fragment(R.layout.modify_annonce_fragment) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = AddToyFragmentBinding.inflate(inflater, container, false)
+        val binding = ModifyAnnonceFragmentBinding.inflate(inflater, container, false)
         modifyAnnonceViewModel= ViewModelProvider(this).get(ModifyAnnonceViewModel::class.java)
         val sharedPreferences =
             requireActivity().getSharedPreferences("authToken", Context.MODE_PRIVATE)
         val token =sharedPreferences.getString("authToken",null)
         //addToyViewModel.token=token
+        val idAnnonce = arguments?.getLong("id")
+        Log.i("id annonce",idAnnonce.toString())
+
+
+        // get item selected
+        val name = arguments?.getString("name").toString()
+        val description = arguments?.getString("description").toString()
+        val _price = arguments?.getString("price").toString()
+        val category = arguments?.getString("category").toString()
+        val age_child = arguments?.getString("age_child").toString()
+        binding.apply {
+            toyName.setText(name)
+            toyDescription.setText(description)
+            childAge.setText(age_child)
+            toyCategory.setText(category)
+            price.setText(_price)
+        }
+
         binding.addButton.setOnClickListener {
             val name=binding.toyName.text.toString()
             val child_age=binding.childAge.text.toString()
@@ -41,8 +59,10 @@ class ModifyAnnonceFragment: Fragment(R.layout.modify_annonce_fragment) {
             val category=binding.toyCategory.text.toString()
             val state=binding.toyState.text.toString()
             val description=binding.toyDescription.text.toString()
-            val annonce= Annonce(category,description,name,price,state,child_age,toy_age)
-            modifyAnnonceViewModel.modifyAnnonce(token.toString(), idAnnonce = "1",annonce)
+            Log.i("id annonce2",idAnnonce.toString())
+
+            val annonce= Annonce(idAnnonce!!,category,description,"",name,price,state,child_age,toy_age)
+            modifyAnnonceViewModel.modifyAnnonce(token.toString(), idAnnonce.toLong() ,annonce)
         }
         modifyAnnonceViewModel.msg.observe(viewLifecycleOwner , Observer {
             if(it!=null){

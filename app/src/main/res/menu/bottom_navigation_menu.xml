@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/feedToysFragment"
-        android:title="Feed"
-        android:icon="@drawable/ic_news"> </item>
+        android:title="Explore"
+        android:icon="@drawable/ic_explore"> </item>
 
     <item android:id="@+id/addToysFragment"
         android:title="Add toys"
@@ -17,6 +17,6 @@
         android:icon="@drawable/ic_profil"> </item>
 
    <item android:id="@+id/myAnnoncesFragment"
-        android:title="Search toys"
-        android:icon="@drawable/ic_search"> </item>
+        android:title="My toys"
+        android:icon="@drawable/ic_news"> </item>
 </menu>

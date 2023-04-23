@@ -4,14 +4,14 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 data class Annonce(
-   // @SerializedName("id")
-   // var id: Int,
+   @SerializedName("id")
+   var id: Long,
     @SerializedName("category")
     val category: String,
     @SerializedName("description")
     val description: String,
-  //  @SerializedName("picture")
-  //  val image_url: String,
+   @SerializedName("picturePath")
+   val image_url: String,
     @SerializedName("name")
     val name: String,
     @SerializedName("price")
