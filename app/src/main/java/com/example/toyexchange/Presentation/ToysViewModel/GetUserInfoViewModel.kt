@@ -55,13 +55,15 @@ class GetUserInfoViewModel @Inject constructor(
             }
         }
     }
+    private val _msgLastName = MutableLiveData<JsonObject>()
+    val msgLastName : LiveData<JsonObject> = _msgLastName
     fun updateLastName(iduser:Long,newLastName:String){
         viewModelScope.launch {
-            var result=toysRepositoryImpl.updateFirstname(iduser,newLastName)
+            var result=toysRepositoryImpl.updateLastname(iduser,newLastName)
             Log.i("result",result.toString())
             try {
                 if (result.body() != null) {
-                    _msg.postValue(result.body())
+                    _msgLastName.postValue(result.body())
                 } else {
                     Log.i("body empty", result.message())
                 }
@@ -70,13 +72,15 @@ class GetUserInfoViewModel @Inject constructor(
             }
         }
     }
+    private val _msgHomeAdd = MutableLiveData<JsonObject>()
+    val msgHomeAdd : LiveData<JsonObject> = _msgHomeAdd
     fun updateHomeAddress(iduser:Long,newHomeAddress:String){
         viewModelScope.launch {
-            var result=toysRepositoryImpl.updateFirstname(iduser,newHomeAddress)
+            var result=toysRepositoryImpl.updateHomeAddress(iduser,newHomeAddress)
             Log.i("result",result.toString())
             try {
                 if (result.body() != null) {
-                    _msg.postValue(result.body())
+                    _msgHomeAdd.postValue(result.body())
                 } else {
                     Log.i("body empty", result.message())
                 }

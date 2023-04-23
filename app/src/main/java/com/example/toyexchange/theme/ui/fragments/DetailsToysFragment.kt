@@ -44,9 +44,7 @@ class DetailsToysFragment : Fragment(R.layout.toy_item) {
             requireActivity().getSharedPreferences("my_checkbox_${toyId}", Context.MODE_PRIVATE)
         val checkboxState = sharedPreferences.getBoolean("checkbox_state", false)
         binding.checkBox.isChecked = checkboxState
-        binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
-            sharedPreferences.edit().putBoolean("checkbox_state", isChecked).apply()
-        }
+
         // get item selected
         val name = arguments?.getString("name").toString()
         val description = arguments?.getString("description").toString()
@@ -62,9 +60,15 @@ class DetailsToysFragment : Fragment(R.layout.toy_item) {
         }
 
         val toyToSave = Toy(toyId!!, category, description, image, name, price,"","","")
-        binding.button.setOnClickListener {
+        binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
+            sharedPreferences.edit().putBoolean("checkbox_state", isChecked).apply()
+            if (isChecked){
             detailsToyViewModel.insertToy(toyToSave)
-            Toast.makeText(requireContext(), "Toy saved", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Toy saved", Toast.LENGTH_SHORT).show()}
+            else{
+                detailsToyViewModel.deleteToy(toyToSave)
+                Toast.makeText(requireContext(), "Toy deleted", Toast.LENGTH_SHORT).show()}
+
         }
         return binding.root
     }

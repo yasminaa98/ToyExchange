@@ -50,11 +50,11 @@ class EditProfilFragment : Fragment(R.layout.profil_edit_fragment) {
         // update firstname
         binding.save.setOnClickListener{
             var newFirstName=binding.firstname.text.toString()
-            var newHomeAddress=binding.address.text.toString()
-            var newLastName=binding.lastname.text.toString()
             getUserInfoViewModel.updateFirstName(idUser.toLong(),newFirstName)
-            getUserInfoViewModel.updateLastName(idUser.toLong(),newLastName)
+            var newHomeAddress=binding.address.text.toString()
             getUserInfoViewModel.updateHomeAddress(idUser.toLong(),newHomeAddress)
+            var newLastName=binding.lastname.text.toString()
+            getUserInfoViewModel.updateLastName(idUser.toLong(),newLastName)
             getUserInfoViewModel.msg.observe(viewLifecycleOwner, Observer {
                 if(it!=null){
                     Toast.makeText(requireContext(),"firstname Updated successfully", Toast.LENGTH_LONG).show()
@@ -64,6 +64,30 @@ class EditProfilFragment : Fragment(R.layout.profil_edit_fragment) {
                     Toast.makeText(requireContext(),"firstname update failed", Toast.LENGTH_LONG).show()
                 }
             })
+           /* var newHomeAddress=binding.address.text.toString()
+            getUserInfoViewModel.updateHomeAddress(idUser.toLong(),newHomeAddress)
+            getUserInfoViewModel.msgHomeAdd.observe(viewLifecycleOwner, Observer {
+                if(it!=null){
+                    Toast.makeText(requireContext(),"home address Updated successfully", Toast.LENGTH_LONG).show()
+                    Log.i("msg",it.toString())
+                }
+                else{
+                    Toast.makeText(requireContext(),"home address update failed", Toast.LENGTH_LONG).show()
+                }
+            })
+
+            var newLastName=binding.lastname.text.toString()
+            getUserInfoViewModel.updateLastName(idUser.toLong(),newLastName)
+            getUserInfoViewModel.msgLastName.observe(viewLifecycleOwner, Observer {
+                if(it!=null){
+                    Toast.makeText(requireContext(),"lastname Updated successfully", Toast.LENGTH_LONG).show()
+                    Log.i("msg",it.toString())
+                }
+                else{
+                    Toast.makeText(requireContext(),"lastname update failed", Toast.LENGTH_LONG).show()
+                }
+            }) */
+
         }
 
         return binding.root
