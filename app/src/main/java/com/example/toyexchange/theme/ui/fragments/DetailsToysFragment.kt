@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import com.example.toyexchange.Domain.model.Toy
 import com.example.toyexchange.Presentation.ToysViewModel.DetailsToyViewModel
 import com.example.toyexchange.Presentation.ToysViewModel.DetailsToyViewModelFactory
@@ -16,22 +15,17 @@ import com.example.toyexchange.R
 import com.example.toyexchange.databinding.ToyDetailsFragmentBinding
 import com.example.toyexchange.db.ToyDatabase
 import com.example.toyexchange.theme.ui.MainActivity
-import com.example.trypostrequest.ui.adapter.ToysRecyclerViewAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class DetailsToysFragment : Fragment(R.layout.toy_item) {
     private lateinit var detailsToyViewModel: DetailsToyViewModel
-    lateinit var toys_recycler: RecyclerView
-    lateinit var toysRecyclerViewAdapter: ToysRecyclerViewAdapter
-    private lateinit var binding: ToyDetailsFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = ToyDetailsFragmentBinding.inflate(inflater, container, false)
         val toyDatabase = ToyDatabase.getInstance(requireContext())
 
@@ -54,11 +48,10 @@ class DetailsToysFragment : Fragment(R.layout.toy_item) {
         binding.apply {
             toyName.text = name
             toyDescription.text = description
-            toyPrice.text = price.toString()
+            toyPrice.text = price
             (activity as MainActivity).setBottomNavigation(false)
             (activity as MainActivity).setToolbar(true)
         }
-
         val toyToSave = Toy(toyId!!, category, description, image, name, price,"","","")
         binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
             sharedPreferences.edit().putBoolean("checkbox_state", isChecked).apply()

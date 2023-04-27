@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.toyexchange.Domain.model.Toy
 import com.example.toyexchange.Domain.model.User
+import com.example.toyexchange.data.Repository.AuthRepository
 import com.example.toyexchange.data.Repository.ToysRepositoryImpl
 import com.google.gson.JsonObject
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 
 class GetUserInfoViewModel @Inject constructor(
-    private val toysRepositoryImpl:ToysRepositoryImpl) :ViewModel(){
+    private val authRepository: AuthRepository) :ViewModel(){
 
     private val _info = MutableLiveData<User>()
     val info: LiveData<User> = _info
@@ -27,7 +28,7 @@ class GetUserInfoViewModel @Inject constructor(
     // display toys List
     fun getUserInfo(username:String) {
         viewModelScope.launch {
-            var result = toysRepositoryImpl.getUser(username)
+            var result = authRepository.getUser(username)
             Log.i("result",result.toString())
             try {
                 if (result.body() != null) {
@@ -42,7 +43,7 @@ class GetUserInfoViewModel @Inject constructor(
     }
     fun updateFirstName(iduser:Long,newFirstName:String){
         viewModelScope.launch {
-            var result=toysRepositoryImpl.updateFirstname(iduser,newFirstName)
+            var result=authRepository.updateFirstname(iduser,newFirstName)
             Log.i("result",result.toString())
             try {
                 if (result.body() != null) {
@@ -59,7 +60,7 @@ class GetUserInfoViewModel @Inject constructor(
     val msgLastName : LiveData<JsonObject> = _msgLastName
     fun updateLastName(iduser:Long,newLastName:String){
         viewModelScope.launch {
-            var result=toysRepositoryImpl.updateLastname(iduser,newLastName)
+            var result=authRepository.updateLastname(iduser,newLastName)
             Log.i("result",result.toString())
             try {
                 if (result.body() != null) {
@@ -76,7 +77,7 @@ class GetUserInfoViewModel @Inject constructor(
     val msgHomeAdd : LiveData<JsonObject> = _msgHomeAdd
     fun updateHomeAddress(iduser:Long,newHomeAddress:String){
         viewModelScope.launch {
-            var result=toysRepositoryImpl.updateHomeAddress(iduser,newHomeAddress)
+            var result=authRepository.updateHomeAddress(iduser,newHomeAddress)
             Log.i("result",result.toString())
             try {
                 if (result.body() != null) {

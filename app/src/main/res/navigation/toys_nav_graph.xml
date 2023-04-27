@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toys_nav_graph"
-    app:startDestination="@id/feedToysFragment">
+    app:startDestination="@id/auctionFragment">
     <fragment
         android:id="@+id/savedToysFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.SavedToysFragment"
@@ -65,6 +65,9 @@
         <action
             android:id="@+id/action_signInFragment_to_editProfilFragment"
             app:destination="@id/editProfilFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_auctionFragment"
+            app:destination="@id/auctionFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -110,5 +113,30 @@
         android:name="com.example.toyexchange.theme.ui.fragments.AuctionFragment"
         android:label="AuctionFragment" >
 
+        <action
+            android:id="@+id/action_auctionFragment_to_auctionDetailsFragment"
+            app:destination="@id/auctionDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/auctionDetailsFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.AuctionDetailsFragment"
+        android:label="AuctionDetailsFragment" >
+        <action
+            android:id="@+id/action_auctionDetailsFragment_to_addBidFragment"
+            app:destination="@id/addBidFragment" />
+        <action
+            android:id="@+id/action_auctionDetailsFragment_to_auctionFragment"
+            app:destination="@id/auctionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addBidFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.AddBidFragment"
+        android:label="AddBidFragment" >
+        <action
+            android:id="@+id/action_addBidFragment_to_auctionFragment"
+            app:destination="@id/auctionFragment" />
+        <action
+            android:id="@+id/action_addBidFragment_to_auctionDetailsFragment"
+            app:destination="@id/auctionDetailsFragment" />
     </fragment>
 </navigation>

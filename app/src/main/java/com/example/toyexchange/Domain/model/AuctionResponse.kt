@@ -1,14 +1,13 @@
 package com.example.toyexchange.Domain.model
 
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-data class Auction(
+data class AuctionResponse(
     @SerializedName("id")
     var id: Long,
     @SerializedName("name")
     val name: String,
-    @SerializedName("initial_price")
+    @SerializedName("price")
     val initial_price: String,
     @SerializedName("description")
     val description: String,

@@ -44,6 +44,7 @@ class ToysRecyclerViewAdapter(
             onClickListener.onClick(toy)
         }
         holder.bind(toy)
+        toys.sortedBy { it.id }
 
         //holder.toy_name ..
 

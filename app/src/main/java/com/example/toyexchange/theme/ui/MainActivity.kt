@@ -6,23 +6,13 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.toyexchange.R
-import com.example.toyexchange.data.remote.RetrofitClient
 import com.example.toyexchange.databinding.ActivityMainBinding
-import com.example.toyexchange.theme.ui.fragments.AddPasswordFragment
-import com.example.toyexchange.theme.ui.fragments.SignUpFragment
-import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 private lateinit var binding: ActivityMainBinding
 @AndroidEntryPoint

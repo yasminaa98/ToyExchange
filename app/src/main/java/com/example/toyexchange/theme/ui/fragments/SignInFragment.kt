@@ -12,13 +12,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.toyexchange.Domain.model.Request
-import com.example.toyexchange.Domain.model.UserLoginResponse
 import com.example.toyexchange.Presentation.ToysViewModel.LoginViewModel
 import com.example.toyexchange.R
-import com.example.toyexchange.data.remote.RetrofitClient
 import com.example.toyexchange.databinding.SignInFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.runBlocking
+
 @AndroidEntryPoint
 class SignInFragment: Fragment(R.layout.sign_in_fragment) {
 
@@ -57,7 +55,7 @@ class SignInFragment: Fragment(R.layout.sign_in_fragment) {
                 Log.i("iduser",it.id.toString())
                 Log.i("token stored",sharedPreferences.getString("authToken",null).toString())
                 Log.i("username stored",sharedPreferences.getString("username",null).toString())
-                findNavController().navigate(R.id.action_signInFragment_to_editProfilFragment)
+                findNavController().navigate(R.id.action_signInFragment_to_auctionFragment)
         }
             else{
                 Toast.makeText(requireContext(),"the user is failed to login",Toast.LENGTH_LONG).show()

@@ -11,7 +11,7 @@
         <ImageView
             android:id="@+id/toy_image"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="199dp"
             android:background="@drawable/top_layout_shape"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints"
@@ -33,6 +33,23 @@
             android:layout_marginRight="10dp"
             app:layout_constraintVertical_bias="1.0">
 
+
+            <TextView
+                android:id="@+id/timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Timer"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.47"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.591"
+                tools:ignore="MissingConstraints" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
@@ -43,33 +60,31 @@
                 android:backgroundTint="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/linear"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.506"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.124"
+                app:layout_constraintVertical_bias="0.239"
                 tools:ignore="MissingConstraints">
 
-                <TextView
-                    android:id="@+id/toy_description"
+                <EditText
+                    android:id="@+id/note"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="64dp"
-                    android:text="description"
-
+                    android:layout_marginBottom="28dp"
+                    android:hint="Leave a note"
                     android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.09"
+                    app:layout_constraintHorizontal_bias="0.06"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:ignore="MissingConstraints" />
 
-                <TextView
-                    android:id="@+id/toy_price"
+                <EditText
+                    android:id="@+id/my_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="price"
+                    android:hint="price"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -101,7 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Current bid"
+                    android:text="Your bid"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -111,37 +126,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.13"
                     tools:ignore="MissingConstraints" />
-
-                <TextView
-                    android:id="@+id/toy_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="12dp"
-                    android:text="name"
-                    android:textSize="30sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/toy_description"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.084"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintWidth_percent="0.8"
-                    tools:ignore="MissingConstraints" />
-
-                <TextView
-                    android:id="@+id/end_dateTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="End date time"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.748" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
             <LinearLayout
                 android:id="@+id/linear"
                 android:layout_width="match_parent"
@@ -151,42 +136,20 @@
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="0dp">
 
-                <CheckBox
-                    android:id="@+id/checkBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="30dp"
-                    android:button="@drawable/wishlist_selector" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/place"
+                    android:id="@+id/done"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
                     android:layout_marginBottom="15dp"
                     android:backgroundTint="@color/pink"
-                    android:text="Place your bid !"
-                    android:clickable="true"
-                    android:enabled="true"
+                    android:text="Done"
                     android:background="@drawable/rectangle_corners"/>
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/bids_list"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginTop="23dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:background="@drawable/rectangle_corners"
-                android:backgroundTint="@color/white"
-                app:layout_constraintBottom_toTopOf="@+id/linear"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-                app:layout_constraintVertical_bias="0.261"
-                tools:listitem="@layout/bids_item" />
 
 
 
@@ -194,7 +157,7 @@
 
 
         <ImageView
-            android:id="@+id/owner_image"
+            android:id="@+id/bidder_image"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/circle"
