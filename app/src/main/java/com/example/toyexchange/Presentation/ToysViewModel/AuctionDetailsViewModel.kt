@@ -10,6 +10,7 @@ import com.example.toyexchange.Domain.model.Bid
 import com.example.toyexchange.data.Repository.AuctionRepository
 import com.google.gson.JsonObject
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 @HiltViewModel
@@ -24,25 +25,31 @@ class AuctionDetailsViewModel@Inject constructor(
     private val _bids=MutableLiveData<List<Bid>>()
     val bids:LiveData<List<Bid>> = _bids
 
+    private val _delete = MutableLiveData<JsonObject>()
+    val delete: LiveData<JsonObject> =_delete
+
 
 
     fun getAuctionPrice(idAuction:Long,token: String) {
         viewModelScope.launch {
-            var resultPrice = auctionRepository.getAuctionPrice(idAuction,token)
-            Log.i("result price ", resultPrice.message().toString())
 
-            try {
-                if (resultPrice.body() != null) {
-                    _price.postValue(resultPrice.body())
+                var resultPrice = auctionRepository.getAuctionPrice(idAuction, token)
+                Log.i("result price ", resultPrice.message().toString())
+                try {
 
-                } else {
-                    Log.i("body empty", resultPrice.message())
+                        if (resultPrice.body() != null) {
+                            _price.setValue(resultPrice.body())
+
+                        } else {
+                            Log.i("body empty", resultPrice.message())
+                        }
+                } catch (e: Exception) {
+                    Log.e(ContentValues.TAG, "Failed to get auction price", e)
                 }
-            } catch (e: Exception) {
-                Log.e(ContentValues.TAG, "Failed to get auction price", e)
             }
         }
-    }
+
+
 
     fun getAuctionBids(idAuction:Long,token: String) {
         viewModelScope.launch {
@@ -64,5 +71,27 @@ class AuctionDetailsViewModel@Inject constructor(
 
 
     }
+
+    fun deleteAuction(idAuction:Long) {
+        viewModelScope.launch {
+            var result = auctionRepository.deleteAuction(idAuction)
+            try {
+                if (result.body() != null) {
+                    _delete.postValue(result.body())
+                    Log.i("delete", _delete.toString())
+
+
+
+                } else {
+                    Log.i("body empty", result.message())
+                }
+            } catch (e: Exception) {
+                Log.e(ContentValues.TAG, "Failed to delete auction", e)
+            }
+        }
+
+
+    }
+
 
 }

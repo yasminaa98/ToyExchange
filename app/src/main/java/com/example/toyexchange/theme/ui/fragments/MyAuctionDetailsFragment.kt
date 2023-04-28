@@ -1,5 +1,6 @@
 package com.example.toyexchange.theme.ui.fragments
 
+
 import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -20,6 +21,7 @@ import com.example.toyexchange.Common.CountDownManager
 import com.example.toyexchange.Presentation.ToysViewModel.AuctionDetailsViewModel
 import com.example.toyexchange.R
 import com.example.toyexchange.databinding.AuctionDetailsBinding
+import com.example.toyexchange.databinding.MyAuctionDetailsBinding
 import com.example.toyexchange.theme.ui.MainActivity
 import com.example.toyexchange.theme.ui.adapter.BidsAdapter
 import com.google.gson.Gson
@@ -31,17 +33,19 @@ import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.*
 
+@Suppress("UNREACHABLE_CODE")
 @AndroidEntryPoint
-class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
+
+class MyAuctionDetailsFragment: Fragment(R.layout.my_auction_details) {
     private lateinit var auctionDetailsViewModel: AuctionDetailsViewModel
-    lateinit var bidsAdapter:BidsAdapter
+    lateinit var bidsAdapter: BidsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = AuctionDetailsBinding.inflate(inflater, container, false)
+        val binding = MyAuctionDetailsBinding.inflate(inflater, container, false)
 
         auctionDetailsViewModel = ViewModelProvider(this).get(AuctionDetailsViewModel::class.java)
         (activity as MainActivity).setBottomNavigation(false)
@@ -74,59 +78,30 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
         val currentDateTime = dateFormat.format(calendar.time)
         Log.i("currentDateTime", currentDateTime.toString())*/
+        CountDownManager.startCountDown(endDateTime.toString(), binding.endDateTime, {
+            binding.endDateTime.text = "Closed"
+        })
 
-        val endDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-        val futureDateTime: Date? = endDateTime?.let { endDateFormat.parse(it) }
-        if (futureDateTime != null) {
-            val calendar = Calendar.getInstance()
-            calendar.time = futureDateTime
-            val now = Calendar.getInstance()
+        auctionDetailsViewModel.getAuctionPrice(auctionId!!, token.toString())
+        auctionDetailsViewModel.price.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                //auctionDetailsViewModel.getAuctionPrice(auctionId!!,token.toString())
+                val jsonObject = Gson().fromJson(it, JsonObject::class.java);
+                val messageValue = jsonObject.get("message").asString
+                binding.toyPrice.text = messageValue.toString()
+                Toast.makeText(requireContext(), "last price", Toast.LENGTH_LONG).show()
+                Log.i("last price", it.toString())
 
-            if (calendar.before(now)) {
-                Log.i("before", "before")
-                binding.place.isEnabled = true
-                binding.place.text = "you can't place a bid !"
-                binding.endDateTime.text = "Time is over !"
-            } else if (calendar.after(now)) {
-                Log.i("after", "after")
-
-                CountDownManager.startCountDown(endDateTime.toString(), binding.endDateTime,{
-                    findNavController().navigate(
-                        R.id.action_auctionDetailsFragment_to_auctionFragment
-                    )
-                })
-                auctionDetailsViewModel.getAuctionPrice(auctionId!!, token.toString())
-
-                    auctionDetailsViewModel.price.observe(viewLifecycleOwner, Observer {
-                        if (it != null) {
-                            //auctionDetailsViewModel.getAuctionPrice(auctionId!!,token.toString())
-                            val jsonObject = Gson().fromJson(it, JsonObject::class.java);
-                            val messageValue = jsonObject.get("message").asString
-                            binding.toyPrice.text = messageValue.toString()
-                            auctionDetailsViewModel.getAuctionPrice(auctionId!!, token.toString())
-
-                            Toast.makeText(requireContext(), "last price", Toast.LENGTH_LONG).show()
-                            Log.i("last price", it.toString())
-                        } else {
-                            Toast.makeText(
-                                requireContext(),
-                                "getting info failed",
-                                Toast.LENGTH_LONG
-                            )
-                                .show()
-                        }
-                    })
-
-
-                binding.place.setOnClickListener {
-                    Log.i("clicked", "clicked")
-                    findNavController().navigate(
-                        R.id.action_auctionDetailsFragment_to_addBidFragment, bundle
-                    )
-                }
-
-
-                // get bids list
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "getting info failed",
+                    Toast.LENGTH_LONG
+                )
+                    .show()
+            }
+        })
+        // get bids list
 
                 binding.bidsList.apply {
                     layoutManager = LinearLayoutManager(this.context)
@@ -137,20 +112,17 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
                     }
                     auctionDetailsViewModel.getAuctionBids(auctionId!!, token.toString())
                     Log.i("bids fetched", "bids fetched")
-                    return binding.root
                 }
+//delete auction when clicking
+        binding.delete.setOnClickListener{
+            auctionDetailsViewModel.deleteAuction(auctionId!!)
+            findNavController().navigate(
+                R.id.action_myAuctionDetailsFragment_to_myAuctionFragment)
+        }
 
+        return binding.root
 
             }
-        }
-
-
-
-
-            return binding.root
-
-        }
-
 
 
     }

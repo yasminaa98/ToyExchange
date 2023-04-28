@@ -28,7 +28,7 @@ class GetUserInfoViewModel @Inject constructor(
     // display toys List
     fun getUserInfo(username:String) {
         viewModelScope.launch {
-            var result = authRepository.getUser(username)
+            var result = authRepository.getUserByUsername(username)
             Log.i("result",result.toString())
             try {
                 if (result.body() != null) {

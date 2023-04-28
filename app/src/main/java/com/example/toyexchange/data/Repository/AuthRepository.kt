@@ -22,7 +22,7 @@ class AuthRepository @Inject constructor(
     }
 
 
-    suspend fun getUser(username:String):Response<User>{
+    suspend fun getUserByUsername(username:String):Response<User>{
         return apiLoginService.getUserByUsername(username)
     }
     suspend fun updateFirstname(

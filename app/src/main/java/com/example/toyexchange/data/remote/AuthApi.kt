@@ -13,7 +13,7 @@ interface AuthApi {
     @POST("api/auth/signup")
     suspend fun userSignUp(@Body user: User):Response<String>
     //@PUT("")
-    @GET("/accounts/getUser/{username}")
+    @GET("/accounts/getUserByUsername/{username}")
     suspend fun getUserByUsername(@Path("username") username:String ): Response<User>
     // update user info
     @PUT("/accounts/{id_user}/update-firstname")

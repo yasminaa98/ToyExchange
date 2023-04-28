@@ -153,22 +153,14 @@
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="0dp">
 
-                <CheckBox
-                    android:id="@+id/checkBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="30dp"
-                    android:button="@drawable/wishlist_selector" />
-
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/place"
+                    android:id="@+id/delete"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:layout_marginLeft="40dp"
                     android:layout_marginBottom="15dp"
-                    android:backgroundTint="@color/pink"
-                    android:text="Place your bid !"
+                    android:backgroundTint="@color/red"
+                    android:text="Delete this Auction"
                     android:clickable="true"
                     android:enabled="true"
                     android:background="@drawable/rectangle_corners"/>

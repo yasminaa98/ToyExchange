@@ -14,6 +14,10 @@ class AuctionRepository @Inject constructor(
         return apiAuctionService.getAllAuctions()
     }
 
+    suspend fun getUserAuctions(token: String):Response<List<AuctionResponse>>{
+        return apiAuctionService.getUserAuctions(token)
+    }
+
     suspend fun getAuctionPrice(idAuction:Long,token:String):Response<JsonObject>{
         return apiAuctionService.getAuctionPrice(idAuction,token)
     }
@@ -31,6 +35,8 @@ class AuctionRepository @Inject constructor(
     suspend fun updateBidPrice(idAuction:Long,newPrice:String,token:String):Response<JsonObject>{
         return apiAuctionService.updateBidPrice(idAuction,newPrice,token)
     }
-
+suspend fun deleteAuction(idAuction: Long):Response<JsonObject>{
+    return apiAuctionService.deleteAuction(idAuction)
+}
 
 }

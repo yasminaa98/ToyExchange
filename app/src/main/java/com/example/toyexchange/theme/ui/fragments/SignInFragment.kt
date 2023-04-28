@@ -55,7 +55,7 @@ class SignInFragment: Fragment(R.layout.sign_in_fragment) {
                 Log.i("iduser",it.id.toString())
                 Log.i("token stored",sharedPreferences.getString("authToken",null).toString())
                 Log.i("username stored",sharedPreferences.getString("username",null).toString())
-                findNavController().navigate(R.id.action_signInFragment_to_auctionFragment)
+                findNavController().navigate(R.id.action_signInFragment_to_myAuctionFragment)
         }
             else{
                 Toast.makeText(requireContext(),"the user is failed to login",Toast.LENGTH_LONG).show()

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toys_nav_graph"
-    app:startDestination="@id/auctionFragment">
+    app:startDestination="@id/signInFragment">
     <fragment
         android:id="@+id/savedToysFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.SavedToysFragment"
@@ -68,6 +68,9 @@
         <action
             android:id="@+id/action_signInFragment_to_auctionFragment"
             app:destination="@id/auctionFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_myAuctionFragment"
+            app:destination="@id/myAuctionFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -138,5 +141,21 @@
         <action
             android:id="@+id/action_addBidFragment_to_auctionDetailsFragment"
             app:destination="@id/auctionDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myAuctionFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.MyAuctionFragment"
+        android:label="MyAuctionFragment" >
+        <action
+            android:id="@+id/action_myAuctionFragment_to_myAuctionDetailsFragment"
+            app:destination="@id/myAuctionDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myAuctionDetailsFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.MyAuctionDetailsFragment"
+        android:label="MyAuctionDetailsFragment" >
+        <action
+            android:id="@+id/action_myAuctionDetailsFragment_to_myAuctionFragment"
+            app:destination="@id/myAuctionFragment" />
     </fragment>
 </navigation>
