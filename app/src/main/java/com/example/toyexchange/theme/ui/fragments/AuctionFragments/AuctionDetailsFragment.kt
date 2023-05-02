@@ -1,8 +1,8 @@
-package com.example.toyexchange.theme.ui.fragments
+package com.example.toyexchange.theme.ui.fragments.AuctionFragments
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +12,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.toyexchange.Common.CountDownManager
@@ -25,9 +23,6 @@ import com.example.toyexchange.theme.ui.adapter.BidsAdapter
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -36,6 +31,7 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
     private lateinit var auctionDetailsViewModel: AuctionDetailsViewModel
     lateinit var bidsAdapter:BidsAdapter
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,6 +45,7 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
         val sharedPreferences =
             requireActivity().getSharedPreferences("authToken", Context.MODE_PRIVATE)
         val token = sharedPreferences.getString("authToken", null)
+        val username = sharedPreferences.getString("username", null)
         Log.i("token1", token.toString())
 
         val auctionId = arguments?.getLong("id_auction")
@@ -68,7 +65,57 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
         binding.toyDescription.text = description
         binding.endDateTime.text = endDateTime
         Log.i("endDateTime", endDateTime.toString())
+    // get owner
+        auctionDetailsViewModel.getAuctionOwner(auctionId!!)
+        Log.i("owner get it", "")
 
+        binding.ownerImage.setOnClickListener {
+            if (binding.profileOwner.visibility==View.GONE) {
+                Log.i("button clicked", "")
+                binding.profileOwner.apply {
+                    visibility = View.VISIBLE
+                    translationY = height.toFloat()
+                    // Animate from off-screen to original position
+                    animate().apply {
+                        translationY(-1400f)
+                    }
+                }
+            }
+        }
+            binding.auctionDetailsFragment.setOnClickListener {
+                if (binding.profileOwner.visibility == View.VISIBLE) {
+                    Log.i("button clicked", "")
+                    binding.profileOwner.apply {
+                        visibility = View.GONE
+                        translationY = height.toFloat()
+                        // Animate from off-screen to original position
+                        animate().apply {
+                            translationY(1400f)
+                        }
+                    }
+                }
+            }
+        auctionDetailsViewModel.auctionOwner.observe(viewLifecycleOwner, Observer {
+            if (it!=null){
+                if (it.username==username){
+                    binding.place.setBackgroundColor(R.color.grey)
+                    binding.place.isEnabled=true
+                    binding.place.setText("Bid unavailable")
+                    Log.i("username", "username")
+                }
+                binding.apply {
+                    userName.setText(it.username)
+                    firstname.setText(it.firstname)
+                    lastname.setText(it.lastname)
+                    email.setText(it.email)
+                    homeaddress.setText(it.homeAddress)
+                    phone.setText(it.phone.toString())
+                    avgResponse.setText(it.avgResponseTime)
+                }
+
+
+            }
+        })
 
         /* val calendar = Calendar.getInstance()
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
@@ -103,8 +150,6 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
                             val jsonObject = Gson().fromJson(it, JsonObject::class.java);
                             val messageValue = jsonObject.get("message").asString
                             binding.toyPrice.text = messageValue.toString()
-                            auctionDetailsViewModel.getAuctionPrice(auctionId!!, token.toString())
-
                             Toast.makeText(requireContext(), "last price", Toast.LENGTH_LONG).show()
                             Log.i("last price", it.toString())
                         } else {
@@ -144,12 +189,11 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
             }
         }
 
-
-
-
             return binding.root
 
         }
+
+
 
 
 

@@ -1,30 +1,43 @@
 package com.example.toyexchange.Presentation.ToysViewModel
 
+import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.toyexchange.Domain.model.Toy
+import com.example.toyexchange.Domain.model.User
+import com.example.toyexchange.data.Repository.ToysRepositoryImpl
 import com.example.toyexchange.db.ToyDatabase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DetailsToyViewModel(val toyDatabase: ToyDatabase): ViewModel() {
-    private val _toysDetails = MutableLiveData<Toy>()
-    val toysDetails: LiveData<Toy> =_toysDetails
-    fun insertToy(toy: Toy){
-        viewModelScope.launch {
-            toyDatabase.toyDao().insertToy(toy)
-        }
-        Log.i("insertToy vm","hi")
-    }
-    fun deleteToy(toy:Toy){
-        viewModelScope.launch {
-            toyDatabase.toyDao().deleteToy(toy)
-        }
-        Log.i("deleteToy vm","hi")
+@HiltViewModel
+class DetailsToyViewModel @Inject constructor(private val toysRepositoryImpl: ToysRepositoryImpl): ViewModel() {
 
+
+    private val _annonceOwner = MutableLiveData<User>()
+    val annonceOwner: LiveData<User> =_annonceOwner
+
+
+
+    fun getAnnonceOwner(idAnnone:Long){
+        viewModelScope.launch {
+            var result = toysRepositoryImpl.getAnnonceOwner(idAnnone)
+            try {
+                if (result.body() != null) {
+                    _annonceOwner.postValue(result.body())
+                } else {
+                    Log.i("body empty", result.message())
+                }
+            } catch (e: Exception) {
+                Log.e(ContentValues.TAG, "Failed to get annonce owner", e)
+            }
+        }
     }
+
 
 
   // or like this  get()= _toysDetails

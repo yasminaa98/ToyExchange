@@ -32,4 +32,8 @@ class ToysRepositoryImpl @Inject constructor(
 
     suspend fun getUserAnnonces(token: String):Response<List<Annonce>>{
         return apiService.getUserAnnonces(token)   }
+
+    suspend fun getAnnonceOwner(idAnnonce:Long):Response<User>{
+        return apiService.getAnnonceOwner(idAnnonce)
+    }
 }

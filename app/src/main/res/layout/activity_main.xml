@@ -61,6 +61,7 @@
         app:menu="@menu/nav_drawer_menu"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        android:visibility="gone"
         tools:ignore="MissingConstraints">
     </com.google.android.material.navigation.NavigationView>
     </androidx.drawerlayout.widget.DrawerLayout>

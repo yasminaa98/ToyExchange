@@ -1,4 +1,4 @@
-package com.example.toyexchange.theme.ui.fragments
+package com.example.toyexchange.theme.ui.fragments.AuctionFragments
 
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.toyexchange.Presentation.ToysViewModel.AuctionViewModel
 import com.example.toyexchange.R
@@ -59,7 +60,14 @@ class AuctionFragment: Fragment(R.layout.auctions_fragment) {
             }
             auctionViewModel.getAllAuctions()
             Log.i("toys fetched", "toys fetched")
-            return binding.root
+
         }
+        binding.addAuction.setOnClickListener{
+            findNavController().navigate(
+                R.id.action_auctionFragment_to_myAnnoncesFragment
+            )
+
+        }
+        return binding.root
     }
 }

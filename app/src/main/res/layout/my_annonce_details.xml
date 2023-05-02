@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/auctionDetailsFragment"
+        android:id="@+id/annonceDetailsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
@@ -31,12 +31,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="160dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             app:layout_constraintVertical_bias="1.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="300dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:background="@drawable/rectangle_corners"
@@ -54,62 +56,62 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="64dp"
+                    android:layout_marginBottom="180dp"
                     android:text="description"
 
                     android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.09"
+                    app:layout_constraintHorizontal_bias="0.083"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:ignore="MissingConstraints" />
 
                 <TextView
-                    android:id="@+id/toy_price"
+                    android:id="@+id/child_age"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="price"
+                    android:text="Child age"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.891"
+                    app:layout_constraintHorizontal_bias="0.083"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.439"
+                    app:layout_constraintVertical_bias="0.879"
                     tools:ignore="MissingConstraints" />
 
                 <TextView
-                    android:id="@+id/dollar"
+                    android:id="@+id/category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="$"
+                    android:text="Category"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.727"
+                    app:layout_constraintHorizontal_bias="0.086"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.439"
+                    app:layout_constraintVertical_bias="0.501"
                     tools:ignore="MissingConstraints" />
 
                 <TextView
-                    android:id="@+id/current_price"
+                    android:id="@+id/toy_age"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Current bid"
+                    android:text="Toy Age"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.934"
+                    app:layout_constraintHorizontal_bias="0.08"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.13"
+                    app:layout_constraintVertical_bias="0.71"
                     tools:ignore="MissingConstraints" />
 
                 <TextView
@@ -117,27 +119,28 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="12dp"
+                    android:layout_marginBottom="32dp"
                     android:text="name"
                     android:textSize="30sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/toy_description"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.084"
+                    app:layout_constraintHorizontal_bias="0.087"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintWidth_percent="0.8"
                     tools:ignore="MissingConstraints" />
 
                 <TextView
-                    android:id="@+id/end_dateTime"
+                    android:id="@+id/state"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="End date time"
+                    android:text="state"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.826"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.748" />
+                    app:layout_constraintVertical_bias="0.096" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -151,44 +154,32 @@
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="0dp">
 
-                <CheckBox
-                    android:id="@+id/checkBox"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/addToAuction"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="30dp"
-                    android:button="@drawable/wishlist_selector" />
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="15dp"
+                    android:backgroundTint="@color/pink"
+                    android:text="Add to auction"
+                    android:clickable="true"
+                    android:enabled="true"
+                    android:visibility="gone"
+                    android:background="@drawable/rectangle_corners"/>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/place"
+                    android:id="@+id/Modifiy"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:layout_marginLeft="40dp"
                     android:layout_marginBottom="15dp"
                     android:backgroundTint="@color/pink"
-                    android:text="Place your bid !"
+                    android:text="Modify"
                     android:clickable="true"
                     android:enabled="true"
                     android:background="@drawable/rectangle_corners"/>
             </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/bids_list"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginTop="23dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:background="@drawable/rectangle_corners"
-                android:backgroundTint="@color/white"
-                app:layout_constraintBottom_toTopOf="@+id/linear"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-                app:layout_constraintVertical_bias="0.261"
-                tools:listitem="@layout/bids_item" />
-
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -207,103 +198,6 @@
             app:layout_constraintVertical_bias="0.849"
             tools:ignore="MissingConstraints"
             tools:srcCompat="@tools:sample/avatars" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/profileOwner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/recyclerview_shape"
-            android:backgroundTint="@color/pink"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:layout_marginBottom="-1500dp"
-            android:layout_marginTop="600dp"
-            app:layout_constraintTop_toTopOf="@+id/toy_image"
-            tools:ignore="MissingConstraints"
-            >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/recyclerview_shape"
-                android:backgroundTint="@color/pink"
-                android:orientation="vertical"
-                android:visibility="visible"
-                android:layout_margin="30dp"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="-44dp"
-                tools:layout_editor_absoluteY="163dp">
-
-                <ImageView
-                    android:id="@+id/ownerimage"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/circle"
-                    android:scaleType="centerInside"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteX="32dp"
-                    tools:layout_editor_absoluteY="21dp"
-                    tools:srcCompat="@tools:sample/avatars" />
-
-                <TextView
-                    android:id="@+id/user_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:text="username" />
-
-                <TextView
-                    android:id="@+id/firstname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:text="Firstname" />
-
-                <TextView
-                    android:id="@+id/lastname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:text="Lastname" />
-
-                <TextView
-                    android:id="@+id/email"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:text="Email" />
-
-                <TextView
-                    android:id="@+id/homeaddress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:text="Home address" />
-
-                <TextView
-                    android:id="@+id/phone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:inputType="phone"
-                    android:layout_marginBottom="20dp"/>
-
-                <TextView
-                    android:id="@+id/avgResponse"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="70dp"
-                    android:text="Average response time" />
-
-            </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

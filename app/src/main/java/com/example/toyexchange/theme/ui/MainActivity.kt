@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -14,9 +15,10 @@ import com.example.toyexchange.R
 import com.example.toyexchange.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-private lateinit var binding: ActivityMainBinding
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
     lateinit var toggle: ActionBarDrawerToggle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,19 +29,24 @@ class MainActivity : AppCompatActivity() {
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.navigationView.setNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.item1 -> Toast.makeText(applicationContext,
-                "cliqued item1",Toast.LENGTH_SHORT).show()
-                R.id.auctionFragment -> Toast.makeText(applicationContext,
-                    "cliqued item2",Toast.LENGTH_SHORT).show()
-                R.id.item3 -> Toast.makeText(applicationContext,
-                    "cliqued item3",Toast.LENGTH_SHORT).show()
-                R.id.item4 -> Toast.makeText(applicationContext,
-                    "cliqued item4",Toast.LENGTH_SHORT).show()
+        binding.navigationView.setNavigationItemSelectedListener { menuItem ->
+            val navController = Navigation.findNavController(this, R.id.toysNavHostFragment)
+
+            when (menuItem.itemId) {
+                R.id.profile -> {
+                    Toast.makeText(applicationContext, "Clicked item1", Toast.LENGTH_SHORT).show()
+                    // Navigate to Fragment1
+                    navController.navigate(R.id.editProfilFragment)
+                }
+                R.id.auctions -> {
+                    Toast.makeText(applicationContext, "Clicked auctionFragment", Toast.LENGTH_SHORT).show()
+                    // Navigate to AuctionFragment
+                    navController.navigate(R.id.auctionFragment)
+                }
             }
             true
         }
+
 
         val toysNavHostFragment =
             supportFragmentManager.findFragmentById(R.id.toysNavHostFragment) as NavHostFragment
@@ -73,6 +80,14 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigationView.visibility = View.VISIBLE
         } else {
             binding.bottomNavigationView.visibility = View.GONE
+        }
+    }
+    fun setSlideNavigaton(isSliding:Boolean){
+        if(isSliding){
+            binding.navigationView.visibility=View.VISIBLE
+        }
+        else{
+            binding.navigationView.visibility=View.GONE
         }
     }
     }

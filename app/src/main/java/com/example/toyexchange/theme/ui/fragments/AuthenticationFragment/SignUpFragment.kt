@@ -1,4 +1,4 @@
-package com.example.toyexchange.theme.ui.fragments
+package com.example.toyexchange.theme.ui.fragments.AuthenticationFragment
 
 import android.os.Bundle
 import android.util.Log
@@ -7,13 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.toyexchange.Presentation.ToysViewModel.LoginViewModel
-import com.example.toyexchange.Presentation.ToysViewModel.SignUpViewModel
 import com.example.toyexchange.R
 import com.example.toyexchange.databinding.SignUpFragmentBinding
-import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

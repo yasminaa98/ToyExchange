@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/addToysFragment"
-        android:name="com.example.toyexchange.theme.ui.fragments.AddToyFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.AnnoncesFragment.AddToyFragment"
         android:label="Add Toys "
     />
     <fragment
@@ -43,11 +43,11 @@
     </fragment>
     <fragment
         android:id="@+id/editProfilFragment"
-        android:name="com.example.toyexchange.theme.ui.fragments.EditProfilFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.AuthenticationFragment.EditProfilFragment"
         android:label="Edit Profil" />
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.example.toyexchange.theme.ui.fragments.SignInFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.AuthenticationFragment.SignInFragment"
         android:label="SignInFragment" >
         <action
             android:id="@+id/action_signInFragment_to_feedToysFragment"
@@ -60,9 +60,6 @@
             android:id="@+id/action_signInFragment_to_addToysFragment"
             app:destination="@id/addToysFragment" />
         <action
-            android:id="@+id/action_signInFragment_to_modifyAnnonceFragment"
-            app:destination="@id/modifyAnnonceFragment" />
-        <action
             android:id="@+id/action_signInFragment_to_editProfilFragment"
             app:destination="@id/editProfilFragment" />
         <action
@@ -71,10 +68,13 @@
         <action
             android:id="@+id/action_signInFragment_to_myAuctionFragment"
             app:destination="@id/myAuctionFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_myAnnoncesFragment"
+            app:destination="@id/myAnnoncesFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.toyexchange.theme.ui.fragments.SignUpFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.AuthenticationFragment.SignUpFragment"
         android:label="SignUpFragment" >
         <action
             android:id="@+id/action_signUpFragment_to_addPasswordFragment"
@@ -86,7 +86,7 @@
     </fragment>
     <fragment
         android:id="@+id/addPasswordFragment"
-        android:name="com.example.toyexchange.theme.ui.fragments.AddPasswordFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.AuthenticationFragment.AddPasswordFragment"
         android:label="AddPasswordFragment" >
         <action
             android:id="@+id/action_addPasswordFragment_to_signInFragment"
@@ -98,31 +98,35 @@
     </fragment>
     <fragment
         android:id="@+id/myAnnoncesFragment"
-        android:name="com.example.toyexchange.theme.ui.fragments.MyAnnoncesFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.AnnoncesFragment.MyAnnoncesFragment"
         android:label="My toy annonces" >
         <action
-            android:id="@+id/action_myAnnoncesFragment_to_modifyAnnonceFragment"
-            app:destination="@id/modifyAnnonceFragment" />
-        <action
-            android:id="@+id/action_myAnnoncesFragment_to_detailsToysFragment"
-            app:destination="@id/detailsToysFragment" />
+            android:id="@+id/action_myAnnoncesFragment_to_myAnnoncedetailsFragment"
+            app:destination="@id/myAnnoncedetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/modifyAnnonceFragment"
-        android:name="com.example.toyexchange.theme.ui.fragments.ModifyAnnonceFragment"
-        android:label="Modify annonce" />
+        android:name="com.example.toyexchange.theme.ui.fragments.AnnoncesFragment.ModifyAnnonceFragment"
+        android:label="Modify annonce" >
+        <action
+            android:id="@+id/action_modifyAnnonceFragment_to_myAnnoncesFragment"
+            app:destination="@id/myAnnoncesFragment" />
+    </fragment>
     <fragment
         android:id="@+id/auctionFragment"
-        android:name="com.example.toyexchange.theme.ui.fragments.AuctionFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.AuctionFragments.AuctionFragment"
         android:label="AuctionFragment" >
 
         <action
             android:id="@+id/action_auctionFragment_to_auctionDetailsFragment"
             app:destination="@id/auctionDetailsFragment" />
+        <action
+            android:id="@+id/action_auctionFragment_to_myAnnoncesFragment"
+            app:destination="@id/myAnnoncesFragment" />
     </fragment>
     <fragment
         android:id="@+id/auctionDetailsFragment"
-        android:name="com.example.toyexchange.theme.ui.fragments.AuctionDetailsFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.AuctionFragments.AuctionDetailsFragment"
         android:label="AuctionDetailsFragment" >
         <action
             android:id="@+id/action_auctionDetailsFragment_to_addBidFragment"
@@ -144,7 +148,7 @@
     </fragment>
     <fragment
         android:id="@+id/myAuctionFragment"
-        android:name="com.example.toyexchange.theme.ui.fragments.MyAuctionFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.AuctionFragments.MyAuctionFragment"
         android:label="MyAuctionFragment" >
         <action
             android:id="@+id/action_myAuctionFragment_to_myAuctionDetailsFragment"
@@ -152,10 +156,29 @@
     </fragment>
     <fragment
         android:id="@+id/myAuctionDetailsFragment"
-        android:name="com.example.toyexchange.theme.ui.fragments.MyAuctionDetailsFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.AuctionFragments.MyAuctionDetailsFragment"
         android:label="MyAuctionDetailsFragment" >
         <action
             android:id="@+id/action_myAuctionDetailsFragment_to_myAuctionFragment"
+            app:destination="@id/myAuctionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myAnnoncedetailsFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.AnnoncesFragment.MyAnnoncedetailsFragment"
+        android:label="MyAnnoncedetailsFragment" >
+        <action
+            android:id="@+id/action_myAnnoncedetailsFragment_to_modifyAnnonceFragment"
+            app:destination="@id/modifyAnnonceFragment" />
+        <action
+            android:id="@+id/action_myAnnoncedetailsFragment_to_addAuctionFragment"
+            app:destination="@id/addAuctionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAuctionFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.AuctionFragments.AddAuctionFragment"
+        android:label="AddAuctionFragment" >
+        <action
+            android:id="@+id/action_addAuctionFragment_to_myAuctionFragment"
             app:destination="@id/myAuctionFragment" />
     </fragment>
 </navigation>

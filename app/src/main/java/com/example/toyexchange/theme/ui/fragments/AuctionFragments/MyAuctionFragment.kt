@@ -1,4 +1,4 @@
-package com.example.toyexchange.theme.ui.fragments
+package com.example.toyexchange.theme.ui.fragments.AuctionFragments
 
 import android.content.Context
 import android.os.Bundle
@@ -10,16 +10,12 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.toyexchange.Presentation.ToysViewModel.MyAuctionsViewModel
-import com.example.toyexchange.Presentation.ToysViewModel.UserAnnoncesViewModel
 import com.example.toyexchange.R
-import com.example.toyexchange.databinding.MyAnnoncesFragmentBinding
 import com.example.toyexchange.databinding.MyAuctionsFragmentBinding
 import com.example.toyexchange.theme.ui.MainActivity
 import com.example.toyexchange.theme.ui.adapter.AuctionAdapter
-import com.example.toyexchange.theme.ui.adapter.UserAnnoncesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -1,9 +1,8 @@
-package com.example.toyexchange.theme.ui.fragments
+package com.example.toyexchange.theme.ui.fragments.AuctionFragments
 
 
 import android.content.Context
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,24 +12,17 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.toyexchange.Common.CountDownManager
 import com.example.toyexchange.Presentation.ToysViewModel.AuctionDetailsViewModel
 import com.example.toyexchange.R
-import com.example.toyexchange.databinding.AuctionDetailsBinding
 import com.example.toyexchange.databinding.MyAuctionDetailsBinding
 import com.example.toyexchange.theme.ui.MainActivity
 import com.example.toyexchange.theme.ui.adapter.BidsAdapter
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.text.SimpleDateFormat
 import java.util.*
 
 @Suppress("UNREACHABLE_CODE")
@@ -119,6 +111,8 @@ class MyAuctionDetailsFragment: Fragment(R.layout.my_auction_details) {
             findNavController().navigate(
                 R.id.action_myAuctionDetailsFragment_to_myAuctionFragment)
         }
+
+
 
         return binding.root
 

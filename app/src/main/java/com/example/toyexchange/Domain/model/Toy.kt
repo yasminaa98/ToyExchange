@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 data class Toy(
     @SerializedName("id")
     @PrimaryKey
-    var id: Int,
+    var id: Long,
     @SerializedName("category")
     val category: String,
     @SerializedName("description")

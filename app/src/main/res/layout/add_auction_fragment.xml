@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/green">
+
+        <EditText
+            android:id="@+id/start_date"
+            android:layout_width="293dp"
+            android:layout_height="50dp"
+            android:background="@drawable/user_profil_shape"
+            android:ems="10"
+            android:hint="Start date and time"
+            android:inputType="datetime"
+            android:textColor="#60953A"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.406"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.395"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/initial_price"
+            android:layout_width="293dp"
+            android:layout_height="50dp"
+            android:background="@drawable/user_profil_shape"
+            android:ems="10"
+            android:hint="Initial price"
+            android:inputType="textPersonName"
+            android:textColor="#60953A"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.406"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.613"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="293dp"
+            android:layout_height="50dp"
+            android:background="@drawable/user_profil_shape"
+            android:ems="10"
+            android:hint="Description"
+            android:inputType="textPersonName"
+            android:textColor="#60953A"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.406"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.731"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/toy_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/category_clicked"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.061"
+            tools:ignore="MissingConstraints"
+            tools:srcCompat="@tools:sample/avatars" />
+
+
+        <Button
+            android:id="@+id/add_auction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/pink"
+            android:text="Add this auction"
+            android:textColor="#60953A"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.437"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.849"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/auction_name"
+            android:layout_width="293dp"
+            android:layout_height="58dp"
+            android:layout_marginStart="48dp"
+            android:autofillHints="no"
+            android:background="@drawable/user_profil_shape"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:textColor="#60953A"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.292" />
+
+        <EditText
+            android:id="@+id/end_date"
+            android:layout_width="293dp"
+            android:layout_height="50dp"
+            android:background="@drawable/user_profil_shape"
+            android:ems="10"
+            android:hint="End date and time"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.406"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.499" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -116,6 +116,7 @@ class AuctionAdapter(
             holder.startAnimation()
             holder.scheduleAnimation()
 
+
             //holder.toy_name ..
 
         }

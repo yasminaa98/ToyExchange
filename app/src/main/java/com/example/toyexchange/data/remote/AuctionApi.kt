@@ -2,6 +2,7 @@ package com.example.toyexchange.data.remote
 
 import com.example.toyexchange.Domain.model.AuctionResponse
 import com.example.toyexchange.Domain.model.Bid
+import com.example.toyexchange.Domain.model.User
 import com.google.gson.JsonObject
 import retrofit2.Response
 import retrofit2.http.*
@@ -40,7 +41,21 @@ interface AuctionApi {
                                @Header("Authorization") token: String):Response<JsonObject>
 
 
+
+    @POST("api/auctions/{id_annonce}/addAuctionToAnnonce")
+    suspend fun addAuction(@Path("id_annonce") idAnnonce: Long,
+    @Body auction:AuctionResponse,
+    @Header("Authorization") token: String):Response<JsonObject>
+
+    @GET("api/auctions/{id_annonce}/checkExistentAuction")
+    suspend fun checkExistentAuction(@Path("id_annonce") idAnnonce: Long,
+                                     @Header("Authorization") token: String):Response<JsonObject>
+
+
     @DELETE("api/auctions/{id_auction}/delete-auction")
     suspend fun deleteAuction(@Path("id_auction") idAuction: Long):Response<JsonObject>
+
+    @GET("api/auctions/{id_auction}/AuctionOwner")
+    suspend fun getAuctionOwner(@Path("id_auction") idAuction: Long):Response<User>
 
 }

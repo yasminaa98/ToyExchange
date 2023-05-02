@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.toyexchange.Domain.model.Bid
+import com.example.toyexchange.Domain.model.User
 import com.example.toyexchange.data.Repository.AuctionRepository
 import com.google.gson.JsonObject
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +15,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 @HiltViewModel
-class AuctionDetailsViewModel@Inject constructor(
+class AuctionDetailsViewModel @Inject constructor(
     private val auctionRepository: AuctionRepository
 ): ViewModel()  {
 
@@ -29,26 +30,50 @@ class AuctionDetailsViewModel@Inject constructor(
     val delete: LiveData<JsonObject> =_delete
 
 
+    private val _auctionOwner = MutableLiveData<User>()
+    val auctionOwner: LiveData<User> =_auctionOwner
+
+
+
+    fun getAuctionOwner(idAuction:Long){
+        viewModelScope.launch {
+            var result = auctionRepository.getAuctionOwner(idAuction)
+            try {
+                if (result.body() != null) {
+                    _auctionOwner.postValue(result.body())
+                } else {
+                    Log.i("body empty", result.message())
+                }
+            } catch (e: Exception) {
+                Log.e(ContentValues.TAG, "Failed to get auction owner", e)
+            }
+        }
+    }
+
+
+
 
     fun getAuctionPrice(idAuction:Long,token: String) {
         viewModelScope.launch {
 
                 var resultPrice = auctionRepository.getAuctionPrice(idAuction, token)
                 Log.i("result price ", resultPrice.message().toString())
+            while (true) {
                 try {
 
-                        if (resultPrice.body() != null) {
-                            _price.setValue(resultPrice.body())
+                    if (resultPrice.body() != null) {
+                        _price.setValue(resultPrice.body())
 
-                        } else {
-                            Log.i("body empty", resultPrice.message())
-                        }
+                    } else {
+                        Log.i("body empty", resultPrice.message())
+                    }
                 } catch (e: Exception) {
                     Log.e(ContentValues.TAG, "Failed to get auction price", e)
                 }
+                delay(1000)
             }
         }
-
+    }
 
 
     fun getAuctionBids(idAuction:Long,token: String) {

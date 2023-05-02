@@ -1,22 +1,19 @@
 package com.example.toyexchange.theme.ui.adapter
 
+import android.util.Log
 import com.example.toyexchange.Domain.model.Annonce
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.toyexchange.Domain.model.Toy
 import com.example.toyexchange.databinding.MyAnnonceItemBinding
-import com.example.toyexchange.databinding.ToyItemBinding
 
 
 class UserAnnoncesAdapter(
     private var annonces:List<Annonce>,
     private val onClickListener: OnClickListener
 ) : RecyclerView.Adapter<UserAnnoncesAdapter.ToysViewHolder>(){
-
-
 
 
     class ToysViewHolder(private val binding: MyAnnonceItemBinding) : RecyclerView.ViewHolder(binding.root){
@@ -28,6 +25,8 @@ class UserAnnoncesAdapter(
             Glide.with(itemView)
                 .load(annonce.image_url)
                 .into(binding.annonceImage)
+
+
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToysViewHolder {
@@ -54,6 +53,8 @@ class UserAnnoncesAdapter(
     class OnClickListener(val clickListener: (annonce: Annonce) -> Unit) {
         fun onClick(annonce: Annonce) = clickListener(annonce)
     }
+
+
 
 
 }
