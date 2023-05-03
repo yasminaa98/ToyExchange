@@ -3,6 +3,7 @@ package com.example.toyexchange.di
 import com.example.toyexchange.Common.Constants.BASE_URL
 import com.example.toyexchange.data.remote.AuctionApi
 import com.example.toyexchange.data.remote.AuthApi
+import com.example.toyexchange.data.remote.ExchangeApi
 import com.example.toyexchange.data.remote.ToysApi
 import dagger.Module
 import dagger.Provides
@@ -40,6 +41,14 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(AuctionApi::class.java)
+    }
+    @Provides // create functions that creates our dependencies
+    @Singleton // make sur we have single instance of whatever the function returns
+    fun provideExchangeApi(): ExchangeApi {
+        return Retrofit.Builder().baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ExchangeApi::class.java)
     }
   /*  @Provides // create functions that creates our dependencies
     fun provideToyDatabase(@ApplicationContext context: Context): ToyDatabase {

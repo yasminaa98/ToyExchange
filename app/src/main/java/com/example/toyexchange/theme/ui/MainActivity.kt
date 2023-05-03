@@ -29,6 +29,12 @@ class MainActivity : AppCompatActivity() {
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        //notification
+        binding.notification.setOnClickListener{
+            val navController = Navigation.findNavController(this, R.id.toysNavHostFragment)
+            navController.navigate(R.id.notificationFragment)
+        }
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
             val navController = Navigation.findNavController(this, R.id.toysNavHostFragment)
 

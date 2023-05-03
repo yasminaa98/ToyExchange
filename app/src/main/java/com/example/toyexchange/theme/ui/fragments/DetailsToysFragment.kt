@@ -9,9 +9,12 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.toyexchange.Domain.model.Toy
 import com.example.toyexchange.Presentation.ToysViewModel.DetailsToyViewModel
 import com.example.toyexchange.Presentation.ToysViewModel.RoomViewModel
@@ -83,9 +86,10 @@ class DetailsToysFragment : Fragment(R.layout.toy_item) {
             if (it!=null){
                 if (it.username==username){
                     binding.exchange.setBackgroundColor(R.color.grey)
-                    binding.exchange.isEnabled=true
+                    binding.exchange.isEnabled=false
                     binding.exchange.setText("Exchange unavailable")
                 }
+
                 binding.apply {
                     userName.setText(it.username)
                     firstname.setText(it.firstname)
@@ -93,7 +97,11 @@ class DetailsToysFragment : Fragment(R.layout.toy_item) {
                     email.setText(it.email)
                     homeaddress.setText(it.homeAddress)
                     phone.setText(it.phone.toString())
-                    avgResponse.setText(it.avgResponseTime)
+                    avgResponse.setText(it.avgResponseTime) }
+
+                    val bundle= bundleOf("username" to it.username,"id_HisAnnonce" to toyId)
+                    binding.exchange.setOnClickListener{
+                        findNavController().navigate(R.id.action_detailsToysFragment_to_chooseExchangeAnnonceFragment,bundle)
 
                 }
 
@@ -135,27 +143,6 @@ class DetailsToysFragment : Fragment(R.layout.toy_item) {
     }
 }
 
-/* private fun onFavoriteClick() {
-     binding.button.setOnClickListener{
-         detailsToyViewModel.insertToy(getToyClicked())
-         Toast.makeText(requireContext(),"Toy saved",Toast.LENGTH_SHORT).show()
-
-     } */
-
-/* override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-     super.onViewCreated(view, savedInstanceState)
-     detailsToyViewModel.toysDetails.observe(viewLifecycleOwner, { toyDetails ->
-         binding.toyName.text = toyDetails.name
-         binding.toyDescription.text = toyDetails.description
-         binding.toyPrice.text = toyDetails.price.toString()
- })
-
- //binding.toyPrice.text = arguments?.getString("price")
-
-     //Log.i("viewmodel created","vm Created" )
-
-
-}*/
 
 
 

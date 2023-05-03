@@ -40,6 +40,9 @@
             app:exitAnim="@anim/slide_in_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_in_left"/>
+        <action
+            android:id="@+id/action_detailsToysFragment_to_chooseExchangeAnnonceFragment"
+            app:destination="@id/chooseExchangeAnnonceFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfilFragment"
@@ -181,4 +184,16 @@
             android:id="@+id/action_addAuctionFragment_to_myAuctionFragment"
             app:destination="@id/myAuctionFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/chooseExchangeAnnonceFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.AnnoncesFragment.ChooseExchangeAnnonceFragment"
+        android:label="ChooseExchangeAnnonceFragment" >
+        <action
+            android:id="@+id/action_chooseExchangeAnnonceFragment_to_feedToysFragment"
+            app:destination="@id/feedToysFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.AnnoncesFragment.NotificationFragment"
+        android:label="NotificationFragment" />
 </navigation>
