@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/notification_item"
+        android:id="@+id/result_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -30,29 +30,30 @@
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
+                    android:layout_marginRight="10dp"
                     tools:ignore="MissingConstraints"
                     android:background="@drawable/circle"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
-                    android:id="@+id/his_annonce"
+                    android:id="@+id/username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="his annonce"
+                    android:text="username  "
                     android:textSize="15sp"
                     app:layout_constraintTop_toTopOf="parent" />
                 <TextView
+                    android:id="@+id/status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" -> "
+                    android:text="accept/decline  "
                     android:textSize="15sp"
                     app:layout_constraintTop_toTopOf="parent" />
                 <TextView
                     android:id="@+id/annonce_to_exchange"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="annonce to exchange"
+                    android:text="your request"
                     android:textSize="15sp"
                     app:layout_constraintTop_toTopOf="parent" />
 

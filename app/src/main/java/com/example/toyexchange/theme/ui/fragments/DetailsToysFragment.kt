@@ -37,6 +37,7 @@ class DetailsToysFragment : Fragment(R.layout.toy_item) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         val binding = ToyDetailsFragmentBinding.inflate(inflater, container, false)
         val toyDatabase = ToyDatabase.getInstance(requireContext())
         val roomViewModelFactory = RoomViewModelFactory(toyDatabase)
@@ -53,8 +54,6 @@ class DetailsToysFragment : Fragment(R.layout.toy_item) {
 
         // getAnnonceOwner
         detailsToyViewModel.getAnnonceOwner(toyId!!)
-
-
 
         binding.ownerImage.setOnClickListener {
             if (binding.profileOwner.visibility==View.GONE) {
@@ -99,10 +98,9 @@ class DetailsToysFragment : Fragment(R.layout.toy_item) {
                     phone.setText(it.phone.toString())
                     avgResponse.setText(it.avgResponseTime) }
 
-                    val bundle= bundleOf("username" to it.username,"id_HisAnnonce" to toyId)
+                    val bundle= bundleOf("reciever" to it.username,"id_receiver_annonce" to toyId)
                     binding.exchange.setOnClickListener{
                         findNavController().navigate(R.id.action_detailsToysFragment_to_chooseExchangeAnnonceFragment,bundle)
-
                 }
 
 

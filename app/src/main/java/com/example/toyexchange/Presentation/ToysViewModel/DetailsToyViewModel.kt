@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.toyexchange.Domain.model.Annonce
 import com.example.toyexchange.Domain.model.Toy
 import com.example.toyexchange.Domain.model.User
 import com.example.toyexchange.data.Repository.ToysRepositoryImpl
@@ -21,11 +22,15 @@ class DetailsToyViewModel @Inject constructor(private val toysRepositoryImpl: To
     private val _annonceOwner = MutableLiveData<User>()
     val annonceOwner: LiveData<User> =_annonceOwner
 
+    private val _annonce1 = MutableLiveData<Annonce>()
+    val annonce1: LiveData<Annonce> =_annonce1
+    private val _annonce2 = MutableLiveData<Annonce>()
+    val annonce2: LiveData<Annonce> =_annonce2
 
 
-    fun getAnnonceOwner(idAnnone:Long){
+    fun getAnnonceOwner(idAnnonce:Long){
         viewModelScope.launch {
-            var result = toysRepositoryImpl.getAnnonceOwner(idAnnone)
+            var result = toysRepositoryImpl.getAnnonceOwner(idAnnonce)
             try {
                 if (result.body() != null) {
                     _annonceOwner.postValue(result.body())
@@ -34,6 +39,37 @@ class DetailsToyViewModel @Inject constructor(private val toysRepositoryImpl: To
                 }
             } catch (e: Exception) {
                 Log.e(ContentValues.TAG, "Failed to get annonce owner", e)
+            }
+        }
+    }
+
+    fun getAnnonce1ById(idAnnonce:Long){
+        viewModelScope.launch {
+            var result = toysRepositoryImpl.getAnnonceById(idAnnonce)
+            Log.i("the result annonce",result.toString())
+            try {
+                if (result.body() != null) {
+                    _annonce1.postValue(result.body())
+                } else {
+                    Log.i("body empty", result.message())
+                }
+            } catch (e: Exception) {
+                Log.e(ContentValues.TAG, "Failed to get annonce ", e)
+            }
+        }
+    }
+    fun getAnnonce2ById(idAnnonce:Long){
+        viewModelScope.launch {
+            var result = toysRepositoryImpl.getAnnonceById(idAnnonce)
+            Log.i("the result annonce",result.toString())
+            try {
+                if (result.body() != null) {
+                    _annonce2.postValue(result.body())
+                } else {
+                    Log.i("body empty", result.message())
+                }
+            } catch (e: Exception) {
+                Log.e(ContentValues.TAG, "Failed to get annonce ", e)
             }
         }
     }

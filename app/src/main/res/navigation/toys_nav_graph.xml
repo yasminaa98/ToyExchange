@@ -194,6 +194,38 @@
     </fragment>
     <fragment
         android:id="@+id/notificationFragment"
-        android:name="com.example.toyexchange.theme.ui.fragments.AnnoncesFragment.NotificationFragment"
-        android:label="NotificationFragment" />
+        android:name="com.example.toyexchange.theme.ui.fragments.Exchange.NotificationFragment"
+        android:label="NotificationFragment" >
+        <action
+            android:id="@+id/action_notificationFragment_to_exchangeDecisionFragment"
+            app:destination="@id/exchangeDecisionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exchangeDecisionFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.Exchange.ExchangeDecisionFragment"
+        android:label="ExchangeDecisionFragment" >
+        <action
+            android:id="@+id/action_exchangeDecisionFragment_to_exchangeAnnonceDetailsFragment"
+            app:destination="@id/exchangeAnnonceDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exchangeAnnonceDetailsFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.Exchange.ExchangeAnnonceDetailsFragment"
+        android:label="ExchangeAnnonceDetailsFragment" />
+    <fragment
+        android:id="@+id/notificationViewPager"
+        android:name="com.example.toyexchange.theme.ui.fragments.AnnoncesFragment.notificationViewPager"
+        android:label="notificationViewPager" >
+        <action
+            android:id="@+id/action_notificationViewPager_to_exchangeDecisionFragment"
+            app:destination="@id/exchangeDecisionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exchangeResultFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.AnnoncesFragment.ExchangeResultFragment"
+        android:label="ExchangeResultFragment" >
+        <action
+            android:id="@+id/action_exchangeResultFragment_to_exchangeDecisionFragment"
+            app:destination="@id/exchangeDecisionFragment" />
+    </fragment>
 </navigation>

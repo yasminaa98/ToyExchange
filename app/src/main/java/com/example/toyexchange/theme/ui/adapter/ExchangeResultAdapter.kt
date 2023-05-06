@@ -1,31 +1,31 @@
 package com.example.toyexchange.theme.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.toyexchange.Domain.model.Annonce
 import com.example.toyexchange.Domain.model.Exchange
-import com.example.toyexchange.databinding.MyAnnonceItemBinding
 import com.example.toyexchange.databinding.NotificationItemBinding
+import com.example.toyexchange.databinding.ResultItemBinding
 
-class NotificationAdapter (
+class ExchangeResultAdapter (
     private var exchanges:List<Exchange>,
     private val onClickListener: OnClickListener
-) : RecyclerView.Adapter<NotificationAdapter.ToysViewHolder>(){
+) : RecyclerView.Adapter<ExchangeResultAdapter.ToysViewHolder>(){
 
 
-    class ToysViewHolder(private val binding: NotificationItemBinding) : RecyclerView.ViewHolder(binding.root){
+    class ToysViewHolder(private val binding: ResultItemBinding) : RecyclerView.ViewHolder(binding.root){
         //var toy_image=itemView.findViewById<ImageView>(R.id.toy_image)
 
         fun bind(exchange: Exchange) {
-            binding.hisAnnonce.text = exchange.id_receiver_annonce.toString()
-            binding.annonceToExchange.text = exchange.id_sender_annonce.toString()
-
+            binding.username.text = exchange.receiver
+            if(exchange.status.toString()=="accepted" || exchange.status.toString()=="declined"){
+            binding.status.text = exchange.status.toString()}
+            Log.i("resulttttttttttt","resultt sender")
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToysViewHolder {
-        val binding= NotificationItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding= ResultItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ToysViewHolder(binding)
         //traja3li view lkol, nemchi lil view holder lfou9 w declari jme3a
     }
@@ -48,6 +48,7 @@ class NotificationAdapter (
     class OnClickListener(val clickListener: (exchange: Exchange) -> Unit) {
         fun onClick(exchange: Exchange) = clickListener(exchange)
     }
+
 
 
 

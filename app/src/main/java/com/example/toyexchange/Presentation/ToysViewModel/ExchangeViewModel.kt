@@ -1,5 +1,6 @@
 package com.example.toyexchange.Presentation.ToysViewModel
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -24,9 +25,21 @@ private val exchangeRepository: ExchangeRepository) : ViewModel() {
     private val _msg = MutableLiveData<JsonObject>()
     val msg: LiveData<JsonObject> = _msg
 
-    fun getUserExchange(username:String) {
+    private val _exchangeById = MutableLiveData<Exchange>()
+    val exchangeById: LiveData<Exchange> = _exchangeById
+
+    private val _update = MutableLiveData<JsonObject>()
+    val update: LiveData<JsonObject> = _update
+
+    private val _sender = MutableLiveData<List<Exchange>>()
+    val sender: LiveData<List<Exchange>> = _sender
+
+    fun getUserExchanges(reciever:String) {
         viewModelScope.launch {
-            var result = exchangeRepository.getUserExchanges(username)
+            var result = exchangeRepository.getUserExchanges(reciever)
+            Log.i("reciever request",result.toString())
+
+
             try {
                 if (result.body() != null) {
                     _exchange.postValue(result.body())
@@ -35,6 +48,20 @@ private val exchangeRepository: ExchangeRepository) : ViewModel() {
                 }
             } catch (e: Exception) {
                 Log.e(ContentValues.TAG, "Failed to get exchanges", e)
+            }
+        }
+    }
+    fun getSenderRequests(sender:String) {
+        viewModelScope.launch {
+            var result = exchangeRepository.getSenderRequests(sender)
+            try {
+                if (result.body() != null) {
+                    _sender.postValue(result.body())
+                } else {
+                    Log.i("body empty", result.message())
+                }
+            } catch (e: Exception) {
+                Log.e(ContentValues.TAG, "Failed to get exchanges requests", e)
             }
         }
     }
@@ -53,5 +80,37 @@ private val exchangeRepository: ExchangeRepository) : ViewModel() {
             }
         }
     }
+    fun getExchangeById(id:Long) {
+        viewModelScope.launch {
+            var result = exchangeRepository.getExchangeById(id)
+            Log.i("status result",result.toString())
+            try {
+                if (result.body() != null) {
+                    _exchangeById.postValue(result.body())
+                } else {
+                    Log.i("body empty", result.message())
+                }
+            } catch (e: Exception) {
+                Log.e(ContentValues.TAG, "Failed to update status", e)
+            }
+        }
+    }
+    fun updateStatus(idExchange:Long,newStatus:String,token:String) {
+        viewModelScope.launch {
+            var result = exchangeRepository.updateStatus(idExchange,newStatus,token)
+            Log.i("status result",result.toString())
+            try {
+                if (result.body() != null) {
+                    _update.postValue(result.body())
+                } else {
+                    Log.i("body empty", result.message())
+                }
+            } catch (e: Exception) {
+                Log.e(ContentValues.TAG, "Failed to update status", e)
+            }
+        }
+    }
+
+
 
 }

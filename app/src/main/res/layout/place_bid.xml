@@ -68,7 +68,7 @@
                 <EditText
                     android:id="@+id/note"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="28dp"
                     android:hint="Leave a note"

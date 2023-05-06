@@ -105,20 +105,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.728"
         tools:ignore="MissingConstraints" />
-
-    <Spinner
-        android:id="@+id/spinner_phone"
-        android:layout_width="74dp"
-        android:layout_height="48dp"
-        android:background="@drawable/user_profil_shape"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.175"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.877"
-        tools:ignore="MissingConstraints" />
-
     <Button
         android:id="@+id/save"
         android:layout_width="wrap_content"

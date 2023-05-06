@@ -36,8 +36,10 @@ class ChooseExchangeAnnonceFragment:Fragment(R.layout.choose_exchange_annonce_fr
         val sharedPreferences =
             requireActivity().getSharedPreferences("authToken", Context.MODE_PRIVATE)
         val token =sharedPreferences.getString("authToken",null)
-        val id_HisAnnonce = arguments?.getLong("id_HisAnnonce")
-        val username = arguments?.getString("username")
+        val sender =sharedPreferences.getString("username",null)
+
+        val id_receiver_annonce = arguments?.getLong("id_receiver_annonce")
+        val receiver = arguments?.getString("receiver")
         binding.annoncesList.apply {
             layoutManager = LinearLayoutManager(this.context)
             userAnnoncesViewModel.annonces.observe(viewLifecycleOwner, { annonces ->
@@ -45,9 +47,8 @@ class ChooseExchangeAnnonceFragment:Fragment(R.layout.choose_exchange_annonce_fr
                 selectExchangeAnnonceAdapter = SelectExchangeAnnonceAdapter(annonces,
                     SelectExchangeAnnonceAdapter.OnClickListener{
                             clickedItem->
-                        val id_AnnonceToExchange = clickedItem.id
-                        val exchange= Exchange(0,username!!,
-                            id_HisAnnonce!!,id_AnnonceToExchange,false)
+                        val id_sender_annonce = clickedItem.id
+                        val exchange= Exchange(0,sender.toString(),receiver.toString(),id_receiver_annonce!!,id_sender_annonce,"waiting")
                         binding.swap.visibility=View.VISIBLE
                         binding.swap.setOnClickListener{
                         exchangeViewModel.addExchangeOffer(exchange,token.toString())

@@ -4,6 +4,7 @@ import com.example.toyexchange.Domain.model.*
 import com.example.toyexchange.data.remote.ToysApi
 import com.google.gson.JsonObject
 import retrofit2.Response
+import retrofit2.http.Path
 import javax.inject.Inject
 
 class ToysRepositoryImpl @Inject constructor(
@@ -36,4 +37,9 @@ class ToysRepositoryImpl @Inject constructor(
     suspend fun getAnnonceOwner(idAnnonce:Long):Response<User>{
         return apiService.getAnnonceOwner(idAnnonce)
     }
+
+    suspend fun getAnnonceById(idAnnonce: Long):Response<Annonce>{
+        return apiService.getAnnonceById(idAnnonce)
+    }
+
 }

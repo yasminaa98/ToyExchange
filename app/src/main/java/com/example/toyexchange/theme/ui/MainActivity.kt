@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         //notification
         binding.notification.setOnClickListener{
             val navController = Navigation.findNavController(this, R.id.toysNavHostFragment)
-            navController.navigate(R.id.notificationFragment)
+            navController.navigate(R.id.notificationViewPager)
         }
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
             val navController = Navigation.findNavController(this, R.id.toysNavHostFragment)
