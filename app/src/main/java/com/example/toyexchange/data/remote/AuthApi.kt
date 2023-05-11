@@ -1,5 +1,6 @@
 package com.example.toyexchange.data.remote
 
+import com.example.toyexchange.Domain.model.ForgotPasswordResponse
 import com.example.toyexchange.Domain.model.Request
 import com.example.toyexchange.Domain.model.User
 import com.example.toyexchange.Domain.model.UserLoginResponse
@@ -12,7 +13,11 @@ interface AuthApi {
     suspend fun userLogin(@Body request: Request): Response<UserLoginResponse>
     @POST("api/auth/signup")
     suspend fun userSignUp(@Body user: User):Response<String>
-    //@PUT("")
+    @POST("api/auth/forgot-password")
+    suspend fun forgetPassword(@Query("email") email:String):Response<ForgotPasswordResponse>
+    @POST("api/auth/reset-password")
+    suspend fun resetPassword(@Query("token") token:String,
+                              @Query("newPassword") newPassword:String)
     @GET("/accounts/getUserByUsername/{username}")
     suspend fun getUserByUsername(@Path("username") username:String ): Response<User>
     // update user info

@@ -2,6 +2,7 @@ package com.example.toyexchange.theme.ui.fragments.AuthenticationFragment
 
 import android.content.Context
 import android.os.Bundle
+import android.renderscript.ScriptGroup.Binding
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -49,13 +50,13 @@ class SignInFragment: Fragment(R.layout.sign_in_fragment) {
                 editor.putString("authToken", it.auth_token)
                 editor.putString("username",it.username)
                 editor.putLong("idUser", it.id)
-                 editor.apply()
+                editor.apply()
                     Log.i("token",it.auth_token)
                 Log.i("username",it.username)
                 Log.i("iduser",it.id.toString())
                 Log.i("token stored",sharedPreferences.getString("authToken",null).toString())
                 Log.i("username stored",sharedPreferences.getString("username",null).toString())
-                findNavController().navigate(R.id.action_signInFragment_to_feedToysFragment)
+                findNavController().navigate(R.id.action_signInFragment_to_myAuctionFragment)
         }
             else{
                 Toast.makeText(requireContext(),"the user is failed to login",Toast.LENGTH_LONG).show()
@@ -63,10 +64,15 @@ class SignInFragment: Fragment(R.layout.sign_in_fragment) {
             }
 
         })
-        /* loginViewModel.token.observe(viewLifecycleOwner, { token ->
-             Log.i("token",token.auth_token)
-         }) */
-            //findNavController().navigate(R.id.action_signInFragment_to_feedToysFragment)
+      binding.register.setOnClickListener{
+          findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
+      }
+        binding.forgotPassword.setOnClickListener{
+            findNavController().navigate(R.id.action_signInFragment_to_forgotPasswordFragment)
+
+
+        }
+
 
 
         return binding.root

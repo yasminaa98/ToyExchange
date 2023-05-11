@@ -45,7 +45,7 @@ class NotificationFragment: Fragment(R.layout.notification_exchange_fragment) {
             //when ever the data changes this code below is called
             //it's the observer of the live data
             exchangeViewModel.exchange.observe(viewLifecycleOwner, Observer {
-                notificationAdapter = NotificationAdapter(it,
+                notificationAdapter = NotificationAdapter(requireActivity(),it,
                     NotificationAdapter.OnClickListener{
                             clickedItem->
                         val bundle=bundleOf("id_exchange" to clickedItem.id,"id_sender_annonce" to clickedItem.id_sender_annonce,

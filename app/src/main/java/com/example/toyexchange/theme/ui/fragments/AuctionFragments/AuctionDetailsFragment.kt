@@ -64,6 +64,7 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
         binding.toyName.text = name
         binding.toyDescription.text = description
         binding.endDateTime.text = endDateTime
+        binding.toyPrice.text=initial_price
         Log.i("endDateTime", endDateTime.toString())
     // get owner
         auctionDetailsViewModel.getAuctionOwner(auctionId!!)

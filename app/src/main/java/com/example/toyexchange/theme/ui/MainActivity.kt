@@ -1,6 +1,9 @@
 package com.example.toyexchange.theme.ui
 
+import android.content.Context
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -13,17 +16,21 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.toyexchange.R
 import com.example.toyexchange.databinding.ActivityMainBinding
+import com.example.toyexchange.theme.ui.fragments.ResetPasswordFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.*
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     lateinit var toggle: ActionBarDrawerToggle
+    private var job: Job? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         // drawer menu
         toggle= ActionBarDrawerToggle(this, binding.drawerLayout,R.string.open,R.string.close)
         binding.drawerLayout.addDrawerListener(toggle)
@@ -64,7 +71,34 @@ class MainActivity : AppCompatActivity() {
            binding.toolbar.setupWithNavController(this, appBarConfiguration)
 
     }
-
+        //reset password
+        val data: Uri? = intent.data
+        if (data != null) {
+            val path: String? = data.path
+            if (path == "/resetpassword") {
+                // Navigate to the reset password fragment
+                val resetPasswordFragment = ResetPasswordFragment()
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.flFragment, resetPasswordFragment)
+                    .commit()
+            }
+        }
+        /*new notification
+        job = CoroutineScope(Dispatchers.Main).launch {
+            while (true) {
+                val sharedPreferences = getSharedPreferences("notif", Context.MODE_PRIVATE)
+                val notif = sharedPreferences.getString("notif", null)
+                Log.i("notif", notif.toString())
+                if (notif == "new") {
+                    binding.redDot.visibility = View.VISIBLE
+                }
+                delay(1000) // wait for 1 second before checking the shared preferences again
+            }
+        }*/
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        job?.cancel() // cancel the coroutine when the activity is destroyed
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

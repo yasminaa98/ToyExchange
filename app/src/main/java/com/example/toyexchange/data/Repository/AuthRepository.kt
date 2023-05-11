@@ -1,10 +1,10 @@
 package com.example.toyexchange.data.Repository
 
+import com.example.toyexchange.Domain.model.ForgotPasswordResponse
 import com.example.toyexchange.Domain.model.Request
 import com.example.toyexchange.Domain.model.User
 import com.example.toyexchange.Domain.model.UserLoginResponse
 import com.example.toyexchange.data.remote.AuthApi
-import com.example.toyexchange.data.remote.ToysApi
 import com.google.gson.JsonObject
 import retrofit2.Response
 import javax.inject.Inject
@@ -19,6 +19,12 @@ class AuthRepository @Inject constructor(
     }
     suspend fun userSignUp(user: User): Response<String> {
         return apiLoginService.userSignUp(user)
+    }
+    suspend fun forgotPassword(email:String):Response<ForgotPasswordResponse>{
+        return apiLoginService.forgetPassword(email)
+    }
+    suspend fun resetPassword(token:String,newPassword:String){
+        return apiLoginService.resetPassword(token,newPassword)
     }
 
 

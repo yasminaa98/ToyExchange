@@ -74,6 +74,12 @@
         <action
             android:id="@+id/action_signInFragment_to_myAnnoncesFragment"
             app:destination="@id/myAnnoncesFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -227,5 +233,17 @@
         <action
             android:id="@+id/action_exchangeResultFragment_to_exchangeDecisionFragment"
             app:destination="@id/exchangeDecisionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.ForgotPasswordFragment"
+        android:label="ForgotPasswordFragment" />
+    <fragment
+        android:id="@+id/resetPasswordFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.ResetPasswordFragment"
+        android:label="ResetPasswordFragment" >
+        <action
+            android:id="@+id/action_resetPasswordFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
     </fragment>
 </navigation>

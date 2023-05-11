@@ -1,15 +1,15 @@
 package com.example.toyexchange.theme.ui.adapter
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.toyexchange.Domain.model.Annonce
 import com.example.toyexchange.Domain.model.Exchange
-import com.example.toyexchange.databinding.MyAnnonceItemBinding
 import com.example.toyexchange.databinding.NotificationItemBinding
-
 class NotificationAdapter (
+    private val context: Context,
     private var exchanges:List<Exchange>,
     private val onClickListener: OnClickListener
 ) : RecyclerView.Adapter<NotificationAdapter.ToysViewHolder>(){
@@ -24,27 +24,73 @@ class NotificationAdapter (
 
         }
     }
+    private val acceptedExchanges = mutableListOf<Exchange>()
+    private val declinedExchanges = mutableListOf<Exchange>()
+    private val otherExchanges = mutableListOf<Exchange>()
+
+
+
+    init {
+        exchanges.forEach { exchange ->
+            when (exchange.status) {
+                "accepted" -> acceptedExchanges.add(exchange)
+                "declined" -> declinedExchanges.add(exchange)
+                else -> otherExchanges.add(exchange)
+            }
+        }
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToysViewHolder {
         val binding= NotificationItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ToysViewHolder(binding)
         //traja3li view lkol, nemchi lil view holder lfou9 w declari jme3a
     }
     override fun getItemCount(): Int {
-        return exchanges.size
+        return otherExchanges.size + acceptedExchanges.size + declinedExchanges.size
     }
+    @SuppressLint("CommitPrefEdits")
     override fun onBindViewHolder(holder: ToysViewHolder, position: Int) {
-        // position de chaque item
-        // fun hethi bch yjibli item eli cliquet alih
-        //te5ou mil viewholder nafsou objet meno , ya nadi bin toul ou
-        val exchange=exchanges[position]
-        holder.itemView.setOnClickListener {
-            onClickListener.onClick(exchange)
+        when {
+            position < otherExchanges.size -> {
+                val exchange = otherExchanges[position]
+                holder.itemView.setOnClickListener {
+                    onClickListener.onClick(exchange)
+                }
+                holder.bind(exchange)
+            }
+            position - otherExchanges.size < acceptedExchanges.size -> {
+                val exchange = acceptedExchanges[position - otherExchanges.size]
+                holder.itemView.setOnClickListener {
+                    onClickListener.onClick(exchange)
+                }
+                holder.bind(exchange)
+            }
+            else -> {
+                val exchange = declinedExchanges[position - otherExchanges.size - acceptedExchanges.size]
+                holder.bind(exchange)
+            }
         }
-        holder.bind(exchange)
+        if (exchanges.any { it.status != "accepted"}) {
+            val sharedPreferences =
+                context.getSharedPreferences("notif", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putString("notif", "new")
+            Log.i("notif added new",editor.toString())
 
-        //holder.toy_name ..
+
+        }
+        else{
+            val sharedPreferences =
+                context.getSharedPreferences("notif", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putString("notif", "old")
+            Log.i("notif added old","")
+
+
+        }
 
     }
+
+
     class OnClickListener(val clickListener: (exchange: Exchange) -> Unit) {
         fun onClick(exchange: Exchange) = clickListener(exchange)
     }

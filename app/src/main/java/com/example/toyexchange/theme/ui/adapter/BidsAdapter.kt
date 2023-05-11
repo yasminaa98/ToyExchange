@@ -27,21 +27,23 @@ class BidsAdapter (
             //binding.toyDescription.text = toy.description
         }
     }
+    private val sortedItems = bids.sortedByDescending { it.price_proposed.toInt()}
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToysViewHolder {
         val binding= BidsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ToysViewHolder(binding)
         //traja3li view lkol, nemchi lil view holder lfou9 w declari jme3a
     }
     override fun getItemCount(): Int {
-        return bids.size
+        return sortedItems.size
     }
     override fun onBindViewHolder(holder: ToysViewHolder, position: Int) {
         // position de chaque item
         // fun hethi bch yjibli item eli cliquet alih
         //te5ou mil viewholder nafsou objet meno , ya nadi bin toul ou
-        val bid=bids[position]
+        val bid=sortedItems[position]
 
         holder.bind(bid)
+        notifyDataSetChanged()
         //holder.toy_name ..
 
     }
