@@ -45,7 +45,7 @@ class AddPasswordFragment : Fragment(R.layout.add_password_fragment) {
                     username,
                     password,
                     phone,
-                    avg_response
+                    avg_response,"no picture yet"
                 )
                 Log.i("info", user.apply {
                     firstname

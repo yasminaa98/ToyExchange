@@ -90,4 +90,19 @@ class GetUserInfoViewModel @Inject constructor(
             }
         }
     }
+    fun updatePicture(iduser:Long,newPicture:String){
+        viewModelScope.launch {
+            var result=authRepository.updatePicture(iduser,newPicture)
+            Log.i("result",result.toString())
+            try {
+                if (result.body() != null) {
+                    _msgHomeAdd.postValue(result.body())
+                } else {
+                    Log.i("body empty", result.message())
+                }
+            } catch (e: Exception) {
+                Log.e(ContentValues.TAG, "Failed to update home address", e)
+            }
+        }
+    }
 }

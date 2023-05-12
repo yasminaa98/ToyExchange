@@ -36,4 +36,9 @@ interface AuthApi {
         @Path("id_user") idUser:Long,
         @Query("newHomeAddress") newHomeAddress:String):Response<JsonObject>
 
+    @PUT("/accounts/{id_user}/update-picture")
+    suspend fun updatePicture(
+        @Path("id_user") idUser:Long,
+        @Query("newPicture") newPicture:String):Response<JsonObject>
+
 }

@@ -46,4 +46,9 @@ class AuthRepository @Inject constructor(
         newHomeAddress:String):Response<JsonObject>{
         return apiLoginService.updateHomeAddress(idUser,newHomeAddress)
     }
+    suspend fun updatePicture(
+        idUser:Long,
+        newPicture:String):Response<JsonObject>{
+        return apiLoginService.updatePicture(idUser,newPicture)
+    }
 }
