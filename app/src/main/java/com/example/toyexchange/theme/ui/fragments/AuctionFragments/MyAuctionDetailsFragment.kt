@@ -12,10 +12,13 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.toyexchange.Common.CountDownManager
+import com.example.toyexchange.Common.PicturesConverter
 import com.example.toyexchange.Presentation.ToysViewModel.AuctionDetailsViewModel
+import com.example.toyexchange.Presentation.ToysViewModel.DetailsToyViewModel
 import com.example.toyexchange.R
 import com.example.toyexchange.databinding.MyAuctionDetailsBinding
 import com.example.toyexchange.theme.ui.MainActivity
@@ -23,6 +26,7 @@ import com.example.toyexchange.theme.ui.adapter.BidsAdapter
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.util.*
 
 @Suppress("UNREACHABLE_CODE")
@@ -30,6 +34,8 @@ import java.util.*
 
 class MyAuctionDetailsFragment: Fragment(R.layout.my_auction_details) {
     private lateinit var auctionDetailsViewModel: AuctionDetailsViewModel
+    private lateinit var detailsToyViewModel: DetailsToyViewModel
+
     lateinit var bidsAdapter: BidsAdapter
 
     override fun onCreateView(
@@ -40,6 +46,8 @@ class MyAuctionDetailsFragment: Fragment(R.layout.my_auction_details) {
         val binding = MyAuctionDetailsBinding.inflate(inflater, container, false)
 
         auctionDetailsViewModel = ViewModelProvider(this).get(AuctionDetailsViewModel::class.java)
+        detailsToyViewModel = ViewModelProvider(this).get(DetailsToyViewModel::class.java)
+
         (activity as MainActivity).setBottomNavigation(false)
         (activity as MainActivity).setToolbar(true)
         val sharedPreferences =
@@ -93,12 +101,45 @@ class MyAuctionDetailsFragment: Fragment(R.layout.my_auction_details) {
                     .show()
             }
         })
-        // get bids list
+        auctionDetailsViewModel.getAuctionOwner(auctionId!!)
+        auctionDetailsViewModel.auctionOwner.observe(viewLifecycleOwner, Observer {
+            if (it!=null){
+                binding.apply {
+                    lifecycleScope.launch {
+                        ownerImage.setImageBitmap(PicturesConverter.base64ToBitmap(it.profile_picture_path))
+                    }
+                }
 
+
+            }
+        })
+        detailsToyViewModel.getAnnonceByAuction(auctionId!!)
+        detailsToyViewModel.annonce.observe(viewLifecycleOwner, Observer {
+            Log.i("1", "1")
+
+            if(it!=null){
+                Log.i("2", "2")
+
+
+                lifecycleScope.launch {
+                    binding.toyImage.setImageBitmap(PicturesConverter.base64ToBitmap(it.picturePath))
+                    Log.i("3", "3")
+
+                    Toast.makeText(requireContext(), "picture got successfully", Toast.LENGTH_LONG)
+                        .show()
+                }}else {
+                Toast.makeText(requireContext(), "getting picture failed", Toast.LENGTH_LONG).show()
+            }
+
+
+
+        })
+
+        // get bids list
                 binding.bidsList.apply {
                     layoutManager = LinearLayoutManager(this.context)
                     auctionDetailsViewModel.bids.observe(viewLifecycleOwner) { priceProposed ->
-                        bidsAdapter = BidsAdapter(priceProposed)
+                        bidsAdapter = BidsAdapter(priceProposed,lifecycleScope)
                         binding.bidsList.adapter = bidsAdapter
 
                     }
@@ -111,8 +152,6 @@ class MyAuctionDetailsFragment: Fragment(R.layout.my_auction_details) {
             findNavController().navigate(
                 R.id.action_myAuctionDetailsFragment_to_myAuctionFragment)
         }
-
-
 
         return binding.root
 

@@ -122,7 +122,8 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
                     phone.setText(it.phone.toString())
                     avgResponse.setText(it.avgResponseTime)
                     lifecycleScope.launch {
-                        ownerImage.setImageBitmap(PicturesConverter.base64ToBitmap(it.profile_picture_path))
+                        val image=PicturesConverter.base64ToBitmap(it.profile_picture_path)
+                        ownerImage.setImageBitmap(PicturesConverter.getRoundedBitmap(image!!,40))
                         ownerimage.setImageBitmap(PicturesConverter.base64ToBitmap(it.profile_picture_path))}
                 }
 
@@ -131,13 +132,19 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
         })
         detailsToyViewModel.getAnnonceByAuction(auctionId!!)
         detailsToyViewModel.annonce.observe(viewLifecycleOwner, Observer {
+            Log.i("1", "1")
+
             if(it!=null){
-                binding.apply {
+                Log.i("2", "2")
+
+
                     lifecycleScope.launch {
-                        toyImage.setImageBitmap(PicturesConverter.base64ToBitmap(it.picturePath))
+                        binding.toyImage.setImageBitmap(PicturesConverter.base64ToBitmap(it.picturePath))
+                        Log.i("3", "3")
+
                         Toast.makeText(requireContext(), "picture got successfully", Toast.LENGTH_LONG)
                             .show()
-                    }}}else {
+                    }}else {
                 Toast.makeText(requireContext(), "getting picture failed", Toast.LENGTH_LONG).show()
             }
 
@@ -189,31 +196,23 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
                                 .show()
                         }
                     })
-
-
                 binding.place.setOnClickListener {
                     Log.i("clicked", "clicked")
                     findNavController().navigate(
                         R.id.action_auctionDetailsFragment_to_addBidFragment, bundle
                     )
                 }
-
-
                 // get bids list
-
                 binding.bidsList.apply {
                     layoutManager = LinearLayoutManager(this.context)
                     auctionDetailsViewModel.bids.observe(viewLifecycleOwner) { priceProposed ->
-                        bidsAdapter = BidsAdapter(priceProposed)
+                        bidsAdapter = BidsAdapter(priceProposed,lifecycleScope)
                         binding.bidsList.adapter = bidsAdapter
-
                     }
                     auctionDetailsViewModel.getAuctionBids(auctionId!!, token.toString())
                     Log.i("bids fetched", "bids fetched")
                     return binding.root
                 }
-
-
             }
         }
 

@@ -1,29 +1,34 @@
 package com.example.toyexchange.theme.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.toyexchange.Common.PicturesConverter
 import com.example.toyexchange.Domain.model.Bid
 import com.example.toyexchange.Domain.model.Toy
 import com.example.toyexchange.databinding.BidsItemBinding
 import com.example.toyexchange.databinding.ToyItemBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 class BidsAdapter (
     private var bids:List<Bid>,
-
+    private val parentLifecycleScope: CoroutineScope
 ) : RecyclerView.Adapter<BidsAdapter.ToysViewHolder>(){
 
-
-
-
-    class ToysViewHolder(private val binding: BidsItemBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class ToysViewHolder(private val binding: BidsItemBinding) : RecyclerView.ViewHolder(binding.root){
         //var toy_image=itemView.findViewById<ImageView>(R.id.toy_image)
 
         fun bind(bid:Bid) {
             binding.priceProposed.text = bid.price_proposed
             binding.userName.text=bid.username
-            //binding.toyDescription.text = toy.description
+
+            parentLifecycleScope.launch {
+                Log.i("bidder image in adapter","bidder image in adapter")
+                binding.bidderImage.setImageBitmap(PicturesConverter.base64ToBitmap(bid.profile_picture_path))
+           }
         }
     }
     private val sortedItems = bids.sortedByDescending { it.price_proposed.toInt()}

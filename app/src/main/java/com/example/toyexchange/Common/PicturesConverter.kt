@@ -26,7 +26,10 @@ class PicturesConverter {
            return@withContext encodedString
 
         }
-        suspend fun base64ToBitmap(base64String: String): Bitmap?= withContext(Dispatchers.Default)  {
+        suspend fun base64ToBitmap(base64String: String?): Bitmap?= withContext(Dispatchers.Default)  {
+            if (base64String == null) {
+                return@withContext null
+            }
             val decodedBytes = Base64.decode(base64String, Base64.DEFAULT)
             val inputStream = ByteArrayInputStream(decodedBytes)
             return@withContext try {
@@ -35,21 +38,24 @@ class PicturesConverter {
                 null
             }
         }
-        suspend fun getRoundedBitmap(bitmap: Bitmap): Bitmap {
-            val output = Bitmap.createBitmap(bitmap.width, bitmap.height, Bitmap.Config.ARGB_8888)
+        suspend fun getRoundedBitmap(bitmap: Bitmap, size: Int): Bitmap {
+            val output = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(output)
             val color = -0xbdbdbe
             val paint = Paint()
-            val rect = Rect(0, 0, bitmap.width, bitmap.height)
-            val radius = bitmap.width / 2f
+            val rect = Rect(0, 0, size, size)
+            val radius = size / 2f
             paint.isAntiAlias = true
             canvas.drawARGB(0, 0, 0, 0)
             paint.color = color
             canvas.drawCircle(radius, radius, radius, paint)
             paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
-            canvas.drawBitmap(bitmap, rect, rect, paint)
+            val matrix = Matrix()
+            matrix.setRectToRect(RectF(0f, 0f, bitmap.width.toFloat(), bitmap.height.toFloat()), RectF(0f, 0f, size.toFloat(), size.toFloat()), Matrix.ScaleToFit.CENTER)
+            canvas.drawBitmap(bitmap, matrix, paint)
             return output
         }
+
 
 
     }

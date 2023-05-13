@@ -11,7 +11,7 @@
 
 
         <ImageView
-            android:id="@+id/auction_image"
+            android:id="@+id/bidder_image"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="16dp"
@@ -22,21 +22,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@drawable/ic_launcher_background" />
 
         <TextView
             android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:gravity="center"
             android:text="name"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/price_proposed"
-            app:layout_constraintHorizontal_bias="0.074"
-            app:layout_constraintStart_toEndOf="@+id/auction_image"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.203"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.884" />
 
         <TextView
             android:id="@+id/price_proposed"
@@ -46,7 +47,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.898"
-            app:layout_constraintStart_toEndOf="@+id/auction_image"
+            app:layout_constraintStart_toEndOf="@+id/bidder_image"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteY="24dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -47,6 +47,8 @@ class DetailsToyViewModel @Inject constructor(private val toysRepositoryImpl: To
     fun getAnnonceByAuction(idAuction:Long){
         viewModelScope.launch {
             var result = toysRepositoryImpl.getAnnonceByAuction(idAuction)
+            Log.i("getAnnonceByAuction",result.toString())
+
             try {
                 if (result.body() != null) {
                     _annonce.postValue(result.body())
