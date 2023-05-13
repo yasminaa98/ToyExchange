@@ -27,7 +27,8 @@ class UserAnnoncesAdapter(
             binding.annonceName.text = annonce.name
             //binding.toyDescription.text = toy.description
             parentLifecycleScope.launch {
-            binding.annonceImage.setImageBitmap(PicturesConverter.base64ToBitmap(annonce.picturePath))}
+                val image=PicturesConverter.base64ToBitmap(annonce.picturePath)
+                binding.annonceImage.setImageBitmap(PicturesConverter.getRoundedBitmap(image!!,200))}
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToysViewHolder {

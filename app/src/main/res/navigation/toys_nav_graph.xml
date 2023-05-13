@@ -225,6 +225,9 @@
         <action
             android:id="@+id/action_notificationViewPager_to_exchangeDecisionFragment"
             app:destination="@id/exchangeDecisionFragment" />
+        <action
+            android:id="@+id/action_notificationViewPager_to_exchangeDecisionResultFragment"
+            app:destination="@id/exchangeDecisionResultFragment" />
     </fragment>
     <fragment
         android:id="@+id/exchangeResultFragment"
@@ -245,5 +248,13 @@
         <action
             android:id="@+id/action_resetPasswordFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exchangeDecisionResultFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.Exchange.ExchangeDecisionResultFragment"
+        android:label="ExchangeDecisionResultFragment" >
+        <action
+            android:id="@+id/action_exchangeDecisionResultFragment_to_exchangeAnnonceDetailsFragment"
+            app:destination="@id/exchangeAnnonceDetailsFragment" />
     </fragment>
 </navigation>

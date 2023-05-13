@@ -106,7 +106,8 @@ class MyAuctionDetailsFragment: Fragment(R.layout.my_auction_details) {
             if (it!=null){
                 binding.apply {
                     lifecycleScope.launch {
-                        ownerImage.setImageBitmap(PicturesConverter.base64ToBitmap(it.profile_picture_path))
+                        val image=PicturesConverter.base64ToBitmap(it.profile_picture_path)
+                        ownerImage.setImageBitmap(PicturesConverter.getRoundedBitmap(image!!,200))
                     }
                 }
 

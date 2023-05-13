@@ -27,7 +27,8 @@ class BidsAdapter (
 
             parentLifecycleScope.launch {
                 Log.i("bidder image in adapter","bidder image in adapter")
-                binding.bidderImage.setImageBitmap(PicturesConverter.base64ToBitmap(bid.profile_picture_path))
+                val image=PicturesConverter.base64ToBitmap(bid.profile_picture_path)
+                binding.bidderImage.setImageBitmap(PicturesConverter.getRoundedBitmap(image!!,100))
            }
         }
     }

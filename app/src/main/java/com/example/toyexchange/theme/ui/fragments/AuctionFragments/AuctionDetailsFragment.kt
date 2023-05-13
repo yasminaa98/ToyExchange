@@ -123,8 +123,9 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
                     avgResponse.setText(it.avgResponseTime)
                     lifecycleScope.launch {
                         val image=PicturesConverter.base64ToBitmap(it.profile_picture_path)
-                        ownerImage.setImageBitmap(PicturesConverter.getRoundedBitmap(image!!,40))
-                        ownerimage.setImageBitmap(PicturesConverter.base64ToBitmap(it.profile_picture_path))}
+                        ownerImage.setImageBitmap(PicturesConverter.getRoundedBitmap(image!!,200))
+                        val owner_image=PicturesConverter.base64ToBitmap(it.profile_picture_path)
+                        ownerimage.setImageBitmap(PicturesConverter.getRoundedBitmap(owner_image!!,300))}
                 }
 
 

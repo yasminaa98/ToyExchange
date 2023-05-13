@@ -46,9 +46,9 @@
             android:text="price"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.898"
+            app:layout_constraintHorizontal_bias="0.924"
             app:layout_constraintStart_toEndOf="@+id/bidder_image"
             tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="24dp" />
+            tools:layout_editor_absoluteY="27dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

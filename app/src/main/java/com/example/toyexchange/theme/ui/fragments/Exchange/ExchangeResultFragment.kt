@@ -54,7 +54,7 @@ class ExchangeResultFragment:Fragment(R.layout.notification_exchange_result_frag
                             clickedItem->
                         val bundle=bundleOf("id_exchange" to clickedItem.id,"id_sender_annonce" to clickedItem.id_sender_annonce,
                             "id_receiver_annonce" to clickedItem.id_receiver_annonce)
-                        findNavController().navigate(R.id.action_notificationViewPager_to_exchangeDecisionFragment,bundle)
+                        findNavController().navigate(R.id.action_notificationViewPager_to_exchangeDecisionResultFragment,bundle)
 
                     })
                 binding.exchangeNotificationResultList.adapter = exchangeResultAdapter

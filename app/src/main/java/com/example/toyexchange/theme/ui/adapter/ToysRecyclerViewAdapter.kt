@@ -24,7 +24,8 @@ class ToysRecyclerViewAdapter(
                 binding.toyName.text = toy.name
                 //binding.toyDescription.text = toy.description
                 parentLifecycleScope.launch {
-                binding.toyImage.setImageBitmap(PicturesConverter.base64ToBitmap(toy.picturePath))}
+                    val image=PicturesConverter.base64ToBitmap(toy.picturePath)
+                    binding.toyImage.setImageBitmap(PicturesConverter.getRoundedBitmap(image!!,300))}
 
             }
         }

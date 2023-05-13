@@ -25,8 +25,7 @@
                 android:layout_width="71dp"
                 android:layout_height="94dp"
                 tools:ignore="MissingConstraints"
-                tools:srcCompat="@drawable/ic_launcher_background"
-                android:background="@drawable/rectangle_corners"/>
+                tools:srcCompat="@drawable/ic_launcher_background" />
 
             <TextView
                 android:id="@+id/toy_name"

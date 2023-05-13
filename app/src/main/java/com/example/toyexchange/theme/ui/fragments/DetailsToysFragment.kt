@@ -101,8 +101,10 @@ class DetailsToysFragment : Fragment(R.layout.toy_details_fragment) {
                     phone.setText(it.phone.toString())
                     avgResponse.setText(it.avgResponseTime)
                     lifecycleScope.launch {
-                        ownerImage.setImageBitmap(PicturesConverter.base64ToBitmap(it.profile_picture_path))
-                    ownerimage.setImageBitmap(PicturesConverter.base64ToBitmap(it.profile_picture_path))}
+                        val image=PicturesConverter.base64ToBitmap(it.profile_picture_path)
+                        ownerImage.setImageBitmap(PicturesConverter.getRoundedBitmap(image!!,200))
+                        val owner_image=PicturesConverter.base64ToBitmap(it.profile_picture_path)
+                        ownerimage.setImageBitmap(PicturesConverter.getRoundedBitmap(owner_image!!,300))}
                 }
 
                     val bundle= bundleOf("reciever" to it.username,"id_receiver_annonce" to toyId)
