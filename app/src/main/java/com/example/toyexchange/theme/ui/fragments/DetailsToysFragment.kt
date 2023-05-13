@@ -13,8 +13,10 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.toyexchange.Common.PicturesConverter
 import com.example.toyexchange.Domain.model.Toy
 import com.example.toyexchange.Presentation.ToysViewModel.DetailsToyViewModel
 import com.example.toyexchange.Presentation.ToysViewModel.RoomViewModel
@@ -24,9 +26,10 @@ import com.example.toyexchange.databinding.ToyDetailsFragmentBinding
 import com.example.toyexchange.db.ToyDatabase
 import com.example.toyexchange.theme.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class DetailsToysFragment : Fragment(R.layout.toy_item) {
+class DetailsToysFragment : Fragment(R.layout.toy_details_fragment) {
     private lateinit var detailsToyViewModel: DetailsToyViewModel
     private lateinit var roomViewModel: RoomViewModel
 
@@ -96,7 +99,11 @@ class DetailsToysFragment : Fragment(R.layout.toy_item) {
                     email.setText(it.email)
                     homeaddress.setText(it.homeAddress)
                     phone.setText(it.phone.toString())
-                    avgResponse.setText(it.avgResponseTime) }
+                    avgResponse.setText(it.avgResponseTime)
+                    lifecycleScope.launch {
+                        ownerImage.setImageBitmap(PicturesConverter.base64ToBitmap(it.profile_picture_path))
+                    ownerimage.setImageBitmap(PicturesConverter.base64ToBitmap(it.profile_picture_path))}
+                }
 
                     val bundle= bundleOf("reciever" to it.username,"id_receiver_annonce" to toyId)
                     binding.exchange.setOnClickListener{
@@ -122,6 +129,8 @@ class DetailsToysFragment : Fragment(R.layout.toy_item) {
             toyName.text = name
             toyDescription.text = description
             toyPrice.text = price
+            lifecycleScope.launch {
+                toyImage.setImageBitmap(PicturesConverter.base64ToBitmap(image.toString()))}
             (activity as MainActivity).setBottomNavigation(false)
             (activity as MainActivity).setToolbar(true)
         }

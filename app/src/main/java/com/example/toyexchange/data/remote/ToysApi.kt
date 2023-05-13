@@ -36,6 +36,8 @@ interface ToysApi {
 
     @GET("api/annonces/{id_annonce}/getAnnonceById")
     suspend fun getAnnonceById(@Path("id_annonce") idAnnonce: Long):Response<Annonce>
+    @GET("api/annonces/{id_auction}/getAnnonceByAuction")
+    suspend fun getAnnonceByAuction(@Path("id_auction") idAuction: Long):Response<Annonce>
 
 
 }

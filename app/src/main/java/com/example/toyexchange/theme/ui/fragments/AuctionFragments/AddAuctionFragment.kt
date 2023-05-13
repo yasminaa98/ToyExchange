@@ -21,6 +21,7 @@ class AddAuctionFragment: Fragment(R.layout.add_auction_fragment){
     private lateinit var addAuctionViewModel: AddAuctionViewModel
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

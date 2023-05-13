@@ -4,17 +4,22 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.compose.ui.graphics.Color
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.toyexchange.Common.PicturesConverter
 import com.example.toyexchange.Domain.model.Annonce
 import com.example.toyexchange.databinding.ExchangeAnnonceItemBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 class SelectExchangeAnnonceAdapter (private var annonces:List<Annonce>,
-                                    private val onClickListener: OnClickListener
+                                    private val onClickListener: OnClickListener,
+                                    private val parentLifecycleScope: CoroutineScope
 ) : RecyclerView.Adapter<SelectExchangeAnnonceAdapter.ToysViewHolder>(){
 
     private var selectedItem = -1
-    class ToysViewHolder(private val binding: ExchangeAnnonceItemBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class ToysViewHolder(private val binding: ExchangeAnnonceItemBinding) : RecyclerView.ViewHolder(binding.root){
         //var toy_image=itemView.findViewById<ImageView>(R.id.toy_image)
 
         fun bind(annonce: Annonce, isSelected: Boolean) {
@@ -22,9 +27,9 @@ class SelectExchangeAnnonceAdapter (private var annonces:List<Annonce>,
             binding.radioButton.isChecked = isSelected
             binding.radioButton.isEnabled=false
             //binding.toyDescription.text = toy.description
-            Glide.with(itemView)
-                .load(annonce.image_url)
-                .into(binding.annonceImage)
+            parentLifecycleScope.launch {
+            binding.annonceImage.setImageBitmap(PicturesConverter.base64ToBitmap(annonce.picturePath))}
+
 
 
         }

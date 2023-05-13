@@ -11,7 +11,7 @@ data class Annonce(
     @SerializedName("description")
     val description: String,
    @SerializedName("picturePath")
-   val image_url: String,
+   val picturePath: String,
     @SerializedName("name")
     val name: String,
     @SerializedName("price")

@@ -8,7 +8,6 @@ import com.example.toyexchange.Domain.model.Bid
 import com.example.toyexchange.Domain.model.Toy
 import com.example.toyexchange.databinding.BidsItemBinding
 import com.example.toyexchange.databinding.ToyItemBinding
-import com.example.trypostrequest.ui.adapter.ToysRecyclerViewAdapter
 
 class BidsAdapter (
     private var bids:List<Bid>,
@@ -43,7 +42,7 @@ class BidsAdapter (
         val bid=sortedItems[position]
 
         holder.bind(bid)
-        notifyDataSetChanged()
+
         //holder.toy_name ..
 
     }

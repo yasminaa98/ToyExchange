@@ -12,10 +12,13 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.toyexchange.Common.CountDownManager
+import com.example.toyexchange.Common.PicturesConverter
 import com.example.toyexchange.Presentation.ToysViewModel.AuctionDetailsViewModel
+import com.example.toyexchange.Presentation.ToysViewModel.DetailsToyViewModel
 import com.example.toyexchange.R
 import com.example.toyexchange.databinding.AuctionDetailsBinding
 import com.example.toyexchange.theme.ui.MainActivity
@@ -23,12 +26,16 @@ import com.example.toyexchange.theme.ui.adapter.BidsAdapter
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
 class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
     private lateinit var auctionDetailsViewModel: AuctionDetailsViewModel
+    private lateinit var detailsToyViewModel: DetailsToyViewModel
+
+
     lateinit var bidsAdapter:BidsAdapter
 
     @SuppressLint("ResourceAsColor")
@@ -40,6 +47,8 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
         val binding = AuctionDetailsBinding.inflate(inflater, container, false)
 
         auctionDetailsViewModel = ViewModelProvider(this).get(AuctionDetailsViewModel::class.java)
+        detailsToyViewModel = ViewModelProvider(this).get(DetailsToyViewModel::class.java)
+
         (activity as MainActivity).setBottomNavigation(false)
         (activity as MainActivity).setToolbar(true)
         val sharedPreferences =
@@ -67,7 +76,6 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
         binding.toyPrice.text=initial_price
         Log.i("endDateTime", endDateTime.toString())
     // get owner
-        auctionDetailsViewModel.getAuctionOwner(auctionId!!)
         Log.i("owner get it", "")
 
         binding.ownerImage.setOnClickListener {
@@ -96,11 +104,12 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
                     }
                 }
             }
+        auctionDetailsViewModel.getAuctionOwner(auctionId!!)
         auctionDetailsViewModel.auctionOwner.observe(viewLifecycleOwner, Observer {
             if (it!=null){
                 if (it.username==username){
                     binding.place.setBackgroundColor(R.color.grey)
-                    binding.place.isEnabled=true
+                    binding.place.isEnabled=false
                     binding.place.setText("Bid unavailable")
                     Log.i("username", "username")
                 }
@@ -112,10 +121,28 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
                     homeaddress.setText(it.homeAddress)
                     phone.setText(it.phone.toString())
                     avgResponse.setText(it.avgResponseTime)
+                    lifecycleScope.launch {
+                        ownerImage.setImageBitmap(PicturesConverter.base64ToBitmap(it.profile_picture_path))
+                        ownerimage.setImageBitmap(PicturesConverter.base64ToBitmap(it.profile_picture_path))}
                 }
 
 
             }
+        })
+        detailsToyViewModel.getAnnonceByAuction(auctionId!!)
+        detailsToyViewModel.annonce.observe(viewLifecycleOwner, Observer {
+            if(it!=null){
+                binding.apply {
+                    lifecycleScope.launch {
+                        toyImage.setImageBitmap(PicturesConverter.base64ToBitmap(it.picturePath))
+                        Toast.makeText(requireContext(), "picture got successfully", Toast.LENGTH_LONG)
+                            .show()
+                    }}}else {
+                Toast.makeText(requireContext(), "getting picture failed", Toast.LENGTH_LONG).show()
+            }
+
+
+
         })
 
         /* val calendar = Calendar.getInstance()

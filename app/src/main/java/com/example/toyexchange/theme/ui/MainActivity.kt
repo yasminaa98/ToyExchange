@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.profile -> {
                     Toast.makeText(applicationContext, "Clicked item1", Toast.LENGTH_SHORT).show()
                     // Navigate to Fragment1
-                    navController.navigate(R.id.editProfilFragment)
+                    navController.navigate(R.id.myAnnoncesFragment)
                 }
                 R.id.auctions -> {
                     Toast.makeText(applicationContext, "Clicked auctionFragment", Toast.LENGTH_SHORT).show()

@@ -26,6 +26,8 @@ class DetailsToyViewModel @Inject constructor(private val toysRepositoryImpl: To
     val annonce1: LiveData<Annonce> =_annonce1
     private val _annonce2 = MutableLiveData<Annonce>()
     val annonce2: LiveData<Annonce> =_annonce2
+    private val _annonce = MutableLiveData<Annonce>()
+    val annonce: LiveData<Annonce> =_annonce
 
 
     fun getAnnonceOwner(idAnnonce:Long){
@@ -39,6 +41,20 @@ class DetailsToyViewModel @Inject constructor(private val toysRepositoryImpl: To
                 }
             } catch (e: Exception) {
                 Log.e(ContentValues.TAG, "Failed to get annonce owner", e)
+            }
+        }
+    }
+    fun getAnnonceByAuction(idAuction:Long){
+        viewModelScope.launch {
+            var result = toysRepositoryImpl.getAnnonceByAuction(idAuction)
+            try {
+                if (result.body() != null) {
+                    _annonce.postValue(result.body())
+                } else {
+                    Log.i("body empty", result.message())
+                }
+            } catch (e: Exception) {
+                Log.e(ContentValues.TAG, "Failed to get annonce by auction", e)
             }
         }
     }

@@ -7,26 +7,27 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.toyexchange.Common.PicturesConverter
 import com.example.toyexchange.databinding.MyAnnonceItemBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 
 class UserAnnoncesAdapter(
     private var annonces:List<Annonce>,
-    private val onClickListener: OnClickListener
+    private val onClickListener: OnClickListener,
+    private val parentLifecycleScope: CoroutineScope
 ) : RecyclerView.Adapter<UserAnnoncesAdapter.ToysViewHolder>(){
 
 
-    class ToysViewHolder(private val binding: MyAnnonceItemBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class ToysViewHolder(private val binding: MyAnnonceItemBinding) : RecyclerView.ViewHolder(binding.root){
         //var toy_image=itemView.findViewById<ImageView>(R.id.toy_image)
 
         fun bind(annonce: Annonce) {
             binding.annonceName.text = annonce.name
             //binding.toyDescription.text = toy.description
-            Glide.with(itemView)
-                .load(annonce.image_url)
-                .into(binding.annonceImage)
-
-
+            parentLifecycleScope.launch {
+            binding.annonceImage.setImageBitmap(PicturesConverter.base64ToBitmap(annonce.picturePath))}
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToysViewHolder {

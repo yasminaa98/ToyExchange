@@ -1,6 +1,9 @@
 package com.example.toyexchange.theme.ui.fragments
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,10 +15,12 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
+import com.example.toyexchange.Common.PICK_IMAGE_REQUEST
 import com.example.toyexchange.Presentation.ToysViewModel.ToysViewModel
 import com.example.toyexchange.R
 import com.example.toyexchange.databinding.FeedToysFragmentBinding
@@ -65,9 +70,9 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
                         val bundle = bundleOf("id" to clickedItem.id ,
                             "name" to clickedItem.name, "description" to clickedItem.description,
                         "price" to clickedItem.price,"category" to clickedItem.category,
-                            "image_url" to clickedItem.image_url)
+                            "image_url" to clickedItem.picturePath)
                         findNavController().navigate(R.id.action_feedToysFragment_to_detailsToysFragment,bundle)
-                })
+                },lifecycleScope)
                 binding.toysList.adapter = toysRecyclerViewAdapter
             })
             toysViewModel.fetchToys(token.toString())
@@ -136,6 +141,7 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
             return binding.root
         }
     }
+
 
 
 }

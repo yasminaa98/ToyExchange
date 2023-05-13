@@ -58,4 +58,5 @@ interface AuctionApi {
     @GET("api/auctions/{id_auction}/AuctionOwner")
     suspend fun getAuctionOwner(@Path("id_auction") idAuction: Long):Response<User>
 
+
 }

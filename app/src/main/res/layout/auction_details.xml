@@ -18,7 +18,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="0dp"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@drawable/ic_launcher_background" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/annonce_home"
@@ -206,7 +206,7 @@
             app:layout_constraintTop_toTopOf="@+id/toy_image"
             app:layout_constraintVertical_bias="0.849"
             tools:ignore="MissingConstraints"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@drawable/ic_launcher_background" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/profileOwner"
@@ -243,7 +243,7 @@
                     tools:ignore="MissingConstraints"
                     tools:layout_editor_absoluteX="32dp"
                     tools:layout_editor_absoluteY="21dp"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    tools:srcCompat="@drawable/ic_launcher_background" />
 
                 <TextView
                     android:id="@+id/user_name"

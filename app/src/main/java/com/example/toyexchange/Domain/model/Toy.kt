@@ -12,8 +12,8 @@ data class Toy(
     val category: String,
     @SerializedName("description")
     val description: String,
-    @SerializedName("picture")
-    val image_url: String,
+    @SerializedName("picturePath")
+    val picturePath: String,
     @SerializedName("name")
     val name: String,
     @SerializedName("price")

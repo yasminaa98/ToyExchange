@@ -58,7 +58,7 @@ class AuctionDetailsViewModel @Inject constructor(
 
                 var resultPrice = auctionRepository.getAuctionPrice(idAuction, token)
                 Log.i("result price ", resultPrice.message().toString())
-            while (true) {
+           // while (true) {
                 try {
 
                     if (resultPrice.body() != null) {
@@ -70,8 +70,8 @@ class AuctionDetailsViewModel @Inject constructor(
                 } catch (e: Exception) {
                     Log.e(ContentValues.TAG, "Failed to get auction price", e)
                 }
-                delay(1000)
-            }
+               /* delay(19000)
+            }*/
         }
     }
 

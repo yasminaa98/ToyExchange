@@ -4,29 +4,31 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.toyexchange.Common.PicturesConverter
 import com.example.toyexchange.Domain.model.Toy
 import com.example.toyexchange.databinding.ToyItemBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 
 class ToysRecyclerViewAdapter(
     private var toys:List<Toy>,
-    private val onClickListener: OnClickListener
+    private val onClickListener: OnClickListener,
+    private val parentLifecycleScope:CoroutineScope
   ) : RecyclerView.Adapter<ToysRecyclerViewAdapter.ToysViewHolder>(){
 
-
-
-
-    class ToysViewHolder(private val binding: ToyItemBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class ToysViewHolder(private val binding: ToyItemBinding) : RecyclerView.ViewHolder(binding.root){
         //var toy_image=itemView.findViewById<ImageView>(R.id.toy_image)
 
             fun bind(toy: Toy) {
                 binding.toyName.text = toy.name
                 //binding.toyDescription.text = toy.description
-                Glide.with(itemView)
-                    .load(toy.image_url)
-                    .into(binding.toyImage)
+                parentLifecycleScope.launch {
+                binding.toyImage.setImageBitmap(PicturesConverter.base64ToBitmap(toy.picturePath))}
+
             }
         }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToysViewHolder {
         val binding=ToyItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ToysViewHolder(binding)

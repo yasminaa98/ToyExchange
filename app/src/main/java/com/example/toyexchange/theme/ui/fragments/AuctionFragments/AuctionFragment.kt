@@ -31,9 +31,7 @@ class AuctionFragment: Fragment(R.layout.auctions_fragment) {
         (activity as MainActivity).setBottomNavigation(true)
         (activity as MainActivity).setToolbar(false)
 
-
         //coundown
-
        binding.auctionsList.apply {
             layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
 

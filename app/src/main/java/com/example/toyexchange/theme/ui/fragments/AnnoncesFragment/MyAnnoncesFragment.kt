@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.toyexchange.Presentation.ToysViewModel.UserAnnoncesViewModel
@@ -22,12 +23,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class MyAnnoncesFragment: Fragment(R.layout.my_annonces_fragment) {
 
     private lateinit var userAnnoncesViewModel:UserAnnoncesViewModel
+
     lateinit var userAnnoncesAdapter: UserAnnoncesAdapter
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val binding = MyAnnoncesFragmentBinding.inflate(inflater, container, false)
         // create instance of viewmodel , the life cycle library creates it for us so if the viewmodel destroyed we don't need to recreated
         userAnnoncesViewModel = ViewModelProvider(this).get(UserAnnoncesViewModel::class.java)
-        (activity as MainActivity).setBottomNavigation(false)
+
+        (activity as MainActivity).setBottomNavigation(true)
         (activity as MainActivity).setToolbar(false)
         /* toysRecyclerViewAdapter = ToysRecyclerViewAdapter(emptyList(),ToysRecyclerViewAdapter.OnClickListener{ photo ->
             Toast.makeText(context, "${photo.name}", Toast.LENGTH_SHORT).show() }) */
@@ -50,10 +53,11 @@ class MyAnnoncesFragment: Fragment(R.layout.my_annonces_fragment) {
                             "name" to clickedItem.name, "description" to clickedItem.description,
                             "price" to clickedItem.price,"category" to clickedItem.category,
                             "age_child" to clickedItem.age_child,"age_toy" to clickedItem.age_toy,
-                        "state" to clickedItem.state,"image" to clickedItem.image_url)
+                        "state" to clickedItem.state,"image" to clickedItem.picturePath)
+                        //val image=clickedItem.picturePath
                         Log.i("bundel sent",bundle.toString())
                         findNavController().navigate(R.id.action_myAnnoncesFragment_to_myAnnoncedetailsFragment,bundle)
-                    })
+                    },lifecycleScope)
                 binding.annoncesList.adapter = userAnnoncesAdapter
             })
             userAnnoncesViewModel.getUserAnnonces(token.toString())

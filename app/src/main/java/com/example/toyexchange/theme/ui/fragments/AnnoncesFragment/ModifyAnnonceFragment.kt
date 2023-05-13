@@ -1,27 +1,42 @@
 package com.example.toyexchange.theme.ui.fragments.AnnoncesFragment
 
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.toyexchange.Common.PICK_IMAGE_REQUEST.Companion.PICK_IMAGE_REQUEST
+import com.example.toyexchange.Common.PicturesConverter
 import com.example.toyexchange.Domain.model.Annonce
+import com.example.toyexchange.Presentation.ToysViewModel.DetailsToyViewModel
 import com.example.toyexchange.Presentation.ToysViewModel.ModifyAnnonceViewModel
 import com.example.toyexchange.R
 import com.example.toyexchange.databinding.ModifyAnnonceFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ModifyAnnonceFragment: Fragment(R.layout.modify_annonce_fragment) {
     private lateinit var modifyAnnonceViewModel: ModifyAnnonceViewModel
+    private lateinit var detailsToyViewModel:DetailsToyViewModel
+
+    private lateinit var selectedImage: ImageView
 
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,6 +44,15 @@ class ModifyAnnonceFragment: Fragment(R.layout.modify_annonce_fragment) {
     ): View {
         val binding = ModifyAnnonceFragmentBinding.inflate(inflater, container, false)
         modifyAnnonceViewModel= ViewModelProvider(this).get(ModifyAnnonceViewModel::class.java)
+        detailsToyViewModel= ViewModelProvider(this).get(DetailsToyViewModel::class.java)
+        selectedImage=binding.toyImage
+        binding.toyImage.setOnClickListener{
+            Log.i("1","1")
+
+            openGallery()
+            Log.i("2","2")
+        }
+
         val sharedPreferences =
             requireActivity().getSharedPreferences("authToken", Context.MODE_PRIVATE)
         val token =sharedPreferences.getString("authToken",null)
@@ -36,37 +60,67 @@ class ModifyAnnonceFragment: Fragment(R.layout.modify_annonce_fragment) {
         val idAnnonce = arguments?.getLong("id")
         Log.i("id annonce",idAnnonce.toString())
         // get item selected
-        val name = arguments?.getString("name").toString()
+
+
+       /* val name = arguments?.getString("name").toString()
         val description = arguments?.getString("description").toString()
         val _price = arguments?.getString("price").toString()
+        val _image= arguments?.getString("image").toString()
         val category = arguments?.getString("category").toString()
         val age_child = arguments?.getString("age_child").toString()
         val age_toy = arguments?.getString("age_toy").toString()
-        val _state = arguments?.getString("state").toString()
-        binding.apply {
-            toyName.setText(name)
-            toyDescription.setText(description)
-            childAge.setText(age_child)
-            toyCategory.setText(category)
-            price.setText(_price)
-            toyAge.setText(age_toy)
-            toyState.setText(_state)
-        }
+        val _state = arguments?.getString("state").toString()*/
+        detailsToyViewModel.getAnnonce1ById(idAnnonce!!)
+        detailsToyViewModel.annonce1.observe(viewLifecycleOwner, Observer {
+            if(it!=null){
+           binding.apply {
+               lifecycleScope.launch {
+                   toyImage.setImageBitmap(PicturesConverter.base64ToBitmap(it.picturePath))
+                   toyName.setText(it.name)
+                   toyDescription.setText(it.description)
+                   childAge.setText(it.age_child)
+                   toyCategory.setText(it.category)
+                   price.setText(it.price)
+                   toyAge.setText(it.age_toy)
+                   toyState.setText(it.state)
+                   Toast.makeText(requireContext(), "info got successfully", Toast.LENGTH_LONG)
+                       .show()
+               }}}else {
+                Toast.makeText(requireContext(), "getting info failed", Toast.LENGTH_LONG).show()
+            }
+
+
+
+        })
+
         binding.addButton.setOnClickListener {
-            val name=binding.toyName.text.toString()
-            val child_age=binding.childAge.text.toString()
-            val toy_age=binding.toyAge.text.toString()
-            val price=binding.price.text.toString()
-            val category=binding.toyCategory.text.toString()
-            val state=binding.toyState.text.toString()
-            val description=binding.toyDescription.text.toString()
-            Log.i("id annonce2",idAnnonce.toString())
+            var name = binding.toyName.text.toString()
+            var child_age = binding.childAge.text.toString()
+            var toy_age = binding.toyAge.text.toString()
+            var price = binding.price.text.toString()
+            var category = binding.toyCategory.text.toString()
+            var state = binding.toyState.text.toString()
+            var description = binding.toyDescription.text.toString()
+            lifecycleScope.launch {
+                val image = PicturesConverter.sendImage(selectedImage)
+                //Log.i("id annonce2",idAnnonce.toString())
 
-            val annonce= Annonce(idAnnonce!!,category,description,"",name,price,state,child_age,toy_age)
-            modifyAnnonceViewModel.modifyAnnonce(token.toString(), idAnnonce.toLong() ,annonce)
+                val annonce = Annonce(
+                    idAnnonce!!,
+                    category,
+                    description,
+                    image!!,
+                    name,
+                    price,
+                    state,
+                    child_age,
+                    toy_age
+                )
+                modifyAnnonceViewModel.modifyAnnonce(token.toString(), idAnnonce.toLong(), annonce)
+            }
             findNavController().navigate(R.id.action_modifyAnnonceFragment_to_myAnnoncesFragment)
-
         }
+
         modifyAnnonceViewModel.msg.observe(viewLifecycleOwner , Observer {
             if(it!=null){
                 Toast.makeText(requireContext(),"toy modified successfully", Toast.LENGTH_LONG).show()
@@ -78,6 +132,25 @@ class ModifyAnnonceFragment: Fragment(R.layout.modify_annonce_fragment) {
         })
         return binding.root
 
+    }
+    private fun openGallery() {
+        Log.i("3","3")
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        Log.i("4","4")
+        startActivityForResult(intent, PICK_IMAGE_REQUEST)
+        Log.i("5","5")
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
+            val imageUri = data.data
+            val imageStream = activity?.contentResolver?.openInputStream(imageUri!!)
+            val selectedBitmap = BitmapFactory.decodeStream(imageStream)
+            selectedImage.setImageBitmap(selectedBitmap)
+        }
     }
 
 }

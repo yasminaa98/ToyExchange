@@ -51,7 +51,7 @@ class SignInFragment: Fragment(R.layout.sign_in_fragment) {
                 editor.putString("username",it.username)
                 editor.putLong("idUser", it.id)
                 editor.apply()
-                    Log.i("token",it.auth_token)
+                Log.i("token",it.auth_token)
                 Log.i("username",it.username)
                 Log.i("iduser",it.id.toString())
                 Log.i("token stored",sharedPreferences.getString("authToken",null).toString())

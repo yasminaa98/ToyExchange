@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.toyexchange.Domain.model.Exchange
@@ -19,7 +20,6 @@ import com.example.toyexchange.databinding.ChooseExchangeAnnonceFragmentBinding
 import com.example.toyexchange.databinding.MyAnnoncesFragmentBinding
 import com.example.toyexchange.theme.ui.MainActivity
 import com.example.toyexchange.theme.ui.adapter.SelectExchangeAnnonceAdapter
-import com.example.toyexchange.theme.ui.adapter.UserAnnoncesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -53,7 +53,7 @@ class ChooseExchangeAnnonceFragment:Fragment(R.layout.choose_exchange_annonce_fr
                         binding.swap.setOnClickListener{
                         exchangeViewModel.addExchangeOffer(exchange,token.toString())
                             findNavController().navigate(R.id.action_chooseExchangeAnnonceFragment_to_feedToysFragment)}
-                    })
+                    },lifecycleScope)
                 binding.annoncesList.adapter = selectExchangeAnnonceAdapter
             })
             userAnnoncesViewModel.getUserAnnonces(token.toString())
