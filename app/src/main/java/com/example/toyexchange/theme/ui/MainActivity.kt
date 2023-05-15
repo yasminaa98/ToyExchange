@@ -56,6 +56,11 @@ class MainActivity : AppCompatActivity() {
                     // Navigate to AuctionFragment
                     navController.navigate(R.id.auctionFragment)
                 }
+                R.id.messages -> {
+                    Toast.makeText(applicationContext, "Clicked auctionFragment", Toast.LENGTH_SHORT).show()
+                    // Navigate to AuctionFragment
+                    navController.navigate(R.id.chatMainFragment)
+                }
             }
             true
         }

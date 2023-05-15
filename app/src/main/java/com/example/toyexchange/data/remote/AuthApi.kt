@@ -1,9 +1,6 @@
 package com.example.toyexchange.data.remote
 
-import com.example.toyexchange.Domain.model.ForgotPasswordResponse
-import com.example.toyexchange.Domain.model.Request
-import com.example.toyexchange.Domain.model.User
-import com.example.toyexchange.Domain.model.UserLoginResponse
+import com.example.toyexchange.Domain.model.*
 import com.google.gson.JsonObject
 import retrofit2.Response
 import retrofit2.http.*
@@ -12,7 +9,7 @@ interface AuthApi {
    @POST("api/auth/signin")
     suspend fun userLogin(@Body request: Request): Response<UserLoginResponse>
     @POST("api/auth/signup")
-    suspend fun userSignUp(@Body user: User):Response<String>
+    suspend fun userSignUp(@Body user: User):Response<UserRegisterResponse>
     @POST("api/auth/forgot-password")
     suspend fun forgetPassword(@Query("email") email:String):Response<ForgotPasswordResponse>
     @POST("api/auth/reset-password")

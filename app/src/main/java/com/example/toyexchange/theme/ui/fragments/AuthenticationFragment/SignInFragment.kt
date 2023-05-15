@@ -1,6 +1,7 @@
 package com.example.toyexchange.theme.ui.fragments.AuthenticationFragment
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.renderscript.ScriptGroup.Binding
 import android.util.Log
@@ -16,13 +17,14 @@ import com.example.toyexchange.Domain.model.Request
 import com.example.toyexchange.Presentation.ToysViewModel.LoginViewModel
 import com.example.toyexchange.R
 import com.example.toyexchange.databinding.SignInFragmentBinding
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SignInFragment: Fragment(R.layout.sign_in_fragment) {
 
     private lateinit var loginViewModel: LoginViewModel
-
+    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +33,8 @@ class SignInFragment: Fragment(R.layout.sign_in_fragment) {
     ): View {
         val binding = SignInFragmentBinding.inflate(inflater, container, false)
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-        Log.i("1","1")
+        mAuth = FirebaseAuth.getInstance()
+
         binding.signInButton.setOnClickListener {
             val email=binding.signInEmail.text.toString()
             Log.i("email",email)
@@ -44,19 +47,20 @@ class SignInFragment: Fragment(R.layout.sign_in_fragment) {
         loginViewModel.token.observe(viewLifecycleOwner, Observer {
             if(it!=null){
                 Toast.makeText(requireContext(),"the user ${it.username} is logged in ",Toast.LENGTH_LONG).show()
+                login(it.email,binding.signInPassword.text.toString())
+                val auth = FirebaseAuth.getInstance()
+                val currentUser = auth.currentUser
+                val uid = currentUser?.uid
                 val sharedPreferences =
                 requireActivity().getSharedPreferences("authToken", Context.MODE_PRIVATE)
                 val editor = sharedPreferences.edit()
                 editor.putString("authToken", it.auth_token)
                 editor.putString("username",it.username)
                 editor.putLong("idUser", it.id)
+                editor.putString("email", it.email)
+                editor.putString("uid", uid)
                 editor.apply()
-                Log.i("token",it.auth_token)
-                Log.i("username",it.username)
-                Log.i("iduser",it.id.toString())
-                Log.i("token stored",sharedPreferences.getString("authToken",null).toString())
-                Log.i("username stored",sharedPreferences.getString("username",null).toString())
-                findNavController().navigate(R.id.action_signInFragment_to_myAuctionFragment)
+                findNavController().navigate(R.id.action_signInFragment_to_feedToysFragment)
         }
             else{
                 Toast.makeText(requireContext(),"the user is failed to login",Toast.LENGTH_LONG).show()
@@ -70,7 +74,6 @@ class SignInFragment: Fragment(R.layout.sign_in_fragment) {
         binding.forgotPassword.setOnClickListener{
             findNavController().navigate(R.id.action_signInFragment_to_forgotPasswordFragment)
 
-
         }
 
 
@@ -78,5 +81,17 @@ class SignInFragment: Fragment(R.layout.sign_in_fragment) {
         return binding.root
 
     }
+    private fun login(email: String, password: String){
+        mAuth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(requireActivity(), "User logged in", Toast.LENGTH_SHORT).show()
+
+                } else {
+                    Toast.makeText(requireActivity(), "User does not exist", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
 }
 

@@ -25,6 +25,10 @@ import com.example.toyexchange.R
 import com.example.toyexchange.databinding.ToyDetailsFragmentBinding
 import com.example.toyexchange.db.ToyDatabase
 import com.example.toyexchange.theme.ui.MainActivity
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -145,6 +149,30 @@ class DetailsToysFragment : Fragment(R.layout.toy_details_fragment) {
             else{
                 roomViewModel.deleteToy(toyToSave)
                 Toast.makeText(requireContext(), "Toy deleted", Toast.LENGTH_SHORT).show()}
+
+        }
+        binding.sendMessage.setOnClickListener{
+            val database = FirebaseDatabase.getInstance()
+            val userRef = database.getReference("user")
+            val nameToFind = detailsToyViewModel.annonceOwner.value?.username.toString()
+
+            userRef.orderByChild("name").equalTo(nameToFind).addListenerForSingleValueEvent(object :
+                ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (userSnapshot in dataSnapshot.children) {
+                        val uid = userSnapshot.child("uid").getValue(String::class.java)
+                        Log.i("uid clicked is ", uid.toString())
+
+                        val bundle= bundleOf("uid" to uid)
+                        findNavController().navigate(R.id.action_detailsToysFragment_to_chat,bundle)
+                    }
+                }
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Log.i("uid clicked is ", "error")
+
+                    // Handle error
+                }
+            })
 
         }
 

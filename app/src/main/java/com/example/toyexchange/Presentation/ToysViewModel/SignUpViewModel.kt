@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.toyexchange.Domain.model.User
 import com.example.toyexchange.Domain.model.UserLoginResponse
+import com.example.toyexchange.Domain.model.UserRegisterResponse
 import com.example.toyexchange.data.Repository.AuthRepository
 import com.example.toyexchange.data.Repository.ToysRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,8 +19,8 @@ import javax.inject.Inject
 class SignUpViewModel @Inject constructor(
     private val authRepository:AuthRepository): ViewModel() {
 
-    private val _msg = MutableLiveData<String>()
-    val msg: LiveData<String> = _msg
+    private val _msg = MutableLiveData<UserRegisterResponse>()
+    val msg: LiveData<UserRegisterResponse> = _msg
     fun userSignUp(user: User){
         viewModelScope.launch {
             var result=authRepository.userSignUp(user)

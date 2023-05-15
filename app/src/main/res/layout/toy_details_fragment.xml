@@ -161,10 +161,20 @@
             tools:ignore="MissingConstraints"
             >
 
+            <ImageView
+                android:id="@+id/send_message"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="250dp"
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/messages_icon" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/recyclerview_shape"
                 android:backgroundTint="@color/pink"
                 android:orientation="vertical"
                 android:visibility="visible"
@@ -239,6 +249,8 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="70dp"
                     android:text="Average response time" />
+
+
 
             </LinearLayout>
 

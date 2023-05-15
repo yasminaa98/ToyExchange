@@ -34,6 +34,7 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
     private lateinit var toysViewModel: ToysViewModel
     lateinit var toysRecyclerViewAdapter: ToysRecyclerViewAdapter
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val binding = FeedToysFragmentBinding.inflate(inflater, container, false)
         // create instance of viewmodel , the life cycle library creates it for us so if the viewmodel destroyed we don't need to recreated
@@ -56,6 +57,8 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
         val sharedPreferences =
             requireActivity().getSharedPreferences("authToken", Context.MODE_PRIVATE)
         val token =sharedPreferences.getString("authToken",null)
+        val email =sharedPreferences.getString("email",null)
+
 
         binding.toysList.apply {
             layoutManager = LinearLayoutManager(this.context)

@@ -1,9 +1,6 @@
 package com.example.toyexchange.data.Repository
 
-import com.example.toyexchange.Domain.model.ForgotPasswordResponse
-import com.example.toyexchange.Domain.model.Request
-import com.example.toyexchange.Domain.model.User
-import com.example.toyexchange.Domain.model.UserLoginResponse
+import com.example.toyexchange.Domain.model.*
 import com.example.toyexchange.data.remote.AuthApi
 import com.google.gson.JsonObject
 import retrofit2.Response
@@ -17,7 +14,7 @@ class AuthRepository @Inject constructor(
         return apiLoginService.userLogin(request)
 
     }
-    suspend fun userSignUp(user: User): Response<String> {
+    suspend fun userSignUp(user: User): Response<UserRegisterResponse> {
         return apiLoginService.userSignUp(user)
     }
     suspend fun forgotPassword(email:String):Response<ForgotPasswordResponse>{

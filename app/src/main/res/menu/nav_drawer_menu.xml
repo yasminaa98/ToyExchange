@@ -7,4 +7,9 @@
         android:id="@+id/auctions"
         android:title="Auctions"/>
 
+    <item
+        android:id="@+id/messages"
+        android:title="Messages"/>
+
+
 </menu>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1060083926239",
+    "project_id": "toyexchange-e2070",
+    "storage_bucket": "toyexchange-e2070.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1060083926239:android:1ddfcb51e5b98c7174556a",
+        "android_client_info": {
+          "package_name": "com.example.toyexchange"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1060083926239-dfhej98d9df6cce0apff65321u3pt71n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZz2QZ-TlIcmHqXYYfZMg0a6f9tAewmJE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1060083926239-dfhej98d9df6cce0apff65321u3pt71n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

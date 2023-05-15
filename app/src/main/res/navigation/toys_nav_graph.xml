@@ -43,6 +43,13 @@
         <action
             android:id="@+id/action_detailsToysFragment_to_chooseExchangeAnnonceFragment"
             app:destination="@id/chooseExchangeAnnonceFragment" />
+        <action
+            android:id="@+id/action_detailsToysFragment_to_chat"
+            app:destination="@id/chat" />
+        <action
+            android:id="@+id/action_detailsToysFragment_to_chatMainFragment"
+            app:destination="@id/chatMainFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/editProfilFragment"
@@ -80,6 +87,9 @@
         <action
             android:id="@+id/action_signInFragment_to_forgotPasswordFragment"
             app:destination="@id/forgotPasswordFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_chatMainFragment"
+            app:destination="@id/chatMainFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -257,4 +267,12 @@
             android:id="@+id/action_exchangeDecisionResultFragment_to_exchangeAnnonceDetailsFragment"
             app:destination="@id/exchangeAnnonceDetailsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/chatMainFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.ChatFragment.ChatMainFragment"
+        android:label="ChatMainFragment" />
+    <fragment
+        android:id="@+id/chat"
+        android:name="com.example.toyexchange.theme.ui.fragments.ChatFragment.Chat"
+        android:label="Chat" />
 </navigation>
