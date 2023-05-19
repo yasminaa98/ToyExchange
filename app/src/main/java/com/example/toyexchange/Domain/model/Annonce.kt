@@ -22,7 +22,6 @@ data class Annonce(
     val age_child: String,
     @SerializedName("ageToy")
     val age_toy: String,
-    /* @SerializedName("owner")
-     val owner:User */
-
+    @SerializedName("estArchive")
+     val estArchive:Boolean = false
 )

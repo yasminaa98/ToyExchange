@@ -38,7 +38,6 @@ class MyAnnoncesFragment: Fragment(R.layout.my_annonces_fragment) {
         val sharedPreferences =
             requireActivity().getSharedPreferences("authToken", Context.MODE_PRIVATE)
         val token =sharedPreferences.getString("authToken",null)
-
         binding.annoncesList.apply {
             layoutManager = LinearLayoutManager(this.context)
 
@@ -53,7 +52,8 @@ class MyAnnoncesFragment: Fragment(R.layout.my_annonces_fragment) {
                             "name" to clickedItem.name, "description" to clickedItem.description,
                             "price" to clickedItem.price,"category" to clickedItem.category,
                             "age_child" to clickedItem.age_child,"age_toy" to clickedItem.age_toy,
-                        "state" to clickedItem.state,"image" to clickedItem.picturePath)
+                        "state" to clickedItem.state,"image" to clickedItem.picturePath,
+                        "estArchive" to clickedItem.estArchive)
                         //val image=clickedItem.picturePath
                         Log.i("bundel sent",bundle.toString())
                         findNavController().navigate(R.id.action_myAnnoncesFragment_to_myAnnoncedetailsFragment,bundle)

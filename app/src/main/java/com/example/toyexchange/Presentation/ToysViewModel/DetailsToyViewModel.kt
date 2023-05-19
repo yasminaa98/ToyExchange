@@ -11,6 +11,7 @@ import com.example.toyexchange.Domain.model.Toy
 import com.example.toyexchange.Domain.model.User
 import com.example.toyexchange.data.Repository.ToysRepositoryImpl
 import com.example.toyexchange.db.ToyDatabase
+import com.google.gson.JsonObject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,6 +29,8 @@ class DetailsToyViewModel @Inject constructor(private val toysRepositoryImpl: To
     val annonce2: LiveData<Annonce> =_annonce2
     private val _annonce = MutableLiveData<Annonce>()
     val annonce: LiveData<Annonce> =_annonce
+    private val _response = MutableLiveData<JsonObject>()
+    val response: LiveData<JsonObject> =_response
 
 
     fun getAnnonceOwner(idAnnonce:Long){
@@ -60,7 +63,22 @@ class DetailsToyViewModel @Inject constructor(private val toysRepositoryImpl: To
             }
         }
     }
+    fun archiveAnnonce(id:Long,token:String){
+        viewModelScope.launch {
+            var result=toysRepositoryImpl.archiveAnnonce(id,token)
+            Log.i("result", result.toString())
 
+            try {
+                if (result.body() != null) {
+                    _response.postValue(result.body())
+                } else {
+                    Log.i("body empty", result.message())
+                }
+            } catch (e: Exception) {
+                Log.e(ContentValues.TAG, "Failed to get archive", e)
+            }
+        }
+    }
     fun getAnnonce1ById(idAnnonce:Long){
         viewModelScope.launch {
             var result = toysRepositoryImpl.getAnnonceById(idAnnonce)

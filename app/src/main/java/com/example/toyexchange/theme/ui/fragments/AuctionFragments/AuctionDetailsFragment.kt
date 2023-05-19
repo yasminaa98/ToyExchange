@@ -23,6 +23,11 @@ import com.example.toyexchange.R
 import com.example.toyexchange.databinding.AuctionDetailsBinding
 import com.example.toyexchange.theme.ui.MainActivity
 import com.example.toyexchange.theme.ui.adapter.BidsAdapter
+import com.example.trypostrequest.ui.adapter.ToysRecyclerViewAdapter
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,7 +39,6 @@ import java.util.*
 class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
     private lateinit var auctionDetailsViewModel: AuctionDetailsViewModel
     private lateinit var detailsToyViewModel: DetailsToyViewModel
-
 
     lateinit var bidsAdapter:BidsAdapter
 
@@ -170,6 +174,8 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
                 binding.place.isEnabled = true
                 binding.place.text = "you can't place a bid !"
                 binding.endDateTime.text = "Time is over !"
+
+
             } else if (calendar.after(now)) {
                 Log.i("after", "after")
 
@@ -203,22 +209,45 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
                         R.id.action_auctionDetailsFragment_to_addBidFragment, bundle
                     )
                 }
+            }
+        }
                 // get bids list
                 binding.bidsList.apply {
                     layoutManager = LinearLayoutManager(this.context)
-                    auctionDetailsViewModel.bids.observe(viewLifecycleOwner) { priceProposed ->
-                        bidsAdapter = BidsAdapter(priceProposed,lifecycleScope)
+                    auctionDetailsViewModel.bids.observe(viewLifecycleOwner, { priceProposed ->
+                        bidsAdapter = BidsAdapter(priceProposed,
+                            BidsAdapter.OnClickListener { clickedItem ->
+                                val database = FirebaseDatabase.getInstance()
+                                val userRef = database.getReference("user")
+                                val nameToFind = clickedItem.username
+
+                                userRef.orderByChild("name").equalTo(nameToFind).addListenerForSingleValueEvent(object :
+                                    ValueEventListener {
+                                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                        for (userSnapshot in dataSnapshot.children) {
+                                            val uid = userSnapshot.child("uid").getValue(String::class.java)
+                                            Log.i("uid clicked is ", uid.toString())
+
+                                            val bundle= bundleOf("uid" to uid)
+                                            findNavController().navigate(R.id.action_auctionDetailsFragment_to_chat,bundle)
+                                        }
+                                    }
+                                    override fun onCancelled(databaseError: DatabaseError) {
+                                        Log.i("uid clicked is ", "error")
+
+                                        // Handle error
+                                    }
+                                })
+                            }, lifecycleScope
+                        )
                         binding.bidsList.adapter = bidsAdapter
-                    }
+                    })
+
                     auctionDetailsViewModel.getAuctionBids(auctionId!!, token.toString())
                     Log.i("bids fetched", "bids fetched")
+
                     return binding.root
                 }
-            }
-        }
-
-            return binding.root
-
         }
 
 

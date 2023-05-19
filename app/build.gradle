@@ -22,8 +22,6 @@ android {
     dataBinding {
         enabled = true
     }
-
-
     defaultConfig {
         applicationId "com.example.toyexchange"
         minSdk 24

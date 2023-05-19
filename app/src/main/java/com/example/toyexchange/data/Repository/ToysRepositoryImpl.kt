@@ -44,6 +44,9 @@ class ToysRepositoryImpl @Inject constructor(
     suspend fun getAnnonceByAuction(idAuction: Long):Response<Annonce>{
         return apiService.getAnnonceByAuction(idAuction)
     }
+    suspend fun archiveAnnonce(id:Long,token:String):Response<JsonObject>{
+        return apiService.ArchiveAnnonce(id,token)
+    }
 
 
 }

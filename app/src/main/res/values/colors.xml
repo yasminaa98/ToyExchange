@@ -13,4 +13,5 @@
     <color name="transparent">#809bc472</color>
     <color name="red">#FF0000</color>
     <color name="grey">#DCD2CC</color>
+   <!-- <color name="transparent_white">#80FFFFFFFF</color> -->
 </resources>

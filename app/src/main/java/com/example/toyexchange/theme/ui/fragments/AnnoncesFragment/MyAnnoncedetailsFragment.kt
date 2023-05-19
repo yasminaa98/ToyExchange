@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -30,7 +31,7 @@ class MyAnnoncedetailsFragment: Fragment(R.layout.my_annonce_details) {
 
 
     private lateinit var selectedImage: ImageView
-    @SuppressLint("SuspiciousIndentation")
+    @SuppressLint("SuspiciousIndentation", "ResourceAsColor")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,7 +41,6 @@ class MyAnnoncedetailsFragment: Fragment(R.layout.my_annonce_details) {
 
         addAuctionViewModel = ViewModelProvider(this).get(AddAuctionViewModel::class.java)
         detailsToyViewModel = ViewModelProvider(this).get(DetailsToyViewModel::class.java)
-
 
         selectedImage=binding.toyImage
         val sharedPreferences =
@@ -63,6 +63,8 @@ class MyAnnoncedetailsFragment: Fragment(R.layout.my_annonce_details) {
         val age_toy = arguments?.getString("age_toy").toString()
         val _state = arguments?.getString("state").toString()
         val _image= arguments?.getString("image").toString()
+        val estArchive=arguments?.getBoolean("estArchive")
+        Log.i("archivage",estArchive.toString())
 
             //Log.i("image arrived", image!!)
             binding.apply {
@@ -82,6 +84,25 @@ class MyAnnoncedetailsFragment: Fragment(R.layout.my_annonce_details) {
                     Log.i("image set", _image.toString())
                 }
             }
+
+        //archive
+        if (estArchive==true){
+            binding.archive.setImageResource(R.drawable.archived)
+            binding.archive.isEnabled=false
+        }
+        else {
+            binding.archive.setImageResource(R.drawable.vue)
+            binding.archive.setOnClickListener {
+                binding.archive.setImageResource(R.drawable.archived)
+                detailsToyViewModel.archiveAnnonce(idAnnonce!!, token.toString())
+                detailsToyViewModel.response.observe(viewLifecycleOwner, Observer {
+                    if (it != null) {
+
+                    }
+                })
+            }
+        }
+        //get owner
         detailsToyViewModel.getAnnonceOwner(idAnnonce!!)
         detailsToyViewModel.annonceOwner.observe(viewLifecycleOwner, Observer {
             if (it!=null){
@@ -92,12 +113,6 @@ class MyAnnoncedetailsFragment: Fragment(R.layout.my_annonce_details) {
                 }
             }
         })
-
-
-
-
-
-
         val bundle = bundleOf("id" to idAnnonce)
 
         binding.Modifiy.setOnClickListener {

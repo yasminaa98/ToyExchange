@@ -34,7 +34,6 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
     private lateinit var toysViewModel: ToysViewModel
     lateinit var toysRecyclerViewAdapter: ToysRecyclerViewAdapter
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val binding = FeedToysFragmentBinding.inflate(inflater, container, false)
         // create instance of viewmodel , the life cycle library creates it for us so if the viewmodel destroyed we don't need to recreated
@@ -62,9 +61,6 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
 
         binding.toysList.apply {
             layoutManager = LinearLayoutManager(this.context)
-
-            //when ever the data changes this code below is called
-            //it's the observer of the live data
             toysViewModel.toys.observe(viewLifecycleOwner, { toys ->
 
                 toysRecyclerViewAdapter = ToysRecyclerViewAdapter(toys,
@@ -73,7 +69,8 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
                         val bundle = bundleOf("id" to clickedItem.id ,
                             "name" to clickedItem.name, "description" to clickedItem.description,
                         "price" to clickedItem.price,"category" to clickedItem.category,
-                            "image_url" to clickedItem.picturePath)
+                            "image_url" to clickedItem.picturePath,"estArchive" to clickedItem.estArchive)
+                        Log.i("bundle", bundle.toString())
                         findNavController().navigate(R.id.action_feedToysFragment_to_detailsToysFragment,bundle)
                 },lifecycleScope)
                 binding.toysList.adapter = toysRecyclerViewAdapter

@@ -39,5 +39,10 @@ interface ToysApi {
     @GET("api/annonces/{id_auction}/getAnnonceByAuctionId")
     suspend fun getAnnonceByAuction(@Path("id_auction") idAuction: Long):Response<Annonce>
 
+    @PUT("api/annonces/{id}/archive")
+    suspend fun ArchiveAnnonce(@Path("id") id: Long,
+                               @Header("Authorization") token: String
+                               ):Response<JsonObject>
+
 
 }

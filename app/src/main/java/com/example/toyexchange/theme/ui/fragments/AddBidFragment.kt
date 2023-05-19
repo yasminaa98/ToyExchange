@@ -88,7 +88,7 @@ class AddBidFragment:Fragment(R.layout.place_bid) {
                 )
 
         })
-      /*  addBidViewModel.getUserBid(auctionId!!, token.toString())
+      addBidViewModel.getUserBid(auctionId!!, token.toString())
         addBidViewModel.bid.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 binding.myPrice.setText(it.price_proposed)
@@ -99,7 +99,7 @@ class AddBidFragment:Fragment(R.layout.place_bid) {
             } else {
                 Toast.makeText(requireContext(), "bid getting failed", Toast.LENGTH_LONG).show()
             }
-        })*/
+        })
 
         binding.done.setOnClickListener {
             val my_price = addBidViewModel.bid.value?.price_proposed

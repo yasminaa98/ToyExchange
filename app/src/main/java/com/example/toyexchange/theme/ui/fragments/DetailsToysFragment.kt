@@ -131,6 +131,7 @@ class DetailsToysFragment : Fragment(R.layout.toy_details_fragment) {
         val price = arguments?.getString("price").toString()
         val category = arguments?.getString("category").toString()
         val image = arguments?.getString("image_url").toString()
+        val estArchive=arguments?.getBoolean("estArchive")
         binding.apply {
             toyName.text = name
             toyDescription.text = description
@@ -140,7 +141,7 @@ class DetailsToysFragment : Fragment(R.layout.toy_details_fragment) {
             (activity as MainActivity).setBottomNavigation(false)
             (activity as MainActivity).setToolbar(true)
         }
-        val toyToSave = Toy(toyId!!, category, description, image, name, price,"","","")
+        val toyToSave = Toy(toyId!!, category, description, "image", name, price,"","","",estArchive!!)
         binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
             sharedPreferencesRoom.edit().putBoolean("checkbox_state", isChecked).apply()
             if (isChecked){

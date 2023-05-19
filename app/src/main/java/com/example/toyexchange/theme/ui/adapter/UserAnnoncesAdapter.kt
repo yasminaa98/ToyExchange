@@ -30,6 +30,7 @@ class UserAnnoncesAdapter(
                 val image=PicturesConverter.base64ToBitmap(annonce.picturePath)
                 binding.annonceImage.setImageBitmap(PicturesConverter.getRoundedBitmap(image!!,200))}
         }
+
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToysViewHolder {
         val binding=MyAnnonceItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)

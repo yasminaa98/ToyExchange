@@ -23,6 +23,10 @@ import com.example.toyexchange.R
 import com.example.toyexchange.databinding.MyAuctionDetailsBinding
 import com.example.toyexchange.theme.ui.MainActivity
 import com.example.toyexchange.theme.ui.adapter.BidsAdapter
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import dagger.hilt.android.AndroidEntryPoint
@@ -140,7 +144,31 @@ class MyAuctionDetailsFragment: Fragment(R.layout.my_auction_details) {
                 binding.bidsList.apply {
                     layoutManager = LinearLayoutManager(this.context)
                     auctionDetailsViewModel.bids.observe(viewLifecycleOwner) { priceProposed ->
-                        bidsAdapter = BidsAdapter(priceProposed,lifecycleScope)
+                        bidsAdapter = BidsAdapter(priceProposed,
+                            BidsAdapter.OnClickListener { clickedItem ->
+                                val database = FirebaseDatabase.getInstance()
+                                val userRef = database.getReference("user")
+                                val nameToFind = clickedItem.username
+
+                                userRef.orderByChild("name").equalTo(nameToFind).addListenerForSingleValueEvent(object :
+                                    ValueEventListener {
+                                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                        for (userSnapshot in dataSnapshot.children) {
+                                            val uid = userSnapshot.child("uid").getValue(String::class.java)
+                                            Log.i("uid clicked is ", uid.toString())
+
+                                            val bundle= bundleOf("uid" to uid)
+                                            findNavController().navigate(R.id.action_myAuctionDetailsFragment_to_chat,bundle)
+                                        }
+                                    }
+                                    override fun onCancelled(databaseError: DatabaseError) {
+                                        Log.i("uid clicked is ", "error")
+
+                                        // Handle error
+                                    }
+                                })
+                            }, lifecycleScope
+                        )
                         binding.bidsList.adapter = bidsAdapter
 
                     }

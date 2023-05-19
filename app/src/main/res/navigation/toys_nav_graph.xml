@@ -153,6 +153,9 @@
         <action
             android:id="@+id/action_auctionDetailsFragment_to_auctionFragment"
             app:destination="@id/auctionFragment" />
+        <action
+            android:id="@+id/action_auctionDetailsFragment_to_chat"
+            app:destination="@id/chat" />
     </fragment>
     <fragment
         android:id="@+id/addBidFragment"
@@ -180,6 +183,9 @@
         <action
             android:id="@+id/action_myAuctionDetailsFragment_to_myAuctionFragment"
             app:destination="@id/myAuctionFragment" />
+        <action
+            android:id="@+id/action_myAuctionDetailsFragment_to_chat"
+            app:destination="@id/chat" />
     </fragment>
     <fragment
         android:id="@+id/myAnnoncedetailsFragment"
