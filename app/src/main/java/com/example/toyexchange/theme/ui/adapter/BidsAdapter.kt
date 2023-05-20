@@ -28,11 +28,7 @@ class BidsAdapter (
             binding.priceProposed.text = bid.price_proposed
             binding.userName.text=bid.username
 
-            parentLifecycleScope.launch {
-                Log.i("bidder image in adapter","bidder image in adapter")
-                val image=PicturesConverter.base64ToBitmap(bid.profile_picture_path)
-                binding.bidderImage.setImageBitmap(PicturesConverter.getRoundedBitmap(image!!,100))
-           }
+
             if (adapterPosition == 0) {
                 binding.winner.setImageResource(R.drawable.winner)
                 Log.i("winner icon","winner icon")

@@ -21,7 +21,7 @@ data class User(
     val phone: Int,
     @SerializedName("avgResponseTime")
     val avgResponseTime: String,
-    @SerializedName("profilePicturePath")
+    @SerializedName("profilePicture")
     val profile_picture_path: String
    /* @SerializedName("description")
     val description: String */

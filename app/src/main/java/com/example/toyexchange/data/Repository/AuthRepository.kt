@@ -3,6 +3,7 @@ package com.example.toyexchange.data.Repository
 import com.example.toyexchange.Domain.model.*
 import com.example.toyexchange.data.remote.AuthApi
 import com.google.gson.JsonObject
+import okhttp3.MultipartBody
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -43,9 +44,8 @@ class AuthRepository @Inject constructor(
         newHomeAddress:String):Response<JsonObject>{
         return apiLoginService.updateHomeAddress(idUser,newHomeAddress)
     }
-    suspend fun updatePicture(
-        idUser:Long,
-        newPicture:String):Response<JsonObject>{
-        return apiLoginService.updatePicture(idUser,newPicture)
+    suspend fun updatePicture(token:String,photo: MultipartBody.Part):Response<UpdatePictureResponse>{
+        return apiLoginService.updatePicture(token,photo)
     }
+
 }

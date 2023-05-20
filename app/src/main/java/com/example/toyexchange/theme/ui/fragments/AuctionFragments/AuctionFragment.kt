@@ -29,8 +29,7 @@ class AuctionFragment: Fragment(R.layout.auctions_fragment) {
         // create instance of viewmodel , the life cycle library creates it for us so if the viewmodel destroyed we don't need to recreated
         auctionViewModel = ViewModelProvider(this).get(AuctionViewModel::class.java)
         (activity as MainActivity).setBottomNavigation(true)
-        (activity as MainActivity).setToolbar(false)
-
+        (activity as MainActivity).setToolbar(true)
         //coundown
        binding.auctionsList.apply {
             layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)

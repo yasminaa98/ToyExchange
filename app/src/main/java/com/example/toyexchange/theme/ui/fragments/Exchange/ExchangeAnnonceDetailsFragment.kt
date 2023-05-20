@@ -60,8 +60,6 @@ class ExchangeAnnonceDetailsFragment:Fragment(R.layout.exchange_annonce_details)
             ageToy.text=age_toy
             ageChild.text=age_child
             state.text=_state
-            lifecycleScope.launch {
-                toyImage.setImageBitmap(PicturesConverter.base64ToBitmap(image.toString()))}
             (activity as MainActivity).setBottomNavigation(false)
             (activity as MainActivity).setToolbar(true)
         }
@@ -78,11 +76,7 @@ class ExchangeAnnonceDetailsFragment:Fragment(R.layout.exchange_annonce_details)
                     homeaddress.setText(it.homeAddress)
                     phone.setText(it.phone.toString())
                     avgResponse.setText(it.avgResponseTime)
-                    lifecycleScope.launch {
-                        val image= PicturesConverter.base64ToBitmap(it.profile_picture_path)
-                        ownerImage.setImageBitmap(PicturesConverter.getRoundedBitmap(image!!,200))
-                        val owner_image= PicturesConverter.base64ToBitmap(it.profile_picture_path)
-                        ownerimage.setImageBitmap(PicturesConverter.getRoundedBitmap(owner_image!!,300))}}
+                }
             }
         })
         binding.ownerImage.setOnClickListener {

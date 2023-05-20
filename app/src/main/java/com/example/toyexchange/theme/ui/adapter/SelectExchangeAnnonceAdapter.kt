@@ -27,8 +27,7 @@ class SelectExchangeAnnonceAdapter (private var annonces:List<Annonce>,
             binding.radioButton.isChecked = isSelected
             binding.radioButton.isEnabled=false
             //binding.toyDescription.text = toy.description
-            parentLifecycleScope.launch {
-            binding.annonceImage.setImageBitmap(PicturesConverter.base64ToBitmap(annonce.picturePath))}
+
 
 
 

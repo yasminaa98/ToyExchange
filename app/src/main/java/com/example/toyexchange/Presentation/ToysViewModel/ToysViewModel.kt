@@ -1,17 +1,16 @@
 package com.example.toyexchange.Presentation.ToysViewModel
 
 import android.content.ContentValues
-import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.toyexchange.Common.Resource
 import com.example.toyexchange.data.Repository.ToysRepositoryImpl
 import com.example.toyexchange.Domain.model.Toy
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,9 +21,25 @@ class ToysViewModel @Inject constructor(
     private val _toys = MutableLiveData<List<Toy>>()
     val toys: LiveData<List<Toy>> = _toys
 
-   /* private val _toySelected = MutableLiveData<Toy>()
-    val toySelected: LiveData<Toy> = _toySelected */
+   private val _picture = MutableLiveData<ResponseBody>()
+    val picture: LiveData<ResponseBody> = _picture
+    //get picture
 
+    fun getImage(picture:String) {
+        viewModelScope.launch {
+            var result = toysRepositoryImpl.getImage(picture)
+            Log.i("picture",result.toString())
+            try {
+                if (result.body() != null) {
+                    _picture.postValue(result.body())
+                } else {
+                    Log.i("body empty", result.message())
+                }
+            } catch (e: Exception) {
+                Log.e(ContentValues.TAG, "Failed to fetch toys", e)
+            }
+        }
+    }
 
     // display toys List
     fun fetchToys(token:String) {

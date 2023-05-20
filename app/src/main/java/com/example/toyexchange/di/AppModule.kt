@@ -16,6 +16,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
     @Provides // create functions that creates our dependencies
     @Singleton // make sur we have single instance of whatever the function returns
     fun provideToysApi(): ToysApi {

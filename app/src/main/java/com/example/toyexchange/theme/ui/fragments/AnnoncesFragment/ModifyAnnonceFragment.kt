@@ -18,7 +18,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.toyexchange.Common.PICK_IMAGE_REQUEST.Companion.PICK_IMAGE_REQUEST
 import com.example.toyexchange.Common.PicturesConverter
 import com.example.toyexchange.Domain.model.Annonce
 import com.example.toyexchange.Presentation.ToysViewModel.DetailsToyViewModel
@@ -49,7 +48,7 @@ class ModifyAnnonceFragment: Fragment(R.layout.modify_annonce_fragment) {
         binding.toyImage.setOnClickListener{
             Log.i("1","1")
 
-            openGallery()
+
             Log.i("2","2")
         }
 
@@ -74,8 +73,7 @@ class ModifyAnnonceFragment: Fragment(R.layout.modify_annonce_fragment) {
         detailsToyViewModel.annonce1.observe(viewLifecycleOwner, Observer {
             if(it!=null){
            binding.apply {
-               lifecycleScope.launch {
-                   toyImage.setImageBitmap(PicturesConverter.base64ToBitmap(it.picturePath))
+
                    toyName.setText(it.name)
                    toyDescription.setText(it.description)
                    childAge.setText(it.age_child)
@@ -85,7 +83,7 @@ class ModifyAnnonceFragment: Fragment(R.layout.modify_annonce_fragment) {
                    toyState.setText(it.state)
                    Toast.makeText(requireContext(), "info got successfully", Toast.LENGTH_LONG)
                        .show()
-               }}}else {
+               }}else {
                 Toast.makeText(requireContext(), "getting info failed", Toast.LENGTH_LONG).show()
             }
 
@@ -101,15 +99,14 @@ class ModifyAnnonceFragment: Fragment(R.layout.modify_annonce_fragment) {
             var category = binding.toyCategory.text.toString()
             var state = binding.toyState.text.toString()
             var description = binding.toyDescription.text.toString()
-            lifecycleScope.launch {
-                val image = PicturesConverter.sendImage(selectedImage)
+
                 //Log.i("id annonce2",idAnnonce.toString())
 
                 val annonce = Annonce(
                     idAnnonce!!,
                     category,
                     description,
-                    image!!,
+                    "image!!",
                     name,
                     price,
                     state,
@@ -117,7 +114,7 @@ class ModifyAnnonceFragment: Fragment(R.layout.modify_annonce_fragment) {
                     toy_age
                 )
                 modifyAnnonceViewModel.modifyAnnonce(token.toString(), idAnnonce.toLong(), annonce)
-            }
+
             findNavController().navigate(R.id.action_modifyAnnonceFragment_to_myAnnoncesFragment)
         }
 
@@ -132,25 +129,6 @@ class ModifyAnnonceFragment: Fragment(R.layout.modify_annonce_fragment) {
         })
         return binding.root
 
-    }
-    private fun openGallery() {
-        Log.i("3","3")
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        Log.i("4","4")
-        startActivityForResult(intent, PICK_IMAGE_REQUEST)
-        Log.i("5","5")
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
-            val imageUri = data.data
-            val imageStream = activity?.contentResolver?.openInputStream(imageUri!!)
-            val selectedBitmap = BitmapFactory.decodeStream(imageStream)
-            selectedImage.setImageBitmap(selectedBitmap)
-        }
     }
 
 }

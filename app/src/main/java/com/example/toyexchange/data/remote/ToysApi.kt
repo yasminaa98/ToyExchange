@@ -4,14 +4,18 @@ import com.example.toyexchange.Domain.model.Annonce
 import com.example.toyexchange.Domain.model.Toy
 import com.example.toyexchange.Domain.model.User
 import com.google.gson.JsonObject
+import okhttp3.MultipartBody
+import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
 
 interface ToysApi {
+    @Multipart
     @POST("api/annonces/add")
     suspend fun addToy(
+        @Part photo: MultipartBody.Part,
         @Header("Authorization") token: String,
-        @Body annonce: Annonce
+        //@Body annonce: Annonce
     ): Response<JsonObject>
 
     @GET("api/annonces/getAll")
@@ -43,6 +47,10 @@ interface ToysApi {
     suspend fun ArchiveAnnonce(@Path("id") id: Long,
                                @Header("Authorization") token: String
                                ):Response<JsonObject>
+    @GET("api/annonces/classpath")
+    suspend fun getImage(@Query("picture") picture:String
+    ):Response<ResponseBody>
+
 
 
 }

@@ -125,11 +125,7 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
                     homeaddress.setText(it.homeAddress)
                     phone.setText(it.phone.toString())
                     avgResponse.setText(it.avgResponseTime)
-                    lifecycleScope.launch {
-                        val image=PicturesConverter.base64ToBitmap(it.profile_picture_path)
-                        ownerImage.setImageBitmap(PicturesConverter.getRoundedBitmap(image!!,200))
-                        val owner_image=PicturesConverter.base64ToBitmap(it.profile_picture_path)
-                        ownerimage.setImageBitmap(PicturesConverter.getRoundedBitmap(owner_image!!,300))}
+
                 }
 
 
@@ -143,13 +139,11 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
                 Log.i("2", "2")
 
 
-                    lifecycleScope.launch {
-                        binding.toyImage.setImageBitmap(PicturesConverter.base64ToBitmap(it.picturePath))
-                        Log.i("3", "3")
+
 
                         Toast.makeText(requireContext(), "picture got successfully", Toast.LENGTH_LONG)
                             .show()
-                    }}else {
+                    }else {
                 Toast.makeText(requireContext(), "getting picture failed", Toast.LENGTH_LONG).show()
             }
 

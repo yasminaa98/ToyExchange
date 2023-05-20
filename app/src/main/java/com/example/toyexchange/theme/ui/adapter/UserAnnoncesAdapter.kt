@@ -26,9 +26,7 @@ class UserAnnoncesAdapter(
         fun bind(annonce: Annonce) {
             binding.annonceName.text = annonce.name
             //binding.toyDescription.text = toy.description
-            parentLifecycleScope.launch {
-                val image=PicturesConverter.base64ToBitmap(annonce.picturePath)
-                binding.annonceImage.setImageBitmap(PicturesConverter.getRoundedBitmap(image!!,200))}
+
         }
 
     }

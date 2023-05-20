@@ -2,6 +2,7 @@ package com.example.toyexchange.data.remote
 
 import com.example.toyexchange.Domain.model.*
 import com.google.gson.JsonObject
+import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -33,9 +34,10 @@ interface AuthApi {
         @Path("id_user") idUser:Long,
         @Query("newHomeAddress") newHomeAddress:String):Response<JsonObject>
 
-    @PUT("/accounts/{id_user}/update-picture")
+    @Multipart
+    @PUT("/accounts/update-profile-picture")
     suspend fun updatePicture(
-        @Path("id_user") idUser:Long,
-        @Query("newPicture") newPicture:String):Response<JsonObject>
+        @Header("Authorization") token: String,
+        @Part photo: MultipartBody.Part):Response<UpdatePictureResponse>
 
 }

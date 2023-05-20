@@ -79,10 +79,6 @@ class MyAnnoncedetailsFragment: Fragment(R.layout.my_annonce_details) {
                     requireActivity().getSharedPreferences("myAnnonceImage", Context.MODE_PRIVATE)
                 val image =sh.getString("myAnnonceImage",null)*/
 
-                lifecycleScope.launch {
-                    toyImage.setImageBitmap(PicturesConverter.base64ToBitmap(_image.toString()))
-                    Log.i("image set", _image.toString())
-                }
             }
 
         //archive
@@ -107,9 +103,7 @@ class MyAnnoncedetailsFragment: Fragment(R.layout.my_annonce_details) {
         detailsToyViewModel.annonceOwner.observe(viewLifecycleOwner, Observer {
             if (it!=null){
                 binding.apply {
-                    lifecycleScope.launch {
-                        val image=PicturesConverter.base64ToBitmap(it.profile_picture_path)
-                        ownerImage.setImageBitmap(PicturesConverter.getRoundedBitmap(image!!,200)) }
+
                 }
             }
         })

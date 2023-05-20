@@ -7,12 +7,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.toyexchange.Domain.model.Toy
+import com.example.toyexchange.Domain.model.UpdatePictureResponse
 import com.example.toyexchange.Domain.model.User
 import com.example.toyexchange.data.Repository.AuthRepository
 import com.example.toyexchange.data.Repository.ToysRepositoryImpl
 import com.google.gson.JsonObject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 import javax.inject.Inject
 @HiltViewModel
 
@@ -24,6 +26,10 @@ class GetUserInfoViewModel @Inject constructor(
 
     private val _msg = MutableLiveData<JsonObject>()
     val msg : LiveData<JsonObject> = _msg
+
+    private val _imageResponse = MutableLiveData<UpdatePictureResponse>()
+    val imageResponse : LiveData<UpdatePictureResponse> = _imageResponse
+
 
     // display toys List
     fun getUserInfo(username:String) {
@@ -90,13 +96,13 @@ class GetUserInfoViewModel @Inject constructor(
             }
         }
     }
-    fun updatePicture(iduser:Long,newPicture:String){
+    fun updatePicture(token:String,photo: MultipartBody.Part){
         viewModelScope.launch {
-            var result=authRepository.updatePicture(iduser,newPicture)
+            var result=authRepository.updatePicture(token,photo)
             Log.i("result",result.toString())
             try {
                 if (result.body() != null) {
-                    _msgHomeAdd.postValue(result.body())
+                    _imageResponse.postValue(result.body())
                 } else {
                     Log.i("body empty", result.message())
                 }
