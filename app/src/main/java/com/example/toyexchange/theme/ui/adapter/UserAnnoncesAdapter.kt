@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.toyexchange.Common.PicturesConverter
 import com.example.toyexchange.databinding.MyAnnonceItemBinding
 import kotlinx.coroutines.CoroutineScope
@@ -25,6 +26,10 @@ class UserAnnoncesAdapter(
 
         fun bind(annonce: Annonce) {
             binding.annonceName.text = annonce.name
+            Glide.with(itemView)
+                .load("http://192.168.100.47:2023/image/fileSystem/"+annonce.picturePath)
+                .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
+                .into(binding.annonceImage)
             //binding.toyDescription.text = toy.description
 
         }

@@ -16,6 +16,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.toyexchange.Common.PicturesConverter
 import com.example.toyexchange.Domain.model.Toy
 import com.example.toyexchange.Presentation.ToysViewModel.DetailsToyViewModel
@@ -104,6 +106,14 @@ class DetailsToysFragment : Fragment(R.layout.toy_details_fragment) {
                     homeaddress.setText(it.homeAddress)
                     phone.setText(it.phone.toString())
                     avgResponse.setText(it.avgResponseTime)
+                    Glide.with(requireActivity())
+                        .load("http://192.168.100.47:2023/image/fileSystem/"+it.profile_picture_path)
+                        .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
+                        .into(binding.ownerimage)
+                    Glide.with(requireActivity())
+                        .load("http://192.168.100.47:2023/image/fileSystem/"+it.profile_picture_path)
+                        .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
+                        .into(binding.ownerImage)
 
                 }
 
@@ -132,6 +142,10 @@ class DetailsToysFragment : Fragment(R.layout.toy_details_fragment) {
             toyName.text = name
             toyDescription.text = description
             toyPrice.text = price
+            Glide.with(requireActivity())
+                .load("http://192.168.100.47:2023/image/fileSystem/"+image)
+                .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
+                .into(binding.toyImage)
             (activity as MainActivity).setBottomNavigation(false)
             (activity as MainActivity).setToolbar(true)
         }

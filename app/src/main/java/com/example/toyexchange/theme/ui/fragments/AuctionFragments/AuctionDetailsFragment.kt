@@ -15,6 +15,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.toyexchange.Common.CountDownManager
 import com.example.toyexchange.Common.PicturesConverter
 import com.example.toyexchange.Presentation.ToysViewModel.AuctionDetailsViewModel
@@ -42,7 +44,7 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
 
     lateinit var bidsAdapter:BidsAdapter
 
-    @SuppressLint("ResourceAsColor")
+    @SuppressLint("ResourceAsColor", "SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -125,6 +127,14 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
                     homeaddress.setText(it.homeAddress)
                     phone.setText(it.phone.toString())
                     avgResponse.setText(it.avgResponseTime)
+                    Glide.with(requireActivity())
+                        .load("http://192.168.100.47:2023/image/fileSystem/"+it.profile_picture_path)
+                        .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
+                        .into(binding.ownerimage)
+                    Glide.with(requireActivity())
+                        .load("http://192.168.100.47:2023/image/fileSystem/"+it.profile_picture_path)
+                        .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
+                        .into(binding.ownerImage)
 
                 }
 
@@ -136,19 +146,15 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
             Log.i("1", "1")
 
             if(it!=null){
-                Log.i("2", "2")
-
-
-
-
+                Glide.with(requireActivity())
+                    .load("http://192.168.100.47:2023/image/fileSystem/"+it.picturePath)
+                    //.apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
+                    .into(binding.toyImage)
                         Toast.makeText(requireContext(), "picture got successfully", Toast.LENGTH_LONG)
                             .show()
                     }else {
                 Toast.makeText(requireContext(), "getting picture failed", Toast.LENGTH_LONG).show()
             }
-
-
-
         })
 
         /* val calendar = Calendar.getInstance()

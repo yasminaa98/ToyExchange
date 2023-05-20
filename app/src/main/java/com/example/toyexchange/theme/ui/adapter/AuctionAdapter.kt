@@ -85,9 +85,7 @@ class AuctionAdapter(
                 countDownTimer.start()
 
                 //binding.toyDescription.text = toy.description
-                Glide.with(itemView)
-                    .load(auctionResponse.image_url)
-                    .into(binding.auctionImage)
+
             }
         }
 

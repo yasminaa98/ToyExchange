@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.toyexchange.Presentation.ToysViewModel.DetailsToyViewModel
 import com.example.toyexchange.Presentation.ToysViewModel.ExchangeViewModel
 import com.example.toyexchange.R
@@ -63,6 +65,10 @@ class ExchangeDecisionFragment:Fragment(R.layout.exchange_decision_fragment) {
                 it.id=annonce_to_exchange
                 Toast.makeText(requireContext(),"annonce got successfully", Toast.LENGTH_LONG).show()
                 Log.i("annonce",it.toString())
+                Glide.with(requireActivity())
+                    .load("http://192.168.100.47:2023/image/fileSystem/"+it.picturePath)
+                    .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
+                    .into(binding.annonceImage)
                 val bundle=bundleOf("id" to annonce_to_exchange,"name" to it.name,
                     "description" to it.description,
                     "age_toy" to it.age_toy,
@@ -89,6 +95,10 @@ class ExchangeDecisionFragment:Fragment(R.layout.exchange_decision_fragment) {
                 binding.myAnnonceState.setText(it.state)
                 binding.myEstimatedPrice.setText(it.price)
                 it.id=my_annonce_id
+                Glide.with(requireActivity())
+                    .load("http://192.168.100.47:2023/image/fileSystem/"+it.picturePath)
+                    .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
+                    .into(binding.myAnnonceImage)
                 Toast.makeText(requireContext(),"annonce got successfully", Toast.LENGTH_LONG).show()
                 Log.i("annonce",it.toString())
             }

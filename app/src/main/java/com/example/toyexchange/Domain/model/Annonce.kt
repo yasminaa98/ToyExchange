@@ -10,7 +10,7 @@ data class Annonce(
     val category: String,
     @SerializedName("description")
     val description: String,
-   @SerializedName("picture")
+   @SerializedName("picturePath")
    val picturePath: String,
     @SerializedName("name")
     val name: String,

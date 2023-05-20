@@ -25,21 +25,8 @@ class ToysViewModel @Inject constructor(
     val picture: LiveData<ResponseBody> = _picture
     //get picture
 
-    fun getImage(picture:String) {
-        viewModelScope.launch {
-            var result = toysRepositoryImpl.getImage(picture)
-            Log.i("picture",result.toString())
-            try {
-                if (result.body() != null) {
-                    _picture.postValue(result.body())
-                } else {
-                    Log.i("body empty", result.message())
-                }
-            } catch (e: Exception) {
-                Log.e(ContentValues.TAG, "Failed to fetch toys", e)
-            }
-        }
-    }
+
+
 
     // display toys List
     fun fetchToys(token:String) {
@@ -67,7 +54,7 @@ class ToysViewModel @Inject constructor(
     }
     fun searchToysByCategory(category:String)=viewModelScope.launch{
         try {
-            _toys.value = toysRepositoryImpl.searchToys(category).filter { it.category.contains(category, ignoreCase = true)}
+            _toys.value = toysRepositoryImpl.searchToysByCategory(category).filter { it.category.contains(category, ignoreCase = true)}
 
         } catch (e: Exception) {
             Log.e(ContentValues.TAG, "Failed to search for this category", e)

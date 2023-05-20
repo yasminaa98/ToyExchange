@@ -15,6 +15,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.toyexchange.Common.CountDownManager
 import com.example.toyexchange.Common.PicturesConverter
 import com.example.toyexchange.Presentation.ToysViewModel.AuctionDetailsViewModel
@@ -35,13 +37,10 @@ import java.util.*
 
 @Suppress("UNREACHABLE_CODE")
 @AndroidEntryPoint
-
 class MyAuctionDetailsFragment: Fragment(R.layout.my_auction_details) {
     private lateinit var auctionDetailsViewModel: AuctionDetailsViewModel
     private lateinit var detailsToyViewModel: DetailsToyViewModel
-
     lateinit var bidsAdapter: BidsAdapter
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -109,31 +108,27 @@ class MyAuctionDetailsFragment: Fragment(R.layout.my_auction_details) {
         auctionDetailsViewModel.auctionOwner.observe(viewLifecycleOwner, Observer {
             if (it!=null){
                 binding.apply {
+                    Glide.with(requireActivity())
+                        .load("http://192.168.100.47:2023/image/fileSystem/"+it.profile_picture_path)
+                        //.apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
+                        .into(binding.ownerImage)
 
                 }
-
-
             }
         })
         detailsToyViewModel.getAnnonceByAuction(auctionId!!)
         detailsToyViewModel.annonce.observe(viewLifecycleOwner, Observer {
-            Log.i("1", "1")
-
             if(it!=null){
-                Log.i("2", "2")
-
-
-
+                Glide.with(requireActivity())
+                    .load("http://192.168.100.47:2023/image/fileSystem/"+it.picturePath)
+                    //.apply(RequestOptions.circleCropTransform())
+                    .into(binding.toyImage)
                     Toast.makeText(requireContext(), "picture got successfully", Toast.LENGTH_LONG)
                         .show()
                 }else {
                 Toast.makeText(requireContext(), "getting picture failed", Toast.LENGTH_LONG).show()
             }
-
-
-
         })
-
         // get bids list
                 binding.bidsList.apply {
                     layoutManager = LinearLayoutManager(this.context)
@@ -169,7 +164,7 @@ class MyAuctionDetailsFragment: Fragment(R.layout.my_auction_details) {
                     auctionDetailsViewModel.getAuctionBids(auctionId!!, token.toString())
                     Log.i("bids fetched", "bids fetched")
                 }
-//delete auction when clicking
+        //delete auction when clicking
         binding.delete.setOnClickListener{
             auctionDetailsViewModel.deleteAuction(auctionId!!)
             findNavController().navigate(

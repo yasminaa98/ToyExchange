@@ -21,6 +21,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.toyexchange.Common.PICK_IMAGE_REQUEST
 import com.example.toyexchange.Common.PicturesConverter
 import com.example.toyexchange.Presentation.ToysViewModel.GetUserInfoViewModel
@@ -80,6 +81,7 @@ class EditProfilFragment : Fragment(R.layout.profil_edit_fragment) {
                 binding.userPhone.setText(it.phone.toString())
                 Glide.with(requireActivity())
                     .load("http://192.168.100.47:2023/image/fileSystem/"+it.profile_picture_path)
+                    .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
                     .into(binding.profileImage)
 
                 Toast.makeText(requireContext(), "info got successfully", Toast.LENGTH_LONG).show()

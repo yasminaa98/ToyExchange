@@ -93,7 +93,6 @@ class AddBidFragment:Fragment(R.layout.place_bid) {
             if (it != null) {
                 binding.myPrice.setText(it.price_proposed)
                 binding.note.setText(it.note)
-                val bidderImage=it.profile_picture_path
                 Toast.makeText(requireContext(), "bid user", Toast.LENGTH_LONG).show()
                 Log.i("msg", it.toString())
             } else {
@@ -139,8 +138,8 @@ class AddBidFragment:Fragment(R.layout.place_bid) {
                 val noteToAdd= binding.note.text.toString()
                 Log.i("bid added is ", my_price + note)
                 val bid = Bid(30, noteToAdd, priceToAdd, username.toString(), auctionId!!,
-                    "")
-                Log.i("bid added is ", my_price + note)
+                    getUserInfoViewModel.info.value!!.profile_picture_path)
+                Log.i("bid added is ", bid.toString())
                 addBidViewModel.addBid(bid, auctionId, token.toString())
                 addBidViewModel.response.observe(viewLifecycleOwner, Observer {
                     if (it != null) {

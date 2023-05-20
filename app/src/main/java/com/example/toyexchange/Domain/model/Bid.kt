@@ -14,7 +14,7 @@ data class Bid(
     val username: String,
     @SerializedName("auction_id")
     val auctionId: Long,
-    @SerializedName("profilePicturePath")
+    @SerializedName("profilePicture")
     val profile_picture_path: String
 
 )
