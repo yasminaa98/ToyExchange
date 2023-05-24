@@ -6,14 +6,21 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.example.toyexchange.Presentation.ToysViewModel.GetUserInfoViewModel
 import com.example.toyexchange.R
 import com.example.toyexchange.databinding.ActivityMainBinding
 import com.example.toyexchange.theme.ui.fragments.ResetPasswordFragment
@@ -23,6 +30,7 @@ import kotlinx.coroutines.*
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var getUserInfoViewModel: GetUserInfoViewModel
 
     lateinit var toggle: ActionBarDrawerToggle
     private var job: Job? = null
@@ -36,6 +44,34 @@ class MainActivity : AppCompatActivity() {
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        // get user
+        val sharedPreferences =
+            applicationContext.getSharedPreferences("authToken", Context.MODE_PRIVATE)
+        val username = sharedPreferences.getString("username", null)
+        val idUser = sharedPreferences.getLong("idUser", 0L)
+        val token = sharedPreferences.getString("authToken", null)
+        Log.i("idUser", idUser.toString())
+        getUserInfoViewModel = ViewModelProvider(this).get(GetUserInfoViewModel::class.java)
+        getUserInfoViewModel.getUserInfo(username.toString())
+        getUserInfoViewModel.info.observe(this, Observer {
+            if (it != null) {
+                val headerView = binding.navigationView.getHeaderView(0)
+                val usernameTextView = headerView.findViewById<TextView>(R.id.username)
+                val userImageView = headerView.findViewById<ImageView>(R.id.user_photo)
+                usernameTextView.text=username
+                Glide.with(applicationContext)
+                    .load("http://192.168.100.47:2023/image/fileSystem/"+it.profile_picture_path)
+                    .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
+                    .into(userImageView)
+
+                Toast.makeText(applicationContext, "info got successfully", Toast.LENGTH_LONG).show()
+                Log.i("msg", it.toString())
+
+
+            } else {
+                Toast.makeText(applicationContext, "getting info failed", Toast.LENGTH_LONG).show()
+            }
+        })
 
         //notification
         binding.notification.setOnClickListener{

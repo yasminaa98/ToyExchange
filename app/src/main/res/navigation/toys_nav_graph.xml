@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toys_nav_graph"
-    app:startDestination="@id/signInFragment">
+    app:startDestination="@id/splash_Fragment">
     <fragment
         android:id="@+id/savedToysFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.SavedToysFragment"
@@ -281,4 +281,12 @@
         android:id="@+id/chat"
         android:name="com.example.toyexchange.theme.ui.fragments.ChatFragment.Chat"
         android:label="Chat" />
+    <fragment
+        android:id="@+id/splash_Fragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.Splash_Fragment"
+        android:label="Splash_Fragment" >
+        <action
+            android:id="@+id/action_splash_Fragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
 </navigation>
