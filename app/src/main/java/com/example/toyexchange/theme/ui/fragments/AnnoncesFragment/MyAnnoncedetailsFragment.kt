@@ -15,6 +15,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.toyexchange.Common.PicturesConverter
 import com.example.toyexchange.Presentation.ToysViewModel.AddAuctionViewModel
 import com.example.toyexchange.Presentation.ToysViewModel.DetailsToyViewModel
@@ -75,6 +77,10 @@ class MyAnnoncedetailsFragment: Fragment(R.layout.my_annonce_details) {
                 category.setText(_category)
                 state.setText(_state)
                 toyAge.setText(age_toy)
+                Glide.with(requireActivity())
+                    .load("http://192.168.100.47:2023/image/fileSystem/"+_image)
+                    .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
+                    .into(binding.toyImage)
                 /*val sh =
                     requireActivity().getSharedPreferences("myAnnonceImage", Context.MODE_PRIVATE)
                 val image =sh.getString("myAnnonceImage",null)*/
@@ -103,6 +109,10 @@ class MyAnnoncedetailsFragment: Fragment(R.layout.my_annonce_details) {
         detailsToyViewModel.annonceOwner.observe(viewLifecycleOwner, Observer {
             if (it!=null){
                 binding.apply {
+                    Glide.with(requireActivity())
+                        .load("http://192.168.100.47:2023/image/fileSystem/"+it.profile_picture_path)
+                        .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
+                        .into(binding.ownerImage)
 
                 }
             }

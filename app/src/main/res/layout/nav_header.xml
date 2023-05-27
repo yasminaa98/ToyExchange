@@ -9,7 +9,7 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="@color/pink"
+        android:background="@color/bleu_nude"
         tools:ignore="MissingConstraints">
 
     </androidx.constraintlayout.widget.ConstraintLayout>

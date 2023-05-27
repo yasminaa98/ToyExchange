@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.toyexchange.Presentation.ToysViewModel.UserAnnoncesViewModel
 import com.example.toyexchange.R
@@ -39,7 +40,7 @@ class MyAnnoncesFragment: Fragment(R.layout.my_annonces_fragment) {
             requireActivity().getSharedPreferences("authToken", Context.MODE_PRIVATE)
         val token =sharedPreferences.getString("authToken",null)
         binding.annoncesList.apply {
-            layoutManager = LinearLayoutManager(this.context)
+            layoutManager = GridLayoutManager(this.context,2)
 
             //when ever the data changes this code below is called
             //it's the observer of the live data

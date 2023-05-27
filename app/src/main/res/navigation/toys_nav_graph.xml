@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/savedToysFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.SavedToysFragment"
-        android:label="SavedToysFragment" >
+        android:label="Saved toys" >
         <action
             android:id="@+id/action_savedToysFragment_to_detailsToysFragment"
             app:destination="@id/detailsToysFragment" />
@@ -23,11 +23,14 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_feedToysFragment_to_notificationViewPager"
+            app:destination="@id/notificationViewPager" />
     </fragment>
     <fragment
         android:id="@+id/addToysFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.AnnoncesFragment.AddToyFragment"
-        android:label="Add Toys "
+        android:label="Add Toy "
     />
     <fragment
         android:id="@+id/detailsToysFragment"
@@ -54,7 +57,7 @@
     <fragment
         android:id="@+id/editProfilFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.AuthenticationFragment.EditProfilFragment"
-        android:label="Edit Profil" />
+        android:label="Edit Profile" />
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.AuthenticationFragment.SignInFragment"
@@ -106,7 +109,7 @@
     <fragment
         android:id="@+id/addPasswordFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.AuthenticationFragment.AddPasswordFragment"
-        android:label="AddPasswordFragment" >
+        android:label="Add Password " >
         <action
             android:id="@+id/action_addPasswordFragment_to_signInFragment"
             app:destination="@id/signInFragment"
@@ -126,7 +129,7 @@
     <fragment
         android:id="@+id/modifyAnnonceFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.AnnoncesFragment.ModifyAnnonceFragment"
-        android:label="Modify annonce" >
+        android:label="Modify Ad" >
         <action
             android:id="@+id/action_modifyAnnonceFragment_to_myAnnoncesFragment"
             app:destination="@id/myAnnoncesFragment" />
@@ -142,6 +145,9 @@
         <action
             android:id="@+id/action_auctionFragment_to_myAnnoncesFragment"
             app:destination="@id/myAnnoncesFragment" />
+        <action
+            android:id="@+id/action_auctionFragment_to_addAuctionFragment"
+            app:destination="@id/addAuctionFragment" />
     </fragment>
     <fragment
         android:id="@+id/auctionDetailsFragment"
@@ -160,7 +166,7 @@
     <fragment
         android:id="@+id/addBidFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.AddBidFragment"
-        android:label="AddBidFragment" >
+        android:label="Add Bid" >
         <action
             android:id="@+id/action_addBidFragment_to_auctionFragment"
             app:destination="@id/auctionFragment" />
@@ -175,11 +181,17 @@
         <action
             android:id="@+id/action_myAuctionFragment_to_myAuctionDetailsFragment"
             app:destination="@id/myAuctionDetailsFragment" />
+        <action
+            android:id="@+id/action_myAuctionFragment_to_addAuctionFragment"
+            app:destination="@id/addAuctionFragment" />
+        <action
+            android:id="@+id/action_myAuctionFragment_to_myAnnoncesFragment"
+            app:destination="@id/myAnnoncesFragment" />
     </fragment>
     <fragment
         android:id="@+id/myAuctionDetailsFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.AuctionFragments.MyAuctionDetailsFragment"
-        android:label="MyAuctionDetailsFragment" >
+        android:label="My Auction Details" >
         <action
             android:id="@+id/action_myAuctionDetailsFragment_to_myAuctionFragment"
             app:destination="@id/myAuctionFragment" />
@@ -190,7 +202,7 @@
     <fragment
         android:id="@+id/myAnnoncedetailsFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.AnnoncesFragment.MyAnnoncedetailsFragment"
-        android:label="MyAnnoncedetailsFragment" >
+        android:label="Toy details" >
         <action
             android:id="@+id/action_myAnnoncedetailsFragment_to_modifyAnnonceFragment"
             app:destination="@id/modifyAnnonceFragment" />
@@ -209,7 +221,7 @@
     <fragment
         android:id="@+id/chooseExchangeAnnonceFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.AnnoncesFragment.ChooseExchangeAnnonceFragment"
-        android:label="ChooseExchangeAnnonceFragment" >
+        android:label="Choose Ad" >
         <action
             android:id="@+id/action_chooseExchangeAnnonceFragment_to_feedToysFragment"
             app:destination="@id/feedToysFragment" />
@@ -225,7 +237,7 @@
     <fragment
         android:id="@+id/exchangeDecisionFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.Exchange.ExchangeDecisionFragment"
-        android:label="ExchangeDecisionFragment" >
+        android:label="Exchange requests" >
         <action
             android:id="@+id/action_exchangeDecisionFragment_to_exchangeAnnonceDetailsFragment"
             app:destination="@id/exchangeAnnonceDetailsFragment" />
@@ -237,7 +249,7 @@
     <fragment
         android:id="@+id/notificationViewPager"
         android:name="com.example.toyexchange.theme.ui.fragments.AnnoncesFragment.notificationViewPager"
-        android:label="notificationViewPager" >
+        android:label="Exchanges notifications" >
         <action
             android:id="@+id/action_notificationViewPager_to_exchangeDecisionFragment"
             app:destination="@id/exchangeDecisionFragment" />
@@ -268,7 +280,7 @@
     <fragment
         android:id="@+id/exchangeDecisionResultFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.Exchange.ExchangeDecisionResultFragment"
-        android:label="ExchangeDecisionResultFragment" >
+        android:label="Exchange result" >
         <action
             android:id="@+id/action_exchangeDecisionResultFragment_to_exchangeAnnonceDetailsFragment"
             app:destination="@id/exchangeAnnonceDetailsFragment" />

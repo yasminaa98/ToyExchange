@@ -110,7 +110,7 @@ class MyAuctionDetailsFragment: Fragment(R.layout.my_auction_details) {
                 binding.apply {
                     Glide.with(requireActivity())
                         .load("http://192.168.100.47:2023/image/fileSystem/"+it.profile_picture_path)
-                        //.apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
+                        .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
                         .into(binding.ownerImage)
 
                 }

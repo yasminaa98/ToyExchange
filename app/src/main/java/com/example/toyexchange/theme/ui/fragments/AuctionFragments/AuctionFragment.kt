@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.toyexchange.Presentation.ToysViewModel.AuctionViewModel
 import com.example.toyexchange.R
@@ -29,10 +30,10 @@ class AuctionFragment: Fragment(R.layout.auctions_fragment) {
         // create instance of viewmodel , the life cycle library creates it for us so if the viewmodel destroyed we don't need to recreated
         auctionViewModel = ViewModelProvider(this).get(AuctionViewModel::class.java)
         (activity as MainActivity).setBottomNavigation(true)
-        (activity as MainActivity).setToolbar(true)
+        (activity as MainActivity).setToolbar(false)
         //coundown
        binding.auctionsList.apply {
-            layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+            layoutManager = GridLayoutManager(this.context, 2)
 
             //when ever the data changes this code below is called
             //it's the observer of the live data
@@ -61,7 +62,7 @@ class AuctionFragment: Fragment(R.layout.auctions_fragment) {
         }
         binding.addAuction.setOnClickListener{
             findNavController().navigate(
-                R.id.action_auctionFragment_to_myAnnoncesFragment
+                R.id.action_auctionFragment_to_addAuctionFragment
             )
 
         }

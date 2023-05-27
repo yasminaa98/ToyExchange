@@ -27,6 +27,7 @@ import com.example.toyexchange.Domain.model.Annonce
 import com.example.toyexchange.Presentation.ToysViewModel.AddToyViewModel
 import com.example.toyexchange.R
 import com.example.toyexchange.databinding.AddToyFragmentBinding
+import com.example.toyexchange.theme.ui.MainActivity
 import com.example.toyexchange.theme.ui.fragments.AuthenticationFragment.EditProfilFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -55,6 +56,8 @@ class AddToyFragment: Fragment(R.layout.add_toy_fragment) {
         val sharedPreferences =
             requireActivity().getSharedPreferences("authToken", Context.MODE_PRIVATE)
         val token =sharedPreferences.getString("authToken",null)
+        (activity as MainActivity).setBottomNavigation(true)
+        (activity as MainActivity).setToolbar(false)
         //addToyViewModel.token=token
         selectedImage=binding.annoncePicture
         selectedImage.setOnClickListener{ openGallery()}

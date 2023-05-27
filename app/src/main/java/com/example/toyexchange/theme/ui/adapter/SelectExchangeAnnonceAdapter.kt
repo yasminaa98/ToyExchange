@@ -7,6 +7,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.toyexchange.Common.PicturesConverter
 import com.example.toyexchange.Domain.model.Annonce
 import com.example.toyexchange.databinding.ExchangeAnnonceItemBinding
@@ -26,6 +27,10 @@ class SelectExchangeAnnonceAdapter (private var annonces:List<Annonce>,
             binding.annonceName.text = annonce.name
             binding.radioButton.isChecked = isSelected
             binding.radioButton.isEnabled=false
+            Glide.with(itemView)
+                .load("http://192.168.100.47:2023/image/fileSystem/"+annonce.picturePath)
+                .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
+                .into(binding.annonceImage)
             //binding.toyDescription.text = toy.description
 
 

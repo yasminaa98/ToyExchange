@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.toyexchange.Domain.model.Exchange
 import com.example.toyexchange.databinding.NotificationItemBinding
 class NotificationAdapter (
@@ -13,15 +15,17 @@ class NotificationAdapter (
     private var exchanges:List<Exchange>,
     private val onClickListener: OnClickListener
 ) : RecyclerView.Adapter<NotificationAdapter.ToysViewHolder>(){
-
-
     class ToysViewHolder(private val binding: NotificationItemBinding) : RecyclerView.ViewHolder(binding.root){
         //var toy_image=itemView.findViewById<ImageView>(R.id.toy_image)
 
         fun bind(exchange: Exchange) {
-            binding.hisAnnonce.text = exchange.id_receiver_annonce.toString()
-            binding.annonceToExchange.text = exchange.id_sender_annonce.toString()
-
+            //binding.hisAnnonce.text = exchange.id_receiver_annonce.toString()
+            //binding.annonceToExchange.text = exchange.id_sender_annonce.toString()
+            binding.hisAnnonce.text="Mohamed-89 send you an exchange request"
+            Glide.with(itemView)
+                .load("http://192.168.100.47:2023/image/fileSystem/lego.jpg")
+                .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
+                .into(binding.senderImage)
         }
     }
     private val acceptedExchanges = mutableListOf<Exchange>()

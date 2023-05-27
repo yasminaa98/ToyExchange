@@ -2,14 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 <item
     android:id="@+id/profile"
-    android:title="Profile"/>
+    android:title="Profile"
+    android:icon="@drawable/profile_svg"/>
     <item
         android:id="@+id/auctions"
-        android:title="Auctions"/>
+        android:title="Auctions"
+        android:icon="@drawable/auction_svgr"/>
 
     <item
         android:id="@+id/messages"
-        android:title="Messages"/>
+        android:title="Messages"
+        android:icon="@drawable/messages_svg"/>
+
+    <item android:id="@+id/myAnnonces"
+        android:title="My toys"
+        android:icon="@drawable/ic_news"> </item>
 
 
 </menu>

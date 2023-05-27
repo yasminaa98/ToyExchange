@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.toyexchange.Domain.model.Exchange
 import com.example.toyexchange.Presentation.ToysViewModel.ExchangeViewModel
@@ -41,7 +42,7 @@ class ChooseExchangeAnnonceFragment:Fragment(R.layout.choose_exchange_annonce_fr
         val id_receiver_annonce = arguments?.getLong("id_receiver_annonce")
         val receiver = arguments?.getString("receiver")
         binding.annoncesList.apply {
-            layoutManager = LinearLayoutManager(this.context)
+            layoutManager = GridLayoutManager(this.context,2)
             userAnnoncesViewModel.annonces.observe(viewLifecycleOwner, { annonces ->
 
                 selectExchangeAnnonceAdapter = SelectExchangeAnnonceAdapter(annonces,

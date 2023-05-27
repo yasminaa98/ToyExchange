@@ -6,29 +6,25 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/notification_item"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialCardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints">
+        android:layout_height="30dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/rectangle_corners">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                tools:ignore="MissingConstraints"
+               >
 
                 <ImageView
                     android:id="@+id/sender_image"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
+                    android:layout_marginTop="5dp"
+
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
                     tools:ignore="MissingConstraints"
@@ -41,11 +37,17 @@
                     android:layout_height="wrap_content"
                     android:text="his annonce"
                     android:textSize="15sp"
+                    android:layout_marginTop="5dp"
+
+                    android:textStyle="bold"
                     app:layout_constraintTop_toTopOf="parent" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" -> "
+                    android:textStyle="bold"
+                    android:layout_marginTop="5dp"
+                    android:visibility="gone"
                     android:textSize="15sp"
                     app:layout_constraintTop_toTopOf="parent" />
                 <TextView
@@ -53,10 +55,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="annonce to exchange"
+                    android:visibility="gone"
+                    android:layout_marginTop="5dp"
+
+                    android:textStyle="bold"
+
                     android:textSize="15sp"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
-        </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

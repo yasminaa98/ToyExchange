@@ -48,6 +48,7 @@ class AuctionAdapter(
             binding.auctionName.text = auctionResponse.name
                 binding.auctionPrice.text = auctionResponse.initial_price
                 binding.auctionEndDateTime.text = auctionResponse.end_dateTime
+            binding.auctionName.text=auctionResponse.description
                 val timer = auctionResponse.end_dateTime.toString()
                 //countdown
                 val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")

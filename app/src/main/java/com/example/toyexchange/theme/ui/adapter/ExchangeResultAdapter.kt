@@ -4,6 +4,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.toyexchange.Domain.model.Exchange
 import com.example.toyexchange.databinding.NotificationItemBinding
 import com.example.toyexchange.databinding.ResultItemBinding
@@ -22,6 +24,10 @@ class ExchangeResultAdapter (
             if(exchange.status.toString()=="accepted" || exchange.status.toString()=="declined"){
             binding.status.text = exchange.status.toString()}
             Log.i("resulttttttttttt","resultt sender")
+            Glide.with(itemView)
+                .load("http://192.168.100.47:2023/image/fileSystem/lego.jpg")
+                .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
+                .into(binding.senderImage)
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToysViewHolder {

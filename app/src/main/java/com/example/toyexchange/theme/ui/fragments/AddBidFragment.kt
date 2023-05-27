@@ -19,6 +19,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.toyexchange.Common.CountDownManager
 import com.example.toyexchange.Common.PICK_IMAGE_REQUEST
 import com.example.toyexchange.Common.PicturesConverter
@@ -156,6 +158,7 @@ class AddBidFragment:Fragment(R.layout.place_bid) {
 
             }
         }
+
         return binding.root
 
     }

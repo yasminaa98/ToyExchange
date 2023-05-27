@@ -7,5 +7,18 @@
     android:layout_height="match_parent"
     android:background="@drawable/splash">
 
+    <ImageView
+        android:id="@+id/booba"
+        android:layout_width="348dp"
+        android:layout_height="176dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        android:layout_marginBottom="-1500dp"
+        app:layout_constraintVertical_bias="0.482"
+        app:srcCompat="@drawable/booba" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

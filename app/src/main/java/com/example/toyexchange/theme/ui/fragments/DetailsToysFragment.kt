@@ -99,13 +99,13 @@ class DetailsToysFragment : Fragment(R.layout.toy_details_fragment) {
                 }
 
                 binding.apply {
-                    userName.setText(it.username)
-                    firstname.setText(it.firstname)
-                    lastname.setText(it.lastname)
-                    email.setText(it.email)
-                    homeaddress.setText(it.homeAddress)
-                    phone.setText(it.phone.toString())
-                    avgResponse.setText(it.avgResponseTime)
+                    userName.setText("Username: "+it.username)
+                    firstname.setText("Firstname: "+it.firstname)
+                    lastname.setText("Lastname: "+it.lastname)
+                    email.setText("Email: "+it.email)
+                    homeaddress.setText("Home address: "+it.homeAddress)
+                    phone.setText("Phone: " + it.phone.toString())
+                    avgResponse.setText("I respond every "+it.avgResponseTime+" hours")
                     Glide.with(requireActivity())
                         .load("http://192.168.100.47:2023/image/fileSystem/"+it.profile_picture_path)
                         .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
@@ -135,13 +135,19 @@ class DetailsToysFragment : Fragment(R.layout.toy_details_fragment) {
         val name = arguments?.getString("name").toString()
         val description = arguments?.getString("description").toString()
         val price = arguments?.getString("price").toString()
-        val category = arguments?.getString("category").toString()
+        val _category = arguments?.getString("category").toString()
         val image = arguments?.getString("image_url").toString()
-        val estArchive=arguments?.getBoolean("estArchive")
+        val ageToy=arguments?.getString("age_toy").toString()
+        val ageChild=arguments?.getString("age_child").toString()
+
         binding.apply {
             toyName.text = name
             toyDescription.text = description
             toyPrice.text = price
+            toyAge.text=ageToy
+            childAge.text=ageChild
+            category.text=_category
+
             Glide.with(requireActivity())
                 .load("http://192.168.100.47:2023/image/fileSystem/"+image)
                 .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
@@ -149,7 +155,7 @@ class DetailsToysFragment : Fragment(R.layout.toy_details_fragment) {
             (activity as MainActivity).setBottomNavigation(false)
             (activity as MainActivity).setToolbar(true)
         }
-        val toyToSave = Toy(toyId!!, category, description, "image", name, price,"","","",estArchive!!)
+        val toyToSave = Toy(toyId!!, _category, description, "image", name, price,"","","",false)
         binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
             sharedPreferencesRoom.edit().putBoolean("checkbox_state", isChecked).apply()
             if (isChecked){

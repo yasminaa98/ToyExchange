@@ -83,19 +83,16 @@ class MainActivity : AppCompatActivity() {
 
             when (menuItem.itemId) {
                 R.id.profile -> {
-                    Toast.makeText(applicationContext, "Clicked item1", Toast.LENGTH_SHORT).show()
-                    // Navigate to Fragment1
-                    navController.navigate(R.id.myAnnoncesFragment)
+                    navController.navigate(R.id.editProfilFragment)
                 }
                 R.id.auctions -> {
-                    Toast.makeText(applicationContext, "Clicked auctionFragment", Toast.LENGTH_SHORT).show()
-                    // Navigate to AuctionFragment
-                    navController.navigate(R.id.auctionFragment)
+                    navController.navigate(R.id.myAuctionFragment)
                 }
                 R.id.messages -> {
-                    Toast.makeText(applicationContext, "Clicked auctionFragment", Toast.LENGTH_SHORT).show()
-                    // Navigate to AuctionFragment
                     navController.navigate(R.id.chatMainFragment)
+                }
+                R.id.myAnnonces -> {
+                    navController.navigate(R.id.myAnnoncesFragment)
                 }
             }
             true

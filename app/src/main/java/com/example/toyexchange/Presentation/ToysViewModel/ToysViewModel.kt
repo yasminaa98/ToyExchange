@@ -61,6 +61,5 @@ class ToysViewModel @Inject constructor(
         }
     }
 
-
 }
 

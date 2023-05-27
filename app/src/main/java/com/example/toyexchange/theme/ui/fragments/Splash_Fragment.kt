@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class Splash_Fragment: Fragment(R.layout.splash_screen) {
-    private val splashScreenDuration: Long = 2000
+    private val splashScreenDuration: Long = 5000
 
 
     override fun onCreateView(
@@ -27,7 +27,18 @@ class Splash_Fragment: Fragment(R.layout.splash_screen) {
         Handler().postDelayed({
             findNavController().navigate(R.id.action_splash_Fragment_to_signInFragment)
         }, splashScreenDuration)
+
+        binding.booba.apply {
+            visibility = View.VISIBLE
+            translationY = height.toFloat()
+            // Animate from off-screen to original position
+            animate().apply {
+                translationY(-100f)
+                duration = 1000
+            }
+        }
         return binding.root
 
     }
+
 }

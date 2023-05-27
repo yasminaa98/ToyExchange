@@ -12,11 +12,15 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
@@ -39,7 +43,11 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
         // create instance of viewmodel , the life cycle library creates it for us so if the viewmodel destroyed we don't need to recreated
         toysViewModel = ViewModelProvider(this).get(ToysViewModel::class.java)
         (activity as MainActivity).setBottomNavigation(true)
-        (activity as MainActivity).setToolbar(true)
+        (activity as MainActivity).setToolbar(false)
+        //notification
+        binding.notification.setOnClickListener{
+            findNavController().navigate(R.id.action_feedToysFragment_to_notificationViewPager)
+        }
         //image slider
         val imageList=ArrayList<SlideModel>()
         imageList.clear()
@@ -48,7 +56,8 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
         imageList.add(SlideModel(R.drawable.img3))
         imageList.add(SlideModel(R.drawable.img4))
         imageList.add(SlideModel(R.drawable.img1))
-        binding.imageSlider.setImageList(imageList, ScaleTypes.FIT)
+        //binding.imageSlider.setImageList(imageList, ScaleTypes.FIT)
+
 
         /* toysRecyclerViewAdapter = ToysRecyclerViewAdapter(emptyList(),ToysRecyclerViewAdapter.OnClickListener{ photo ->
             Toast.makeText(context, "${photo.name}", Toast.LENGTH_SHORT).show() }) */
@@ -60,7 +69,7 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
 
 
         binding.toysList.apply {
-            layoutManager = LinearLayoutManager(this.context)
+            layoutManager = GridLayoutManager(this.context,2)
             toysViewModel.toys.observe(viewLifecycleOwner, { toys ->
 
                 toysRecyclerViewAdapter = ToysRecyclerViewAdapter(toys,
@@ -69,7 +78,8 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
                         val bundle = bundleOf("id" to clickedItem.id ,
                             "name" to clickedItem.name, "description" to clickedItem.description,
                         "price" to clickedItem.price,"category" to clickedItem.category,
-                            "image_url" to clickedItem.picturePath,"estArchive" to clickedItem.estArchive)
+                            "image_url" to clickedItem.picturePath,"age_toy" to clickedItem.age_toy,
+                            "age_child" to clickedItem.age_child)
                         Log.i("bundle", bundle.toString())
                         findNavController().navigate(R.id.action_feedToysFragment_to_detailsToysFragment,bundle)
                 },lifecycleScope)

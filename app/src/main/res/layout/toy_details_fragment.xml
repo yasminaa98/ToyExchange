@@ -7,17 +7,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toyDetailsFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/toy_image"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="200dp"
             android:background="@drawable/top_layout_shape"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="0dp"
             tools:srcCompat="@tools:sample/avatars" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +25,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/recyclerview_shape"
-            android:backgroundTint="#F3F3F3"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,14 +37,15 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
-                android:layout_width="373dp"
+                android:layout_width="match_parent"
                 android:layout_height="385dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+
                 android:background="@drawable/rectangle_corners"
                 android:backgroundTint="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/linear"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.578"
@@ -65,6 +67,38 @@
                     tools:ignore="MissingConstraints" />
 
                 <TextView
+                    android:id="@+id/category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Category"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.583"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.337"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Category:"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.093"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.337"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
                     android:id="@+id/toy_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -74,10 +108,26 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.888"
+                    app:layout_constraintHorizontal_bias="0.789"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.129"
+                    app:layout_constraintVertical_bias="0.148"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="TND"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.948"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.147"
                     tools:ignore="MissingConstraints" />
 
                 <TextView
@@ -85,15 +135,77 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="36dp"
+                    android:layout_marginBottom="24dp"
                     android:text="name"
                     android:textSize="30sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/toy_description"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.088"
+                    app:layout_constraintHorizontal_bias="0.09"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintWidth_percent="0.8"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/toy_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Toy Age"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.556"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.491"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Toy Age:"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.099"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.491"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/child_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Child age"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.588"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.645"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Child age:"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.105"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.645"
                     tools:ignore="MissingConstraints" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -105,13 +217,14 @@
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="0dp">
+                tools:layout_editor_absoluteX="0dp"
+                >
 
                 <CheckBox
                     android:id="@+id/checkBox"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="30dp"
+                android:layout_marginLeft="10dp"
                     android:button="@drawable/wishlist_selector" />
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -120,8 +233,9 @@
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginBottom="15dp"
-                    android:backgroundTint="@color/pink"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="@color/bleu_nude"
                     android:text="Exchange"
                     android:clickable="true"
                     android:enabled="true"
@@ -152,7 +266,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/recyclerview_shape"
-            android:backgroundTint="@color/pink"
             android:orientation="vertical"
             android:visibility="gone"
             android:layout_marginBottom="-1500dp"
@@ -190,6 +303,8 @@
                     android:background="@drawable/circle"
                     android:scaleType="centerInside"
                     tools:ignore="MissingConstraints"
+                    android:textStyle="bold"
+
                     tools:layout_editor_absoluteX="32dp"
                     tools:layout_editor_absoluteY="21dp"
                     tools:srcCompat="@tools:sample/avatars" />
@@ -199,6 +314,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:textStyle="bold"
+
                     android:layout_marginBottom="20dp"
                     android:text="username" />
 
@@ -208,6 +325,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
+                    android:textStyle="bold"
+
                     android:text="Firstname" />
 
                 <TextView
@@ -216,6 +335,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
+                    android:textStyle="bold"
+
                     android:text="Lastname" />
 
                 <TextView
@@ -224,6 +345,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
+                    android:textStyle="bold"
+
                     android:text="Email" />
 
                 <TextView
@@ -231,6 +354,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:textStyle="bold"
+
                     android:layout_marginBottom="20dp"
                     android:text="Home address" />
 
@@ -240,6 +365,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:inputType="phone"
+                    android:textStyle="bold"
+
                     android:layout_marginBottom="20dp"/>
 
                 <TextView
@@ -247,6 +374,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:textStyle="bold"
                     android:layout_marginBottom="70dp"
                     android:text="Average response time" />
 

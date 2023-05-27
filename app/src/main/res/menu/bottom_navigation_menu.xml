@@ -12,11 +12,9 @@
     <item android:id="@+id/savedToysFragment"
         android:title="Favorite"
         android:icon="@drawable/ic_favorite"> </item>
-    <item android:id="@+id/editProfilFragment"
-        android:title="Profil"
-        android:icon="@drawable/ic_profil"> </item>
 
-   <item android:id="@+id/myAnnoncesFragment"
-        android:title="My toys"
-        android:icon="@drawable/ic_news"> </item>
+
+    <item android:id="@+id/auctionFragment"
+        android:title="Auctions"
+        android:icon="@drawable/auction_svgr"> </item>
 </menu>

@@ -18,6 +18,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.toyexchange.Common.PicturesConverter
 import com.example.toyexchange.Domain.model.Annonce
 import com.example.toyexchange.Presentation.ToysViewModel.DetailsToyViewModel
@@ -81,6 +83,11 @@ class ModifyAnnonceFragment: Fragment(R.layout.modify_annonce_fragment) {
                    price.setText(it.price)
                    toyAge.setText(it.age_toy)
                    toyState.setText(it.state)
+               Glide.with(requireActivity())
+                   .load("http://192.168.100.47:2023/image/fileSystem/"+it.picturePath)
+                   .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
+                   .into(binding.toyImage)
+
                    Toast.makeText(requireContext(), "info got successfully", Toast.LENGTH_LONG)
                        .show()
                }}else {

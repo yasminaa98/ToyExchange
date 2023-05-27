@@ -10,6 +10,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.toyexchange.Presentation.ToysViewModel.MyAuctionsViewModel
 import com.example.toyexchange.R
@@ -63,6 +64,12 @@ class MyAuctionFragment :Fragment(R.layout.my_auctions_fragment){
             myAuctionsViewModel.getUserAuctions(token.toString())
             Log.i("auctions fetched", "auctions fetched")
 
+            binding.addAuction.setOnClickListener{
+                findNavController().navigate(
+                    R.id.action_myAuctionFragment_to_myAnnoncesFragment
+                )
+
+            }
 
             //
         }
