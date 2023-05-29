@@ -5,6 +5,7 @@ import com.example.toyexchange.Domain.model.Toy
 import com.example.toyexchange.Domain.model.User
 import com.google.gson.JsonObject
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -14,8 +15,14 @@ interface ToysApi {
     @POST("api/annonces/add")
     suspend fun addToy(
         @Part photo: MultipartBody.Part,
-        @Header("Authorization") token: String,
-        //@Body annonce: Annonce
+        @Part("name") name: RequestBody,
+        @Part("price") price: RequestBody,
+        @Part("state") state: RequestBody,
+        @Part("ageChild") ageChild: RequestBody,
+        @Part("ageToy") ageToy: RequestBody,
+        @Part("category") category: RequestBody,
+        @Part("description") description: RequestBody,
+        @Header("Authorization") token: String
     ): Response<JsonObject>
 
     @GET("api/annonces/getAll")

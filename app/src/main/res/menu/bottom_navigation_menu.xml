@@ -10,7 +10,7 @@
         android:icon="@drawable/ic_add"> </item>
 
     <item android:id="@+id/savedToysFragment"
-        android:title="Favorite"
+        android:title="Favourites"
         android:icon="@drawable/ic_favorite"> </item>
 
 

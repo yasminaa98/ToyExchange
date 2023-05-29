@@ -17,6 +17,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.toyexchange.Common.Constants
+import com.example.toyexchange.Common.Constants.IMAGE_URL
 import com.example.toyexchange.Common.CountDownManager
 import com.example.toyexchange.Common.PicturesConverter
 import com.example.toyexchange.Presentation.ToysViewModel.AuctionDetailsViewModel
@@ -117,22 +119,23 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
                     binding.place.setBackgroundColor(R.color.grey)
                     binding.place.isEnabled=false
                     binding.place.setText("Bid unavailable")
+                    binding.sendMessage.visibility=View.GONE
                     Log.i("username", "username")
                 }
                 binding.apply {
-                    userName.setText(it.username)
-                    firstname.setText(it.firstname)
-                    lastname.setText(it.lastname)
-                    email.setText(it.email)
-                    homeaddress.setText(it.homeAddress)
-                    phone.setText(it.phone.toString())
-                    avgResponse.setText(it.avgResponseTime)
+                    userName.setText("Username: "+it.username)
+                    firstname.setText("Firstname: "+it.firstname)
+                    lastname.setText("Lastname:"+it.lastname)
+                    email.setText("Email: "+it.email)
+                    homeaddress.setText("Home address: "+it.homeAddress)
+                    phone.setText("Phone: "+it.phone.toString())
+                    avgResponse.setText("I respond every "+it.avgResponseTime+" hours")
                     Glide.with(requireActivity())
-                        .load("http://192.168.100.47:2023/image/fileSystem/"+it.profile_picture_path)
+                        .load(IMAGE_URL +it.profile_picture_path)
                         .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
                         .into(binding.ownerimage)
                     Glide.with(requireActivity())
-                        .load("http://192.168.100.47:2023/image/fileSystem/"+it.profile_picture_path)
+                        .load(IMAGE_URL+it.profile_picture_path)
                         .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
                         .into(binding.ownerImage)
 
@@ -147,7 +150,7 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
 
             if(it!=null){
                 Glide.with(requireActivity())
-                    .load("http://192.168.100.47:2023/image/fileSystem/"+it.picturePath)
+                    .load(IMAGE_URL+it.picturePath)
                     //.apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
                     .into(binding.toyImage)
                         Toast.makeText(requireContext(), "picture got successfully", Toast.LENGTH_LONG)
@@ -246,8 +249,33 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
                     auctionDetailsViewModel.getAuctionBids(auctionId!!, token.toString())
                     Log.i("bids fetched", "bids fetched")
 
-                    return binding.root
+
                 }
+        binding.sendMessage.setOnClickListener{
+            val database = FirebaseDatabase.getInstance()
+            val userRef = database.getReference("user")
+            val nameToFind = detailsToyViewModel.annonceOwner.value?.username.toString()
+
+            userRef.orderByChild("name").equalTo(nameToFind).addListenerForSingleValueEvent(object :
+                ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (userSnapshot in dataSnapshot.children) {
+                        val uid = userSnapshot.child("uid").getValue(String::class.java)
+                        Log.i("uid clicked is ", uid.toString())
+
+                        val bundle= bundleOf("uid" to uid)
+                        findNavController().navigate(R.id.action_auctionDetailsFragment_to_chat,bundle)
+                    }
+                }
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Log.i("uid clicked is ", "error")
+
+                    // Handle error
+                }
+            })
+
+        }
+        return binding.root
         }
 
 

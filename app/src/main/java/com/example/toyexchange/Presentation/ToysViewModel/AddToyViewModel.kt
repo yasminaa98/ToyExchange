@@ -13,6 +13,7 @@ import com.google.gson.JsonObject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import javax.inject.Inject
 @HiltViewModel
 
@@ -23,9 +24,14 @@ class AddToyViewModel @Inject constructor(
     val adding_msg: LiveData<JsonObject> = _msg
 
     //var token: String? = null
-    fun addToy(photo: MultipartBody.Part,token: String) {
+    fun addToy(photo: MultipartBody.Part,name:RequestBody, price: RequestBody,
+               state: RequestBody,
+               ageChild: RequestBody,
+               ageToy: RequestBody,
+               category: RequestBody,
+               description: RequestBody,token: String) {
         viewModelScope.launch {
-            var result = toysRepositoryImpl.addToy(photo,"$token")
+            var result = toysRepositoryImpl.addToy(photo,name,price,state,ageChild,ageToy,category,description,"$token")
             Log.i("result", result.toString())
             Log.i("bearer token is ", token.toString())
 

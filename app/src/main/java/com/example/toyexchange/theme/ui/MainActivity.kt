@@ -20,6 +20,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.toyexchange.Common.Constants.IMAGE_URL
 import com.example.toyexchange.Presentation.ToysViewModel.GetUserInfoViewModel
 import com.example.toyexchange.R
 import com.example.toyexchange.databinding.ActivityMainBinding
@@ -60,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                 val userImageView = headerView.findViewById<ImageView>(R.id.user_photo)
                 usernameTextView.text=username
                 Glide.with(applicationContext)
-                    .load("http://192.168.100.47:2023/image/fileSystem/"+it.profile_picture_path)
+                    .load(IMAGE_URL+it.profile_picture_path)
                     .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
                     .into(userImageView)
 
@@ -93,6 +94,9 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.myAnnonces -> {
                     navController.navigate(R.id.myAnnoncesFragment)
+                }
+                R.id.explore -> {
+                    navController.navigate(R.id.feedToysFragment)
                 }
             }
             true

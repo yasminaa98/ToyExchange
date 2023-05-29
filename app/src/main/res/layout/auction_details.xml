@@ -209,7 +209,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/recyclerview_shape"
-            android:backgroundTint="@color/pink"
             android:orientation="vertical"
             android:visibility="gone"
             android:layout_marginBottom="-1500dp"
@@ -218,10 +217,21 @@
             tools:ignore="MissingConstraints"
             >
 
+            <ImageView
+                android:id="@+id/send_message"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="250dp"
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/messages_icon" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/recyclerview_shape"
+                android:backgroundTint="@color/pink"
                 android:orientation="vertical"
                 android:visibility="visible"
                 android:layout_margin="30dp"
@@ -236,15 +246,19 @@
                     android:background="@drawable/circle"
                     android:scaleType="centerInside"
                     tools:ignore="MissingConstraints"
+                    android:textStyle="bold"
+
                     tools:layout_editor_absoluteX="32dp"
                     tools:layout_editor_absoluteY="21dp"
-                    tools:srcCompat="@drawable/ic_launcher_background" />
+                    tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
                     android:id="@+id/user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:textStyle="bold"
+
                     android:layout_marginBottom="20dp"
                     android:text="username" />
 
@@ -254,6 +268,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
+                    android:textStyle="bold"
+
                     android:text="Firstname" />
 
                 <TextView
@@ -262,6 +278,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
+                    android:textStyle="bold"
+
                     android:text="Lastname" />
 
                 <TextView
@@ -270,6 +288,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
+                    android:textStyle="bold"
+
                     android:text="Email" />
 
                 <TextView
@@ -277,6 +297,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:textStyle="bold"
+
                     android:layout_marginBottom="20dp"
                     android:text="Home address" />
 
@@ -286,6 +308,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:inputType="phone"
+                    android:textStyle="bold"
+
                     android:layout_marginBottom="20dp"/>
 
                 <TextView
@@ -293,6 +317,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:textStyle="bold"
                     android:layout_marginBottom="70dp"
                     android:text="Average response time" />
 

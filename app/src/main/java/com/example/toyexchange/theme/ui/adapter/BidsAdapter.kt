@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.toyexchange.Common.Constants.IMAGE_URL
 import com.example.toyexchange.Common.PicturesConverter
 import com.example.toyexchange.Domain.model.Bid
 import com.example.toyexchange.Domain.model.Toy
@@ -29,7 +30,7 @@ class BidsAdapter (
             binding.priceProposed.text = bid.price_proposed
             binding.userName.text=bid.username
             Glide.with(itemView)
-                .load("http://192.168.100.47:2023/image/fileSystem/"+bid.profile_picture_path)
+                .load(IMAGE_URL+bid.profile_picture_path)
                 .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
                 .into(binding.bidderImage)
 

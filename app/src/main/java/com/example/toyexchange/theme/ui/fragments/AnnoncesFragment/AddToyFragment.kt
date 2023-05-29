@@ -31,8 +31,10 @@ import com.example.toyexchange.theme.ui.MainActivity
 import com.example.toyexchange.theme.ui.fragments.AuthenticationFragment.EditProfilFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.io.FileOutputStream
@@ -62,18 +64,27 @@ class AddToyFragment: Fragment(R.layout.add_toy_fragment) {
         selectedImage=binding.annoncePicture
         selectedImage.setOnClickListener{ openGallery()}
         binding.addButton.setOnClickListener {
-            /*val name=binding.toyName.text.toString()
+            val name=binding.toyName.text.toString()
             val child_age=binding.childAge.text.toString()
             val toy_age=binding.toyAge.text.toString()
             val price=binding.price.text.toString()
             val category=binding.toyCategory.text.toString()
             val state=binding.toyState.text.toString()
             val description=binding.toyDescription.text.toString()
-            lifecycleScope.launch{
-            val ImageString=PicturesConverter.sendImage(selectedImage)
-            val annonce= Annonce(1,category,description,ImageString!!,name,price,state,child_age,toy_age)*/
+            val nameRequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), name)
+            val childAgeRequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), child_age)
+            val toyAgeRequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), toy_age)
+            val priceRequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), price)
+            val categoryRequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), category)
+            val stateRequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), state)
+            val descriptionRequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), description)
+
+
+            //val annonce= Annonce(1,category,description,ImageString!!,name,price,state,child_age,toy_age)
             val photoPart=PicturesConverter.managePicture(requireContext(),"picture",selectedPhotoUri)
-            addToyViewModel.addToy(photoPart!!, token.toString())
+            addToyViewModel.addToy(photoPart!!, nameRequestBody,priceRequestBody,
+                stateRequestBody,childAgeRequestBody,toyAgeRequestBody,categoryRequestBody,
+                descriptionRequestBody,token.toString())
         }
         addToyViewModel.adding_msg.observe(viewLifecycleOwner , Observer {
             if(it!=null){

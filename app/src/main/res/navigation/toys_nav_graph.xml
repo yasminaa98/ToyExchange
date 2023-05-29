@@ -162,6 +162,9 @@
         <action
             android:id="@+id/action_auctionDetailsFragment_to_chat"
             app:destination="@id/chat" />
+        <action
+            android:id="@+id/action_auctionDetailsFragment_to_chat2"
+            app:destination="@id/chat" />
     </fragment>
     <fragment
         android:id="@+id/addBidFragment"

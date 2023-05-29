@@ -79,7 +79,7 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
                             "name" to clickedItem.name, "description" to clickedItem.description,
                         "price" to clickedItem.price,"category" to clickedItem.category,
                             "image_url" to clickedItem.picturePath,"age_toy" to clickedItem.age_toy,
-                            "age_child" to clickedItem.age_child)
+                            "age_child" to clickedItem.age_child,"state" to clickedItem.state)
                         Log.i("bundle", bundle.toString())
                         findNavController().navigate(R.id.action_feedToysFragment_to_detailsToysFragment,bundle)
                 },lifecycleScope)

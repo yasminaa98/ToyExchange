@@ -18,8 +18,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.toyexchange.Common.Constants.IMAGE_URL
 import com.example.toyexchange.Common.PicturesConverter
 import com.example.toyexchange.Domain.model.Toy
+import com.example.toyexchange.Domain.model.ToysInformation
 import com.example.toyexchange.Presentation.ToysViewModel.DetailsToyViewModel
 import com.example.toyexchange.Presentation.ToysViewModel.RoomViewModel
 import com.example.toyexchange.Presentation.ToysViewModel.RoomViewModelFactory
@@ -93,6 +95,7 @@ class DetailsToysFragment : Fragment(R.layout.toy_details_fragment) {
         detailsToyViewModel.annonceOwner.observe(viewLifecycleOwner, Observer {
             if (it!=null){
                 if (it.username==username){
+                    binding.sendMessage.visibility=View.GONE
                     binding.exchange.setBackgroundColor(R.color.grey)
                     binding.exchange.isEnabled=false
                     binding.exchange.setText("Exchange unavailable")
@@ -107,11 +110,11 @@ class DetailsToysFragment : Fragment(R.layout.toy_details_fragment) {
                     phone.setText("Phone: " + it.phone.toString())
                     avgResponse.setText("I respond every "+it.avgResponseTime+" hours")
                     Glide.with(requireActivity())
-                        .load("http://192.168.100.47:2023/image/fileSystem/"+it.profile_picture_path)
+                        .load(IMAGE_URL+it.profile_picture_path)
                         .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
                         .into(binding.ownerimage)
                     Glide.with(requireActivity())
-                        .load("http://192.168.100.47:2023/image/fileSystem/"+it.profile_picture_path)
+                        .load(IMAGE_URL+it.profile_picture_path)
                         .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
                         .into(binding.ownerImage)
 
@@ -139,23 +142,24 @@ class DetailsToysFragment : Fragment(R.layout.toy_details_fragment) {
         val image = arguments?.getString("image_url").toString()
         val ageToy=arguments?.getString("age_toy").toString()
         val ageChild=arguments?.getString("age_child").toString()
+        val _state=arguments?.getString("state").toString()
 
         binding.apply {
             toyName.text = name
             toyDescription.text = description
             toyPrice.text = price
-            toyAge.text=ageToy
-            childAge.text=ageChild
-            category.text=_category
+            toyAge.text="Toy age: "+ageToy
+            childAge.text="Child age: "+ageChild
+            category.text="Category: "+_category
+            state.text="State: "+_state
 
             Glide.with(requireActivity())
-                .load("http://192.168.100.47:2023/image/fileSystem/"+image)
-                .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
+                .load(IMAGE_URL+image)
                 .into(binding.toyImage)
             (activity as MainActivity).setBottomNavigation(false)
             (activity as MainActivity).setToolbar(true)
         }
-        val toyToSave = Toy(toyId!!, _category, description, "image", name, price,"","","",false)
+        val toyToSave = ToysInformation(toyId!!, _category, description, image, name, price,"","","",false)
         binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
             sharedPreferencesRoom.edit().putBoolean("checkbox_state", isChecked).apply()
             if (isChecked){

@@ -5,8 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.toyexchange.Domain.model.Toy
+import com.example.toyexchange.Domain.model.ToysInformation
 
-@Database(entities=[Toy::class], version = 1, exportSchema = false)
+@Database(entities=[ToysInformation::class], version = 1, exportSchema = false)
 abstract class ToyDatabase : RoomDatabase(){
     //create instance of dao interface by an abstract fun
     // because we used abstract here and in the class we don't need to

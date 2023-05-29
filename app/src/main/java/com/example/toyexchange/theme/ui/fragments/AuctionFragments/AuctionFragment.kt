@@ -62,7 +62,7 @@ class AuctionFragment: Fragment(R.layout.auctions_fragment) {
         }
         binding.addAuction.setOnClickListener{
             findNavController().navigate(
-                R.id.action_auctionFragment_to_addAuctionFragment
+                R.id.action_auctionFragment_to_myAnnoncesFragment
             )
 
         }

@@ -4,6 +4,7 @@ import com.example.toyexchange.Domain.model.*
 import com.example.toyexchange.data.remote.ToysApi
 import com.google.gson.JsonObject
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.Path
@@ -25,8 +26,14 @@ class ToysRepositoryImpl @Inject constructor(
         return apiService.getToyDetailsById(id)
     }*/
 
-    suspend fun addToy(photo: MultipartBody.Part,token:String):Response<JsonObject>{
-        return apiService.addToy(photo,token)
+    suspend fun addToy(photo: MultipartBody.Part, name: RequestBody,
+                       price: RequestBody,
+                        state: RequestBody,
+                       ageChild: RequestBody,
+                       ageToy: RequestBody,
+                        category: RequestBody,
+                       description: RequestBody,token:String):Response<JsonObject>{
+        return apiService.addToy(photo,name,price,state,ageChild,ageToy,category,description,token)
     }
     suspend fun modifyAnnonce(token:String,idAnnonce:Long,annonce:Annonce):Response<JsonObject>{
         return apiService.modifyAnnonce(token,idAnnonce,annonce)

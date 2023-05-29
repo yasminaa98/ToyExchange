@@ -25,7 +25,7 @@ class ExchangeResultAdapter (
             binding.status.text = exchange.status.toString()}
             Log.i("resulttttttttttt","resultt sender")
             Glide.with(itemView)
-                .load("http://192.168.100.47:2023/image/fileSystem/lego.jpg")
+                .load("http://192.168.100.46:2023/image/fileSystem/lego.jpg")
                 .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
                 .into(binding.senderImage)
         }
