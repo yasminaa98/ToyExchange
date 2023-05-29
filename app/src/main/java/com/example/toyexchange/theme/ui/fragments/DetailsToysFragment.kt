@@ -35,7 +35,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
 @AndroidEntryPoint
 class DetailsToysFragment : Fragment(R.layout.toy_details_fragment) {
     private lateinit var detailsToyViewModel: DetailsToyViewModel

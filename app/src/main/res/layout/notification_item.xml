@@ -23,13 +23,11 @@
                     android:id="@+id/sender_image"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:layout_marginTop="5dp"
-
+                    android:layout_marginTop="3dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
                     tools:ignore="MissingConstraints"
-                    android:background="@drawable/circle"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    app:srcCompat="@drawable/swap_notif_icon"/>
 
                 <TextView
                     android:id="@+id/his_annonce"

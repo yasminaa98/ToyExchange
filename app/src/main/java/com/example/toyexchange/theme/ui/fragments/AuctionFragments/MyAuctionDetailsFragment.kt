@@ -1,6 +1,7 @@
 package com.example.toyexchange.theme.ui.fragments.AuctionFragments
 
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -168,9 +169,22 @@ class MyAuctionDetailsFragment: Fragment(R.layout.my_auction_details) {
                 }
         //delete auction when clicking
         binding.delete.setOnClickListener{
-            auctionDetailsViewModel.deleteAuction(auctionId!!)
-            findNavController().navigate(
-                R.id.action_myAuctionDetailsFragment_to_myAuctionFragment)
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle("Alert")
+                .setMessage("This is an alert dialog.")
+                .setPositiveButton("OK") { dialog, which ->
+                    auctionDetailsViewModel.deleteAuction(auctionId!!)
+                    findNavController().navigate(
+                        R.id.action_myAuctionDetailsFragment_to_myAuctionFragment)
+                }
+                .setNegativeButton("Cancel") { dialog, which ->
+                    findNavController().navigate(
+                        R.id.action_myAuctionDetailsFragment_to_myAuctionFragment)
+                }
+
+            val alertDialog: AlertDialog = builder.create()
+            alertDialog.show()
+
         }
 
         return binding.root

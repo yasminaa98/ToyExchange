@@ -303,5 +303,16 @@
         <action
             android:id="@+id/action_splash_Fragment_to_signInFragment"
             app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_splash_Fragment_to_welcomeImagesFragment"
+            app:destination="@id/welcomeImagesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/welcomeImagesFragment"
+        android:name="com.example.toyexchange.theme.ui.fragments.WelcomeImagesFragment"
+        android:label="WelcomeImagesFragment" >
+        <action
+            android:id="@+id/action_welcomeImagesFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
     </fragment>
 </navigation>

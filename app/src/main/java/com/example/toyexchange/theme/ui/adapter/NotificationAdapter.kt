@@ -21,11 +21,11 @@ class NotificationAdapter (
         fun bind(exchange: Exchange) {
             //binding.hisAnnonce.text = exchange.id_receiver_annonce.toString()
             //binding.annonceToExchange.text = exchange.id_sender_annonce.toString()
-            binding.hisAnnonce.text="Mohamed-89 send you an exchange request"
-            Glide.with(itemView)
+            binding.hisAnnonce.text=exchange.sender.toString()+" send you a request"
+           /* Glide.with(itemView)
                 .load("http://192.168.100.47:2023/image/fileSystem/lego.jpg")
                 .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
-                .into(binding.senderImage)
+                .into(binding.senderImage)*/
         }
     }
     private val acceptedExchanges = mutableListOf<Exchange>()

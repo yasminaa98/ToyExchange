@@ -7,31 +7,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/toy_image"
-            android:layout_width="200dp"
-            android:layout_height="199dp"
-            android:background="@drawable/top_layout_shape"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints"
-            tools:srcCompat="@tools:sample/avatars" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/annonce_home"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/recyclerview_shape"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="160dp"
             android:layout_marginLeft="10dp"
+
+            android:layout_marginTop="108dp"
             android:layout_marginRight="10dp"
-            app:layout_constraintVertical_bias="1.0">
+            android:background="@drawable/recyclerview_shape"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
 
             <TextView
@@ -127,6 +115,7 @@
                     app:layout_constraintVertical_bias="0.13"
                     tools:ignore="MissingConstraints" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <LinearLayout
                 android:id="@+id/linear"
                 android:layout_width="match_parent"
@@ -141,35 +130,18 @@
                     android:id="@+id/done"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
-                    android:layout_weight="1"
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
                     android:layout_marginBottom="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rectangle_corners"
                     android:backgroundTint="@color/bleu_nude"
-                    android:text="Done"
-                    android:background="@drawable/rectangle_corners"/>
+                    android:text="Done" />
             </LinearLayout>
-
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        <ImageView
-            android:id="@+id/bidder_image"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/circle"
-            android:scaleType="centerInside"
-            app:layout_constraintBottom_toBottomOf="@+id/toy_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/toy_image"
-            app:layout_constraintVertical_bias="0.849"
-            tools:ignore="MissingConstraints"
-            tools:srcCompat="@tools:sample/avatars" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

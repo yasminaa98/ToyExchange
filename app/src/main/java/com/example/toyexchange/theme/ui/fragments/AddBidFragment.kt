@@ -21,6 +21,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.toyexchange.Common.Constants
 import com.example.toyexchange.Common.CountDownManager
 import com.example.toyexchange.Common.PICK_IMAGE_REQUEST
 import com.example.toyexchange.Common.PicturesConverter
@@ -64,6 +65,8 @@ class AddBidFragment:Fragment(R.layout.place_bid) {
 
     val auctionId = arguments?.getLong("idAuction")
         val endDateTime=arguments?.getString("end_dateTime")
+        val image=arguments?.getString("image")
+
         //get current user picture
         getUserInfoViewModel.getUserInfo(username.toString())
         getUserInfoViewModel.info.observe(viewLifecycleOwner , Observer {

@@ -25,7 +25,7 @@ class Splash_Fragment: Fragment(R.layout.splash_screen) {
         val binding = SplashScreenBinding.inflate(inflater, container, false)
 
         Handler().postDelayed({
-            findNavController().navigate(R.id.action_splash_Fragment_to_signInFragment)
+            findNavController().navigate(R.id.action_splash_Fragment_to_welcomeImagesFragment)
         }, splashScreenDuration)
 
         binding.booba.apply {

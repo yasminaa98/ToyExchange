@@ -15,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.toyexchange.Common.Constants.IMAGE_URL
 import com.example.toyexchange.Common.PicturesConverter
 import com.example.toyexchange.Presentation.ToysViewModel.DetailsToyViewModel
 import com.example.toyexchange.R
@@ -63,7 +64,7 @@ class ExchangeAnnonceDetailsFragment:Fragment(R.layout.exchange_annonce_details)
             ageChild.text=age_child
             state.text=_state
             Glide.with(requireActivity())
-                .load("http://192.168.100.47:2023/image/fileSystem/"+image)
+                .load(IMAGE_URL+image)
                 //.apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
                 .into(binding.toyImage)
             (activity as MainActivity).setBottomNavigation(false)
@@ -75,19 +76,19 @@ class ExchangeAnnonceDetailsFragment:Fragment(R.layout.exchange_annonce_details)
         detailsToyViewModel.annonceOwner.observe(viewLifecycleOwner, Observer {
             if (it!=null){
                 binding.apply {
-                    userName.setText(it.username)
-                    firstname.setText(it.firstname)
-                    lastname.setText(it.lastname)
-                    email.setText(it.email)
-                    homeaddress.setText(it.homeAddress)
-                    phone.setText(it.phone.toString())
-                    avgResponse.setText(it.avgResponseTime)
+                    userName.setText("Username: "+it.username)
+                    firstname.setText("Firstname: "+it.firstname)
+                    lastname.setText("Lastname: "+it.lastname)
+                    email.setText("Email: "+it.email)
+                    homeaddress.setText("Home address: "+it.homeAddress)
+                    phone.setText("Phone: " + it.phone.toString())
+                    avgResponse.setText("I respond every "+it.avgResponseTime+" hours")
                     Glide.with(requireActivity())
-                        .load("http://192.168.100.47:2023/image/fileSystem/"+it.profile_picture_path)
+                        .load(IMAGE_URL+it.profile_picture_path)
                         .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
                         .into(binding.ownerImage)
                     Glide.with(requireActivity())
-                        .load("http://192.168.100.47:2023/image/fileSystem/"+it.profile_picture_path)
+                        .load(IMAGE_URL+it.profile_picture_path)
                         .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
                         .into(binding.ownerimage)
                 }

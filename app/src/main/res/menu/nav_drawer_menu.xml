@@ -9,7 +9,7 @@
     android:icon="@drawable/profile_svg"/>
     <item
         android:id="@+id/auctions"
-        android:title="Auctions"
+        android:title="My auctions"
         android:icon="@drawable/auction_svgr"/>
 
     <item

@@ -16,18 +16,20 @@ class ExchangeResultAdapter (
 ) : RecyclerView.Adapter<ExchangeResultAdapter.ToysViewHolder>(){
 
 
-    class ToysViewHolder(private val binding: ResultItemBinding) : RecyclerView.ViewHolder(binding.root){
+    class ToysViewHolder(private val binding: ResultItemBinding) : RecyclerView.ViewHolder(binding.root) {
         //var toy_image=itemView.findViewById<ImageView>(R.id.toy_image)
 
         fun bind(exchange: Exchange) {
-            binding.username.text = exchange.receiver
-            if(exchange.status.toString()=="accepted" || exchange.status.toString()=="declined"){
-            binding.status.text = exchange.status.toString()}
-            Log.i("resulttttttttttt","resultt sender")
-            Glide.with(itemView)
-                .load("http://192.168.100.46:2023/image/fileSystem/lego.jpg")
-                .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
-                .into(binding.senderImage)
+            if (exchange.status.toString() == "accepted") {
+                binding.status.text = exchange.receiver + " accepted your request"
+            } else if (exchange.status.toString() == "declined") {
+                binding.status.text = exchange.receiver + " declined your request"
+            }
+            else{
+                binding.status.text = exchange.receiver + " still thinking of your request"
+            }
+
+            Log.i("resulttttttttttt", "resultt sender")
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToysViewHolder {

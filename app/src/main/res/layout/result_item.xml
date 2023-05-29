@@ -27,19 +27,8 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="5dp"
                     tools:ignore="MissingConstraints"
-                    android:background="@drawable/circle"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    app:srcCompat="@drawable/swap_notif_icon" />
 
-                <TextView
-                    android:id="@+id/username"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="username  "
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="5dp"
-
-                    app:layout_constraintTop_toTopOf="parent" />
                 <TextView
                     android:id="@+id/status"
                     android:layout_width="wrap_content"
@@ -47,18 +36,9 @@
                     android:text=" pending  "
                     android:textStyle="bold"
                     android:layout_marginTop="5dp"
+                    android:textSize="15sp"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    android:textSize="15sp"
-                    app:layout_constraintTop_toTopOf="parent" />
-                <TextView
-                    android:id="@+id/annonce_to_exchange"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" your request"
-                    android:textSize="15sp"
-                    android:layout_marginTop="5dp"
-                    android:textStyle="bold"
-                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.constraintlayout.widget.ConstraintLayout>

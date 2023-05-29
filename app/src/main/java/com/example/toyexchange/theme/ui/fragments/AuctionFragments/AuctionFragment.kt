@@ -47,7 +47,8 @@ class AuctionFragment: Fragment(R.layout.auctions_fragment) {
                             "description" to clickedItem.description,
                             "initial_price" to clickedItem.initial_price,
                             "end_dateTime" to clickedItem.end_dateTime,
-                            "start_datetime" to clickedItem.start_datetime
+                            "start_datetime" to clickedItem.start_datetime,
+                            "image" to clickedItem.image_url
                         )
                         findNavController().navigate(
                             R.id.action_auctionFragment_to_auctionDetailsFragment,
