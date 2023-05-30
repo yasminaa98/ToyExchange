@@ -26,7 +26,7 @@ class ExchangeResultAdapter (
                 binding.status.text = exchange.receiver + " declined your request"
             }
             else{
-                binding.status.text = exchange.receiver + " still thinking of your request"
+                binding.status.text = exchange.receiver + " received your request"
             }
 
             Log.i("resulttttttttttt", "resultt sender")

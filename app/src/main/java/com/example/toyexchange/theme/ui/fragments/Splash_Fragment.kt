@@ -2,6 +2,7 @@ package com.example.toyexchange.theme.ui.fragments
 
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,14 +28,14 @@ class Splash_Fragment: Fragment(R.layout.splash_screen) {
         Handler().postDelayed({
             findNavController().navigate(R.id.action_splash_Fragment_to_welcomeImagesFragment)
         }, splashScreenDuration)
-
-        binding.booba.apply {
-            visibility = View.VISIBLE
-            translationY = height.toFloat()
-            // Animate from off-screen to original position
-            animate().apply {
-                translationY(-100f)
+        binding.booba.animate().apply {
+            duration = 1000
+            scaleX(1f).scaleY(1f)
+        }.withEndAction {
+            binding.booba.animate().apply {
                 duration = 1000
+                scaleX(3.5f).scaleY(3.5f)
+
             }
         }
         return binding.root

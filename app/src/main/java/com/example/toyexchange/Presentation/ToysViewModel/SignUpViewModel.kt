@@ -28,6 +28,7 @@ class SignUpViewModel @Inject constructor(
                 if(result.body()!=null){
                     _msg.postValue(result.body()) }
                 else{
+                    _msg.postValue(result.body())
                     Log.i("body empty",result.message())
 
                 }

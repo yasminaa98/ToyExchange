@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.toyexchange.Domain.model.User
 import com.example.toyexchange.theme.ui.fragments.ChatFragment.UserFirebase
 import com.example.toyexchange.Presentation.ToysViewModel.SignUpViewModel
@@ -89,8 +90,9 @@ class AddPasswordFragment : Fragment(R.layout.add_password_fragment) {
                 editor.apply()
             }
             else{
-                Toast.makeText(requireContext(),"sign up failed",Toast.LENGTH_LONG).show()
-
+                Toast.makeText(requireContext(),"sign up failed: username or email are already taken",Toast.LENGTH_LONG).show()
+                findNavController().navigate(
+                    R.id.action_addPasswordFragment_to_signUpFragment)
             }
         })
         return binding.root

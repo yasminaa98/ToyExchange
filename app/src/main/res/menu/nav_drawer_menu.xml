@@ -7,6 +7,10 @@
     android:id="@+id/profile"
     android:title="Profile"
     android:icon="@drawable/profile_svg"/>
+
+    <item android:id="@+id/myAnnonces"
+        android:title="My toys"
+        android:icon="@drawable/ic_news"> </item>
     <item
         android:id="@+id/auctions"
         android:title="My auctions"
@@ -16,10 +20,10 @@
         android:id="@+id/messages"
         android:title="Messages"
         android:icon="@drawable/messages_svg"/>
-
-    <item android:id="@+id/myAnnonces"
-        android:title="My toys"
-        android:icon="@drawable/ic_news"> </item>
+    <item
+        android:id="@+id/logout"
+        android:title="Logout"
+        android:icon="@drawable/logout"/>
 
 
 </menu>

@@ -100,7 +100,7 @@ class ExchangeDecisionResultFragment: Fragment(R.layout.exchange_decision_result
                     "description" to it.description,
                     "age_toy" to it.age_toy,
                     "age_child" to it.age_child,"state" to it.state,"price" to it.price,
-                    "image" to it.picturePath)
+                    "image" to it.picturePath,"category" to it.category)
                 Log.i("bundle in the decision",bundle.toString())
                 binding.myannonce.setOnClickListener{
                     findNavController().navigate(R.id.action_exchangeDecisionResultFragment_to_exchangeAnnonceDetailsFragment,bundle)

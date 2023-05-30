@@ -1,12 +1,15 @@
 package com.example.toyexchange.theme.ui.fragments.AuctionFragments
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -43,7 +46,7 @@ import java.util.*
 class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
     private lateinit var auctionDetailsViewModel: AuctionDetailsViewModel
     private lateinit var detailsToyViewModel: DetailsToyViewModel
-
+    private lateinit var selectedImage: ImageView
     lateinit var bidsAdapter:BidsAdapter
 
     @SuppressLint("ResourceAsColor", "SetTextI18n")
@@ -56,7 +59,8 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
 
         auctionDetailsViewModel = ViewModelProvider(this).get(AuctionDetailsViewModel::class.java)
         detailsToyViewModel = ViewModelProvider(this).get(DetailsToyViewModel::class.java)
-
+        selectedImage = binding.toyImage
+        selectedImage.setOnClickListener { enlargeImage(binding.toyImage.drawable) }
         (activity as MainActivity).setBottomNavigation(false)
         (activity as MainActivity).setToolbar(true)
         val sharedPreferences =
@@ -264,7 +268,6 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
                     for (userSnapshot in dataSnapshot.children) {
                         val uid = userSnapshot.child("uid").getValue(String::class.java)
                         Log.i("uid clicked is ", uid.toString())
-
                         val bundle= bundleOf("uid" to uid)
                         findNavController().navigate(R.id.action_auctionDetailsFragment_to_chat,bundle)
                     }
@@ -279,7 +282,18 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
         }
         return binding.root
         }
+    private fun enlargeImage(drawable: Drawable?) {
+        val dialogBuilder = AlertDialog.Builder(requireContext())
+        val inflater = requireActivity().layoutInflater
+        val dialogView = inflater.inflate(R.layout.dialog_enlarged_image, null)
+        val imageView = dialogView.findViewById<ImageView>(R.id.enlargedImage)
 
+        imageView.setImageDrawable(drawable)
+
+        dialogBuilder.setView(dialogView)
+        val alertDialog = dialogBuilder.create()
+        alertDialog.show()
+    }
 
 
 

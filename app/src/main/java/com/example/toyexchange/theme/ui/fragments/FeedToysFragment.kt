@@ -106,30 +106,75 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
                 }
             })
             //filter by category
+            // Create a variable to keep track of the currently selected checkbox
+            var selectedCheckbox: CompoundButton? = null
+
             val checkboxListener = CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked) {
+                    // Deselect the previously selected checkbox, if any
+                    selectedCheckbox?.isChecked = false
+                    selectedCheckbox = buttonView
+                } else {
+                    // Clear the selected checkbox if it was deselected
+                    if (selectedCheckbox == buttonView) {
+                        selectedCheckbox = null
+                    }
+                }
+
                 val category = when (buttonView.tag) {
-                    "musical" -> "musical"
+                    "action" -> "action"
                     "learning" -> "learning"
-                    "electronic" -> "electronic"
+                    "board" -> "board"
+                    "vehicules" -> "vehicules"
+                    "puzzel" -> "puzzel"
+                    "building" -> "building"
+                    "arts" -> "arts"
+                    "outdoor" -> "outdoor"
+                    "animals" -> "animals"
+                    "educational" -> "educational"
                     else -> ""
                 }
 
                 if (isChecked) {
                     if (toysViewModel.toys.value?.isEmpty() == true) {
-
-                        Toast.makeText(context, "this toy is unavailable", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, "This toy is unavailable", Toast.LENGTH_LONG).show()
                     } else {
                         toysViewModel.searchToysByCategory(category)
-
+                    }
+                } else {
+                    selectedCheckbox = null
+                    // Check if there are no selected checkboxes left
+                    if (binding.action.isChecked ||
+                        binding.dolls.isChecked ||
+                        binding.vehicules.isChecked ||
+                        binding.puzzel.isChecked ||
+                        binding.building.isChecked ||
+                        binding.board.isChecked ||
+                        binding.arts.isChecked ||
+                        binding.outdoor.isChecked ||
+                        binding.animals.isChecked ||
+                        binding.educational.isChecked
+                    ) {
+                        // At least one checkbox is still selected, so no action is needed
+                    } else {
+                        // Fetch all toys again
+                        toysViewModel.fetchToys(token.toString())
                     }
                 }
 
             }
 
-            binding.musical.setOnCheckedChangeListener(checkboxListener)
+            binding.action.setOnCheckedChangeListener(checkboxListener)
+            binding.dolls.setOnCheckedChangeListener(checkboxListener)
+            binding.vehicules.setOnCheckedChangeListener(checkboxListener)
             binding.puzzel.setOnCheckedChangeListener(checkboxListener)
-            binding.electronic.setOnCheckedChangeListener(checkboxListener)
-            binding.learning.setOnCheckedChangeListener(checkboxListener)
+            binding.building.setOnCheckedChangeListener(checkboxListener)
+            binding.board.setOnCheckedChangeListener(checkboxListener)
+            binding.arts.setOnCheckedChangeListener(checkboxListener)
+            binding.outdoor.setOnCheckedChangeListener(checkboxListener)
+            binding.animals.setOnCheckedChangeListener(checkboxListener)
+            binding.educational.setOnCheckedChangeListener(checkboxListener)
+
 
 
 

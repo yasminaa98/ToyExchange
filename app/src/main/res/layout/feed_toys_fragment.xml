@@ -75,31 +75,31 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal" >
                     <CheckBox
-                        android:id="@+id/musical"
+                        android:id="@+id/action"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:button="@drawable/category_selector"
                         android:background="@drawable/category_selector"
-                        android:text="  Musical Toys  "
-                        android:tag="musical"/>
+                        android:text="  Action Figures  "
+                        android:tag="action"/>
 
                     <CheckBox
-                        android:id="@+id/learning"
+                        android:id="@+id/dolls"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:background="@drawable/category_selector"
                         android:button="@drawable/category_selector"
-                        android:tag="learning"
-                        android:text="  Learning toys  " />
+                        android:tag="dolls"
+                        android:text="  Dolls  " />
 
                     <CheckBox
-                        android:id="@+id/electronic"
+                        android:id="@+id/vehicules"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:button="@drawable/category_selector"
                         android:background="@drawable/category_selector"
-                        android:text="  Electronic toys  "
-                        android:tag="electronic"/>
+                        android:text=" Vehicules  "
+                        android:tag="vehicules"/>
 
                     <CheckBox
                         android:id="@+id/puzzel"
@@ -107,24 +107,63 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/category_selector"
                         android:button="@drawable/category_selector"
-                        android:text="  Puzzels   " />
+                        android:text="  Puzzels   "
+                        android:tag="puzzel"/>
 
+                    <CheckBox
+                        android:id="@+id/building"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:button="@drawable/category_selector"
+                        android:background="@drawable/category_selector"
+                        android:text="  Building Blocks  "
+                        android:tag="building"
+
+                        />
+                    <CheckBox
+                        android:id="@+id/board"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:button="@drawable/category_selector"
+                        android:background="@drawable/category_selector"
+                        android:text="  Board Games  "
+                        android:tag="board"
+                        />
+                    <CheckBox
+                        android:id="@+id/arts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:button="@drawable/category_selector"
+                        android:background="@drawable/category_selector"
+                        android:text="  Arts and Crafts  "
+                        android:tag="arts"
+                        />
+                    <CheckBox
+                        android:id="@+id/outdoor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:button="@drawable/category_selector"
+                        android:background="@drawable/category_selector"
+                        android:text="  Outdoor Toys  "
+                        android:tag="outdoor"
+                        />
                     <CheckBox
                         android:id="@+id/animals"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:button="@drawable/category_selector"
                         android:background="@drawable/category_selector"
-                        android:text="  Animals toys  "
-
+                        android:text="  Stuffed Animals  "
+                        android:tag="animals"
                         />
                     <CheckBox
-                        android:id="@+id/dolls"
+                        android:id="@+id/educational"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:button="@drawable/category_selector"
                         android:background="@drawable/category_selector"
-                        android:text="  Girls dolls  "
+                        android:text="  Educational Toys  "
+                        android:tag="educational"
                         />
                 </LinearLayout>
             </HorizontalScrollView>

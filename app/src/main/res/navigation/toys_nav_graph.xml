@@ -117,6 +117,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_addPasswordFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
     </fragment>
     <fragment
         android:id="@+id/myAnnoncesFragment"
@@ -248,7 +251,11 @@
     <fragment
         android:id="@+id/exchangeAnnonceDetailsFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.Exchange.ExchangeAnnonceDetailsFragment"
-        android:label="ExchangeAnnonceDetailsFragment" />
+        android:label="ExchangeAnnonceDetailsFragment" >
+        <action
+            android:id="@+id/action_exchangeAnnonceDetailsFragment_to_chat"
+            app:destination="@id/chat" />
+    </fragment>
     <fragment
         android:id="@+id/notificationViewPager"
         android:name="com.example.toyexchange.theme.ui.fragments.AnnoncesFragment.notificationViewPager"

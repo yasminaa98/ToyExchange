@@ -22,6 +22,10 @@ import com.example.toyexchange.R
 import com.example.toyexchange.databinding.ExchangeAnnonceDetailsBinding
 import com.example.toyexchange.databinding.ToyDetailsFragmentBinding
 import com.example.toyexchange.theme.ui.MainActivity
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -56,6 +60,7 @@ class ExchangeAnnonceDetailsFragment:Fragment(R.layout.exchange_annonce_details)
         val age_toy = arguments?.getString("age_toy").toString()
         val _state = arguments?.getString("state").toString()
         val image = arguments?.getString("image").toString()
+        val _category=arguments?.getString("category").toString()
         binding.apply {
             annonceName.text = name
             annonceDescription.text = description
@@ -63,6 +68,7 @@ class ExchangeAnnonceDetailsFragment:Fragment(R.layout.exchange_annonce_details)
             ageToy.text=age_toy
             ageChild.text=age_child
             state.text=_state
+            annonceCategory.text=_category
             Glide.with(requireActivity())
                 .load(IMAGE_URL+image)
                 //.apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
@@ -119,6 +125,29 @@ class ExchangeAnnonceDetailsFragment:Fragment(R.layout.exchange_annonce_details)
                     }
                 }
             }
+        }
+        binding.sendMessage.setOnClickListener{
+            val database = FirebaseDatabase.getInstance()
+            val userRef = database.getReference("user")
+            val nameToFind = detailsToyViewModel.annonceOwner.value?.username.toString()
+
+            userRef.orderByChild("name").equalTo(nameToFind).addListenerForSingleValueEvent(object :
+                ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (userSnapshot in dataSnapshot.children) {
+                        val uid = userSnapshot.child("uid").getValue(String::class.java)
+                        Log.i("uid clicked is ", uid.toString())
+
+                        val bundle= bundleOf("uid" to uid)
+                        findNavController().navigate(R.id.action_exchangeAnnonceDetailsFragment_to_chat,bundle)
+                    }
+                }
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Log.i("uid clicked is ", "error")
+
+                }
+            })
+
         }
 
         return binding.root

@@ -74,7 +74,7 @@ class ExchangeDecisionFragment:Fragment(R.layout.exchange_decision_fragment) {
                     "description" to it.description,
                     "age_toy" to it.age_toy,
                     "age_child" to it.age_child,"state" to it.state,"price" to it.price,
-                "image" to it.picturePath)
+                "image" to it.picturePath,"category" to it.category)
                 Log.i("bundle in the decision",bundle.toString())
                 //annonce details
                 binding.hisannonce.setOnClickListener{

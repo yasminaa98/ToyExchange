@@ -32,8 +32,6 @@ import kotlinx.coroutines.launch
 class MyAnnoncedetailsFragment: Fragment(R.layout.my_annonce_details) {
     private lateinit var addAuctionViewModel:AddAuctionViewModel
     private lateinit var detailsToyViewModel: DetailsToyViewModel
-
-
     private lateinit var selectedImage: ImageView
     @SuppressLint("SuspiciousIndentation", "ResourceAsColor")
     override fun onCreateView(
@@ -42,16 +40,13 @@ class MyAnnoncedetailsFragment: Fragment(R.layout.my_annonce_details) {
         savedInstanceState: Bundle?
     ): View {
         val binding = MyAnnonceDetailsBinding.inflate(inflater, container, false)
-
         addAuctionViewModel = ViewModelProvider(this).get(AddAuctionViewModel::class.java)
         detailsToyViewModel = ViewModelProvider(this).get(DetailsToyViewModel::class.java)
-
         selectedImage=binding.toyImage
         val sharedPreferences =
             requireActivity().getSharedPreferences("authToken", Context.MODE_PRIVATE)
         val token =sharedPreferences.getString("authToken",null)
         Log.i("token",token!!)
-
         //addToyViewModel.token=token
         val idAnnonce = arguments?.getLong("id")
         Log.i("id annonce",idAnnonce.toString())
@@ -133,7 +128,7 @@ class MyAnnoncedetailsFragment: Fragment(R.layout.my_annonce_details) {
 
         addAuctionViewModel.checkExistentAuction(idAnnonce!!,token.toString())
         addAuctionViewModel.msg.observe(viewLifecycleOwner, Observer {
-            if (it==null){
+            if (it==null && estArchive==false){
                 binding.addToAuction.visibility=View.VISIBLE
             }
         })

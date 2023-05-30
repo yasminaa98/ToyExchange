@@ -15,6 +15,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -61,16 +63,87 @@ class AddToyFragment: Fragment(R.layout.add_toy_fragment) {
         (activity as MainActivity).setBottomNavigation(true)
         (activity as MainActivity).setToolbar(false)
         //addToyViewModel.token=token
+        val associations = arrayOf("Educational Toys", "Stuffed Animals", "Outdoor Toys", "Arts and Crafts",
+        "Puzzles","Board Games","Building Blocks","Vehicles","Dolls","Action Figures")
+        val adapter = ArrayAdapter<String>(requireContext(), R.layout.spinner_item_layout, associations)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.toyCategory.adapter = adapter
+
+        binding.toyCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val selectedLanguage = parent.getItemAtPosition(position).toString()
+                Toast.makeText(requireContext(), "Selected language: $selectedLanguage", Toast.LENGTH_SHORT).show()
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Ne rien faire ici
+            }
+        }
         selectedImage=binding.annoncePicture
         selectedImage.setOnClickListener{ openGallery()}
+        // Inside the addButton click listener
         binding.addButton.setOnClickListener {
-            val name=binding.toyName.text.toString()
-            val child_age=binding.childAge.text.toString()
-            val toy_age=binding.toyAge.text.toString()
-            val price=binding.price.text.toString()
-            val category=binding.toyCategory.text.toString()
-            val state=binding.toyState.text.toString()
-            val description=binding.toyDescription.text.toString()
+            val name = binding.toyName.text.toString()
+            val child_age = binding.childAge.text.toString()
+            val toy_age = binding.toyAge.text.toString()
+            val price = binding.price.text.toString()
+            val category = binding.toyCategory.selectedItem.toString()
+            val state = binding.toyState.text.toString()
+            val description = binding.toyDescription.text.toString()
+
+            var hasError = false
+
+            if (name.isBlank()) {
+                binding.toyName.error = "Please enter a name"
+                hasError = true
+            }
+
+            if (child_age.isBlank()) {
+                binding.childAge.error = "Please enter the child's age"
+                hasError = true
+            }
+
+            if (toy_age.isBlank()) {
+                binding.toyAge.error = "Please enter the toy's age"
+                hasError = true
+            }
+
+            if (price.isBlank()) {
+                binding.price.error = "Please enter a price"
+                hasError = true
+            }
+
+            if (category.isBlank()) {
+                Toast.makeText(requireContext(), "Please select a category", Toast.LENGTH_SHORT).show()
+                hasError = true
+            }
+
+            if (state.isBlank()) {
+                binding.toyState.error = "Please enter the toy's state"
+                hasError = true
+            }
+
+            if (description.isBlank()) {
+                binding.toyDescription.error = "Please enter a description"
+                hasError = true
+            }
+
+            if (!this::selectedPhotoUri.isInitialized) {
+                Toast.makeText(requireContext(), "Please select an image", Toast.LENGTH_SHORT).show()
+                hasError = true
+            }
+
+            if (hasError) {
+                return@setOnClickListener
+            }
+
+            // Reset error indicators
+            binding.toyName.error = null
+            binding.childAge.error = null
+            binding.toyAge.error = null
+            binding.price.error = null
+            binding.toyState.error = null
+            binding.toyDescription.error = null
+
             val nameRequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), name)
             val childAgeRequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), child_age)
             val toyAgeRequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), toy_age)
@@ -79,13 +152,14 @@ class AddToyFragment: Fragment(R.layout.add_toy_fragment) {
             val stateRequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), state)
             val descriptionRequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), description)
 
-
-            //val annonce= Annonce(1,category,description,ImageString!!,name,price,state,child_age,toy_age)
-            val photoPart=PicturesConverter.managePicture(requireContext(),"picture",selectedPhotoUri)
-            addToyViewModel.addToy(photoPart!!, nameRequestBody,priceRequestBody,
-                stateRequestBody,childAgeRequestBody,toyAgeRequestBody,categoryRequestBody,
-                descriptionRequestBody,token.toString())
+            val photoPart = PicturesConverter.managePicture(requireContext(), "picture", selectedPhotoUri)
+            addToyViewModel.addToy(
+                photoPart!!, nameRequestBody, priceRequestBody,
+                stateRequestBody, childAgeRequestBody, toyAgeRequestBody, categoryRequestBody,
+                descriptionRequestBody, token.toString()
+            )
         }
+
         addToyViewModel.adding_msg.observe(viewLifecycleOwner , Observer {
             if(it!=null){
                 Toast.makeText(requireContext(),"toy added successfully", Toast.LENGTH_LONG).show()

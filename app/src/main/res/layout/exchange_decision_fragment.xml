@@ -12,7 +12,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/hisannonce"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="280dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="12dp"
             android:layout_margin="20dp"
@@ -115,7 +115,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Estimated value"
-                    android:layout_marginTop="70dp"
+                    android:layout_marginTop="50dp"
                     android:layout_marginLeft="70dp"
                     android:textStyle="bold"/>
                 <TextView
@@ -134,16 +134,17 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/myannonce"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="280dp"
             android:layout_margin="20dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="12dp"
             app:cardUseCompatPadding="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/hisannonce"
-            app:layout_constraintVertical_bias="0.381"
+            app:layout_constraintVertical_bias="0.175"
             tools:ignore="MissingConstraints">
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -245,7 +246,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="70dp"
-                        android:layout_marginTop="70dp"
+                        android:layout_marginTop="50dp"
                         android:text="Estimated value"
                         android:textStyle="bold" />
 
@@ -300,13 +301,14 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="139dp"
-            android:layout_height="44dp"
+            android:layout_width="130dp"
+            android:layout_height="30dp"
             app:layout_constraintBottom_toTopOf="@+id/hisannonce"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/myannonce"
-            app:layout_constraintVertical_bias="0.507"
+            app:layout_constraintVertical_bias="0.489"
             app:srcCompat="@drawable/swap" />
 
         <TextView

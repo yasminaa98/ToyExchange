@@ -20,7 +20,7 @@ class SignUpFragment:Fragment(R.layout.sign_up_fragment) {
         savedInstanceState: Bundle?
     ): View {
         val binding = SignUpFragmentBinding.inflate(inflater, container, false)
-        val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+        val emailPattern = "[a-zA-Z0-9._-]*@[a-z]+\\.+[a-z]+"
         binding.nextButton.setOnClickListener {
             val firstname = binding.firstname.text.toString()
             val lastname = binding.lastname.text.toString()
@@ -29,28 +29,52 @@ class SignUpFragment:Fragment(R.layout.sign_up_fragment) {
             val address = binding.address.text.toString()
             val avg_response = binding.avgResponse.text.toString()
             val phone = binding.phone.text
+
+            var hasError = false
+
+            if (firstname.isEmpty()) {
+                binding.firstname.error = "First name field is required"
+                hasError = true
+            }
+            if (lastname.isEmpty()) {
+                binding.lastname.error = "Last name field is required"
+                hasError = true
+            }
             if (email.isEmpty() || !email.matches(emailPattern.toRegex())) {
                 binding.email.error = "Invalid email address"
-            } else {
+                hasError = true
+            }
+            if (username.isEmpty()) {
+                binding.username.error = "Username field is required"
+                hasError = true
+            }
+            if (address.isEmpty()) {
+                binding.address.error = "Address field is required"
+                hasError = true
+            }
+            if (avg_response.isEmpty()) {
+                binding.avgResponse.error = "Average response field is required"
+                hasError = true
+            }
+            if (phone.isEmpty()) {
+                binding.phone.error = "Phone field is required"
+                hasError = true
+            }
+
+            if (!hasError) {
                 val bundle = bundleOf(
                     "firstname" to firstname,
                     "lastname" to lastname, "email" to email,
                     "username" to username, "address" to address,
-                    "avg_response" to avg_response, "phone" to phone
+                    "avg_response" to avg_response, "phone" to phone.toString()
                 )
-                Log.i("info", firstname)
-                Log.i("info", lastname)
-                Log.i("info", email)
-                Log.i("info", username)
-                Log.i("info", address)
-                Log.i("info", avg_response)
-                Log.i("info", phone.toString())
                 findNavController().navigate(
                     R.id.action_signUpFragment_to_addPasswordFragment,
                     bundle
                 )
             }
         }
+
         return binding.root
 
     }
