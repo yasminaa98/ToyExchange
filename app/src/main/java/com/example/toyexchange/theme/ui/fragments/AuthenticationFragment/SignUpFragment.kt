@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.toyexchange.R
 import com.example.toyexchange.databinding.SignUpFragmentBinding
+import com.example.toyexchange.theme.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,6 +21,9 @@ class SignUpFragment:Fragment(R.layout.sign_up_fragment) {
         savedInstanceState: Bundle?
     ): View {
         val binding = SignUpFragmentBinding.inflate(inflater, container, false)
+        (activity as MainActivity).setSlideNavigaton(false)
+        (activity as MainActivity).setBottomNavigation(false)
+        (activity as MainActivity).setToolbar(false)
         val emailPattern = "[a-zA-Z0-9._-]*@[a-z]+\\.+[a-z]+"
         binding.nextButton.setOnClickListener {
             val firstname = binding.firstname.text.toString()

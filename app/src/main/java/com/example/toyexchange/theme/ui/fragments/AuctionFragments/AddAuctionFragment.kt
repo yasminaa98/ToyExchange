@@ -1,5 +1,6 @@
 package com.example.toyexchange.theme.ui.fragments.AuctionFragments
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
@@ -68,7 +69,22 @@ class AddAuctionFragment: Fragment(R.layout.add_auction_fragment){
                     if (enteredDateTime != null && enteredDateTime.after(currentDateTime)) {
                         binding.endDate.error = null
                         val auction = AuctionResponse(1, name, price, description, "", start, endDate)
-                        addAuctionViewModel.addAuction(idAnnonce!!, auction, token.toString())
+                        val builder = AlertDialog.Builder(context)
+                        builder.setTitle("Add auction")
+                            .setMessage("are you sure you want add this auction ?")
+                            .setPositiveButton("Add") { dialog, which ->
+                                addAuctionViewModel.addAuction(idAnnonce!!, auction, token.toString())
+                                findNavController().navigate(
+                                    R.id.action_addAuctionFragment_to_myAuctionFragment)
+                            }
+                            .setNegativeButton("Cancel") { dialog, which ->
+
+                            }
+
+                        val alertDialog: AlertDialog = builder.create()
+                        alertDialog.show()
+
+
                     } else {
                         binding.endDate.error = "Entered date and time must be after the current date and time"
                     }

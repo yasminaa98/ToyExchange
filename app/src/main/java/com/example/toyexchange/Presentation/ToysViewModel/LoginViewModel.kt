@@ -27,6 +27,7 @@ class LoginViewModel @Inject constructor(
                 if(result.body()!=null){
                     _token.postValue(result.body()) }
                 else{
+                    _token.postValue(result.body())
                     Log.i("error msg",result.message())
 
                 }

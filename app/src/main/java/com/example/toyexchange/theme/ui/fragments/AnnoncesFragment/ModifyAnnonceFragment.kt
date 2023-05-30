@@ -2,6 +2,7 @@ package com.example.toyexchange.theme.ui.fragments.AnnoncesFragment
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -122,9 +123,19 @@ class ModifyAnnonceFragment: Fragment(R.layout.modify_annonce_fragment) {
                     child_age,
                     toy_age
                 )
-                modifyAnnonceViewModel.modifyAnnonce(token.toString(), idAnnonce.toLong(), annonce)
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle("Modify toy")
+                .setMessage("are you sure you want to modify this toy ?")
+                .setPositiveButton("Modify") { dialog, which ->
+                    modifyAnnonceViewModel.modifyAnnonce(token.toString(), idAnnonce.toLong(), annonce)
+                    findNavController().navigate(R.id.action_modifyAnnonceFragment_to_myAnnoncesFragment)
+                }
+                .setNegativeButton("Cancel") { dialog, which ->
+                }
 
-            findNavController().navigate(R.id.action_modifyAnnonceFragment_to_myAnnoncesFragment)
+            val alertDialog: AlertDialog = builder.create()
+            alertDialog.show()
+
         }
 
         modifyAnnonceViewModel.msg.observe(viewLifecycleOwner , Observer {

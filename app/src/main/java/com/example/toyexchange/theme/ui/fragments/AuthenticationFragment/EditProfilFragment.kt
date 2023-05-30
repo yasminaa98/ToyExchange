@@ -1,6 +1,7 @@
 package com.example.toyexchange.theme.ui.fragments.AuthenticationFragment
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -20,6 +21,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.toyexchange.Common.Constants
@@ -97,14 +99,26 @@ class EditProfilFragment : Fragment(R.layout.profil_edit_fragment) {
 
         // update firstname
         binding.save.setOnClickListener {
-            var newFirstName = binding.firstname.text.toString()
-            getUserInfoViewModel.updateFirstName(idUser.toLong(), newFirstName)
-            var newHomeAddress = binding.address.text.toString()
-            getUserInfoViewModel.updateHomeAddress(idUser.toLong(), newHomeAddress)
-            var newLastName = binding.lastname.text.toString()
-            getUserInfoViewModel.updateLastName(idUser.toLong(), newLastName)
-            val photoPart=PicturesConverter.managePicture(requireContext(),"profilePicture",selectedPhotoUri)
-            getUserInfoViewModel.updatePicture(token.toString(),photoPart!!)
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle("Update profile information")
+                .setMessage("are you sure you want to update information ?")
+                .setPositiveButton("Update") { dialog, which ->
+
+                    var newFirstName = binding.firstname.text.toString()
+                    getUserInfoViewModel.updateFirstName(idUser.toLong(), newFirstName)
+                    var newHomeAddress = binding.address.text.toString()
+                    getUserInfoViewModel.updateHomeAddress(idUser.toLong(), newHomeAddress)
+                    var newLastName = binding.lastname.text.toString()
+                    getUserInfoViewModel.updateLastName(idUser.toLong(), newLastName)
+                    val photoPart=PicturesConverter.managePicture(requireContext(),"profilePicture",selectedPhotoUri)
+                    getUserInfoViewModel.updatePicture(token.toString(),photoPart!!)
+                }
+                .setNegativeButton("Cancel") { dialog, which ->
+                }
+
+            val alertDialog: AlertDialog = builder.create()
+            alertDialog.show()
+
         }
         getUserInfoViewModel.msg.observe(viewLifecycleOwner, Observer {
             if (it != null) {

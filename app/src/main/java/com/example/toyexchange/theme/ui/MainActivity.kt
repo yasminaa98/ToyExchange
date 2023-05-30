@@ -1,6 +1,7 @@
 package com.example.toyexchange.theme.ui
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -46,33 +49,12 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         // get user
-        val sharedPreferences =
-            applicationContext.getSharedPreferences("authToken", Context.MODE_PRIVATE)
-        val username = sharedPreferences.getString("username", null)
-        val idUser = sharedPreferences.getLong("idUser", 0L)
-        val token = sharedPreferences.getString("authToken", null)
-        Log.i("idUser", idUser.toString())
-        getUserInfoViewModel = ViewModelProvider(this).get(GetUserInfoViewModel::class.java)
-        getUserInfoViewModel.getUserInfo(username.toString())
-        getUserInfoViewModel.info.observe(this, Observer {
-            if (it != null) {
-                val headerView = binding.navigationView.getHeaderView(0)
-                val usernameTextView = headerView.findViewById<TextView>(R.id.username)
-                val userImageView = headerView.findViewById<ImageView>(R.id.user_photo)
-                usernameTextView.text=username
-                Glide.with(applicationContext)
-                    .load(IMAGE_URL+it.profile_picture_path)
-                    .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
-                    .into(userImageView)
-
-                Toast.makeText(applicationContext, "info got successfully", Toast.LENGTH_LONG).show()
-                Log.i("msg", it.toString())
 
 
-            } else {
-                Toast.makeText(applicationContext, "getting info failed", Toast.LENGTH_LONG).show()
-            }
-        })
+
+
+
+       startUserInfoUpdate()
 
         //notification
         binding.notification.setOnClickListener{
@@ -98,6 +80,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.explore -> {
                     navController.navigate(R.id.feedToysFragment)
                 }
+                R.id.logout -> {
+                    navController.popBackStack(R.id.signInFragment, false)
+                    navController.navigate(R.id.signInFragment)
+
+                }
             }
             true
         }
@@ -109,7 +96,7 @@ class MainActivity : AppCompatActivity() {
         toysNavHostFragment.findNavController().run {
             binding.toolbar.setupWithNavController(this, AppBarConfiguration(graph))
            //to hide the back button
-           val appBarConfiguration = AppBarConfiguration(setOf(R.id.feedToysFragment, R.id.savedToysFragment, R.id.editProfilFragment))
+           val appBarConfiguration = AppBarConfiguration(setOf(R.id.feedToysFragment, R.id.savedToysFragment, R.id.editProfilFragment,R.id.addToysFragment))
            binding.toolbar.setupWithNavController(this, appBarConfiguration)
 
     }
@@ -138,8 +125,58 @@ class MainActivity : AppCompatActivity() {
             }
         }*/
     }
+    private val mainScope = CoroutineScope(Dispatchers.Main)
+
+    private fun startUserInfoUpdate() {
+        mainScope.launch {
+            while (true) {
+                // Run the code block
+                val sharedPreferences =
+                    applicationContext.getSharedPreferences("authToken", Context.MODE_PRIVATE)
+                val username = sharedPreferences.getString("username", null)
+                val idUser = sharedPreferences.getLong("idUser", 0L)
+                val token = sharedPreferences.getString("authToken", null)
+
+                getUserInfoViewModel = ViewModelProvider(this@MainActivity).get(GetUserInfoViewModel::class.java)
+                getUserInfoViewModel.getUserInfo(username.toString())
+                getUserInfoViewModel.info.observe(this@MainActivity, Observer {
+                    if (it != null) {
+                        val headerView = binding.navigationView.getHeaderView(0)
+                        val usernameTextView = headerView.findViewById<TextView>(R.id.username)
+                        val userImageView = headerView.findViewById<ImageView>(R.id.user_photo)
+                        usernameTextView.text = username
+                        Glide.with(applicationContext)
+                            .load(IMAGE_URL + it.profile_picture_path)
+                            .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
+                            .into(userImageView)
+                    } else {
+                        Toast.makeText(applicationContext, "getting info failed", Toast.LENGTH_LONG)
+                            .show()
+                    }
+                })
+
+                // Delay for 1 second before running the code block again
+                delay(1000)
+            }
+        }
+    }
+
+    override fun onBackPressed() {
+        val navController = Navigation.findNavController(this, R.id.toysNavHostFragment)
+
+        // Check if the current destination is the splash screen fragment
+        if (navController.currentDestination?.id == R.id.signInFragment) {
+            // Handle the back button press, such as displaying a dialog or taking any other action
+            // You can choose to do nothing or exit the app if desired
+            return
+        }
+
+        super.onBackPressed()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
+        mainScope.cancel()
         job?.cancel() // cancel the coroutine when the activity is destroyed
     }
 
@@ -164,14 +201,17 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigationView.visibility = View.GONE
         }
     }
-    fun setSlideNavigaton(isSliding:Boolean){
-        if(isSliding){
-            binding.navigationView.visibility=View.VISIBLE
-        }
-        else{
-            binding.navigationView.visibility=View.GONE
+    fun setSlideNavigaton(isSliding: Boolean) {
+        val drawerLayout = binding.drawerLayout
+        if (isSliding) {
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+            binding.navigationView.visibility = View.VISIBLE
+        } else {
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            binding.navigationView.visibility = View.GONE
         }
     }
+
     }
 
 

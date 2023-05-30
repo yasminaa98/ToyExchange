@@ -2,6 +2,7 @@ package com.example.toyexchange.theme.ui.fragments.AnnoncesFragment
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
@@ -23,6 +24,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.toyexchange.Common.PICK_IMAGE_REQUEST
 import com.example.toyexchange.Common.PicturesConverter
 import com.example.toyexchange.Domain.model.Annonce
@@ -48,8 +50,6 @@ class AddToyFragment: Fragment(R.layout.add_toy_fragment) {
     private lateinit var selectedImage: ImageView
     private lateinit var selectedPhotoUri: Uri
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -72,7 +72,7 @@ class AddToyFragment: Fragment(R.layout.add_toy_fragment) {
         binding.toyCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 val selectedLanguage = parent.getItemAtPosition(position).toString()
-                Toast.makeText(requireContext(), "Selected language: $selectedLanguage", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Selected association: $selectedLanguage", Toast.LENGTH_SHORT).show()
             }
             override fun onNothingSelected(parent: AdapterView<*>) {
                 // Ne rien faire ici
@@ -135,7 +135,6 @@ class AddToyFragment: Fragment(R.layout.add_toy_fragment) {
             if (hasError) {
                 return@setOnClickListener
             }
-
             // Reset error indicators
             binding.toyName.error = null
             binding.childAge.error = null
@@ -151,13 +150,26 @@ class AddToyFragment: Fragment(R.layout.add_toy_fragment) {
             val categoryRequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), category)
             val stateRequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), state)
             val descriptionRequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), description)
-
             val photoPart = PicturesConverter.managePicture(requireContext(), "picture", selectedPhotoUri)
-            addToyViewModel.addToy(
-                photoPart!!, nameRequestBody, priceRequestBody,
-                stateRequestBody, childAgeRequestBody, toyAgeRequestBody, categoryRequestBody,
-                descriptionRequestBody, token.toString()
-            )
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle("Add toy")
+                .setMessage("are you sure you want add this toy ?")
+                .setPositiveButton("Add") { dialog, which ->
+                    addToyViewModel.addToy(
+                        photoPart!!, nameRequestBody, priceRequestBody,
+                        stateRequestBody, childAgeRequestBody, toyAgeRequestBody, categoryRequestBody,
+                        descriptionRequestBody, token.toString()
+                    )
+                    findNavController().navigate(
+                        R.id.action_addToysFragment_to_feedToysFragment)
+                }
+                .setNegativeButton("Cancel") { dialog, which ->
+
+                }
+
+            val alertDialog: AlertDialog = builder.create()
+            alertDialog.show()
+
         }
 
         addToyViewModel.adding_msg.observe(viewLifecycleOwner , Observer {

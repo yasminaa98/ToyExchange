@@ -15,6 +15,7 @@ import com.example.toyexchange.R
 import com.example.toyexchange.databinding.ForgotPasswordFragmentBinding
 import com.example.toyexchange.databinding.ResetPasswordFragmentBinding
 import com.example.toyexchange.databinding.SignInFragmentBinding
+import com.example.toyexchange.theme.ui.MainActivity
 import com.example.toyexchange.theme.ui.fragments.AuthenticationFragment.SignInFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,6 +29,9 @@ class ResetPasswordFragment:Fragment(R.layout.reset_password_fragment) {
         savedInstanceState: Bundle?
     ): View {
         val binding = ResetPasswordFragmentBinding.inflate(inflater, container, false)
+        (activity as MainActivity).setSlideNavigaton(false)
+        (activity as MainActivity).setBottomNavigation(false)
+        (activity as MainActivity).setToolbar(false)
         forgotPasswordViewModel = ViewModelProvider(this).get(ForgotPasswordViewModel::class.java)
         val sharedPreferences =
             requireActivity().getSharedPreferences("tokenMessage", Context.MODE_PRIVATE)
@@ -36,14 +40,32 @@ class ResetPasswordFragment:Fragment(R.layout.reset_password_fragment) {
 
         binding.save.setOnClickListener {
             val newPassword = binding.newPassword.text.toString()
-            Log.i("newPassword", newPassword)
-            Toast.makeText(
-                requireContext(),
-                "Password changes with success ",
-                Toast.LENGTH_LONG
-            ).show()
-            //findNavController().navigate(R.id.action_resetPasswordFragment_to_signInFragment)
+            val repeatPassword = binding.repeatNewPassword.text.toString()
+
+            if (newPassword.isEmpty() && repeatPassword.isEmpty()) {
+                binding.newPassword.error = "New password is required"
+                binding.repeatNewPassword.error = "Repeat password is required"
+            } else if (newPassword.isEmpty()) {
+                binding.newPassword.error = "New password is required"
+            } else if (repeatPassword.isEmpty()) {
+                binding.repeatNewPassword.error = "Repeat password is required"
+            } else if (newPassword != repeatPassword) {
+                Toast.makeText(
+                    requireContext(),
+                    "Passwords do not match",
+                    Toast.LENGTH_LONG
+                ).show()
+            } else {
+                Log.i("newPassword", newPassword)
+                Toast.makeText(
+                    requireContext(),
+                    "Password changed successfully",
+                    Toast.LENGTH_LONG
+                ).show()
+
+            }
         }
+
 
         return binding.root
     }

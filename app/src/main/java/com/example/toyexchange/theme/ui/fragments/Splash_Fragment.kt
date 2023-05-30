@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.toyexchange.R
 import com.example.toyexchange.databinding.SavedToysFragmentBinding
 import com.example.toyexchange.databinding.SplashScreenBinding
+import com.example.toyexchange.theme.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,6 +25,9 @@ class Splash_Fragment: Fragment(R.layout.splash_screen) {
         savedInstanceState: Bundle?
     ): View {
         val binding = SplashScreenBinding.inflate(inflater, container, false)
+        (activity as MainActivity).setSlideNavigaton(false)
+        (activity as MainActivity).setBottomNavigation(false)
+        (activity as MainActivity).setToolbar(false)
 
         Handler().postDelayed({
             findNavController().navigate(R.id.action_splash_Fragment_to_welcomeImagesFragment)

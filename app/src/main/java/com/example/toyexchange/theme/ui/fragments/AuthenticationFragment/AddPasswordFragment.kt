@@ -16,6 +16,7 @@ import com.example.toyexchange.theme.ui.fragments.ChatFragment.UserFirebase
 import com.example.toyexchange.Presentation.ToysViewModel.SignUpViewModel
 import com.example.toyexchange.R
 import com.example.toyexchange.databinding.AddPasswordFragmentBinding
+import com.example.toyexchange.theme.ui.MainActivity
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -35,7 +36,9 @@ class AddPasswordFragment : Fragment(R.layout.add_password_fragment) {
     ): View {
         val binding = AddPasswordFragmentBinding.inflate(inflater, container, false)
         signUpViewModel=ViewModelProvider(this).get(SignUpViewModel::class.java)
-
+        (activity as MainActivity).setSlideNavigaton(false)
+        (activity as MainActivity).setBottomNavigation(false)
+        (activity as MainActivity).setToolbar(false)
         val firstname = arguments?.getString("firstname").toString()
         val lastname = arguments?.getString("lastname").toString()
         val email = arguments?.getString("email").toString()

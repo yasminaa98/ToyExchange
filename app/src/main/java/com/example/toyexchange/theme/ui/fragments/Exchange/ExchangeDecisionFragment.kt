@@ -29,7 +29,6 @@ class ExchangeDecisionFragment:Fragment(R.layout.exchange_decision_fragment) {
     private lateinit var exchangeViewModel: ExchangeViewModel
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -137,11 +136,18 @@ class ExchangeDecisionFragment:Fragment(R.layout.exchange_decision_fragment) {
         binding.accept.setOnClickListener{
             Log.i("id exchange2",id_exchange.toString())
             exchangeViewModel.updateStatus(id_exchange!!,"accepted",token.toString())
+            binding.statusFixed.visibility=View.VISIBLE
+            binding.statusFixed.setText("Accepted")
+            binding.accept.visibility=View.GONE
+            binding.decline.visibility=View.GONE
         }
         binding.decline.setOnClickListener{
             Log.i("id exchange3",id_exchange.toString())
-
             exchangeViewModel.updateStatus(id_exchange!!,"declined",token.toString())
+            binding.statusFixed.visibility=View.VISIBLE
+            binding.statusFixed.setText("Declined")
+            binding.accept.visibility=View.GONE
+            binding.decline.visibility=View.GONE
         }
 
         return binding.root

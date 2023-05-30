@@ -44,6 +44,8 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
         toysViewModel = ViewModelProvider(this).get(ToysViewModel::class.java)
         (activity as MainActivity).setBottomNavigation(true)
         (activity as MainActivity).setToolbar(false)
+        (activity as MainActivity).setSlideNavigaton(true)
+
         //notification
         binding.notification.setOnClickListener{
             findNavController().navigate(R.id.action_feedToysFragment_to_notificationViewPager)

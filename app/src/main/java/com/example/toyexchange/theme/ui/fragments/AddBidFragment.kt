@@ -2,6 +2,7 @@ package com.example.toyexchange.theme.ui.fragments
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -66,6 +67,7 @@ class AddBidFragment:Fragment(R.layout.place_bid) {
     val auctionId = arguments?.getLong("idAuction")
         val endDateTime=arguments?.getString("end_dateTime")
         val image=arguments?.getString("image")
+        val current_price=arguments?.getString("current").toString()
 
         //get current user picture
         getUserInfoViewModel.getUserInfo(username.toString())
@@ -113,8 +115,20 @@ class AddBidFragment:Fragment(R.layout.place_bid) {
             if (my_price!=null && my_price!= binding.myPrice.text.toString()) {
                 Log.i("not the same", my_price + note)
                 val newPrice = binding.myPrice.text.toString()
-                if (newPrice.toInt()> my_price.toInt()) {
-                    addBidViewModel.updateBidPrice(auctionId!!, newPrice, token.toString())
+                if (newPrice.toInt()> my_price.toInt() && newPrice.toInt()>current_price.toInt()) {
+                    val builder = AlertDialog.Builder(context)
+                    builder.setTitle("Update Bid")
+                        .setMessage("are you sure you want update your bid to $newPrice ?")
+                        .setPositiveButton("Update") { dialog, which ->
+                            addBidViewModel.updateBidPrice(auctionId!!, newPrice, token.toString())
+                            findNavController().navigate(
+                                R.id.action_addBidFragment_to_auctionFragment
+                            )
+                        }
+                        .setNegativeButton("Cancel") { dialog, which ->
+                        }
+                    val alertDialog: AlertDialog = builder.create()
+                    alertDialog.show()
                     addBidViewModel.priceUpdated.observe(viewLifecycleOwner, Observer {
                         if (it != null) {
                             Toast.makeText(requireContext(), "price updated", Toast.LENGTH_LONG)
@@ -123,15 +137,13 @@ class AddBidFragment:Fragment(R.layout.place_bid) {
                         } else {
                             Toast.makeText(
                                 requireContext(),
-                                "price updating  failed",
+                                "price updating failed",
                                 Toast.LENGTH_LONG
                             )
                                 .show()
                         }
                     })
-                    findNavController().navigate(
-                        R.id.action_addBidFragment_to_auctionFragment
-                    )
+
                 }
                 else{
                     Toast.makeText(requireContext(), "if you decided to update the price to bigger i guess ! ", Toast.LENGTH_LONG)
@@ -140,12 +152,35 @@ class AddBidFragment:Fragment(R.layout.place_bid) {
                 }
             } else if(my_price == null && note==null) {
                 val priceToAdd= binding.myPrice.text.toString()
-                val noteToAdd= binding.note.text.toString()
-                Log.i("bid added is ", my_price + note)
-                val bid = Bid(30, noteToAdd, priceToAdd, username.toString(), auctionId!!,
-                    getUserInfoViewModel.info.value!!.profile_picture_path)
-                Log.i("bid added is ", bid.toString())
-                addBidViewModel.addBid(bid, auctionId, token.toString())
+                if(priceToAdd.toInt()>current_price.toInt()) {
+                    val noteToAdd = binding.note.text.toString()
+                    Log.i("bid added is ", my_price + note)
+                    val bid = Bid(
+                        30, noteToAdd, priceToAdd, username.toString(), auctionId!!,
+                        getUserInfoViewModel.info.value!!.profile_picture_path
+                    )
+                    Log.i("bid added is ", bid.toString())
+                    val builder = AlertDialog.Builder(context)
+                    builder.setTitle("Add bid")
+                        .setMessage("are you sure you want add $priceToAdd ?")
+                        .setPositiveButton("Add") { dialog, which ->
+                            addBidViewModel.addBid(bid, auctionId, token.toString())
+                            findNavController().navigate(
+                                R.id.action_addBidFragment_to_auctionFragment
+                            )
+                        }
+                        .setNegativeButton("Cancel") { dialog, which ->
+                        }
+
+                    val alertDialog: AlertDialog = builder.create()
+                    alertDialog.show()
+                }
+                else{
+                    Toast.makeText(requireContext(), "The amount you proposed is less than the current bid ", Toast.LENGTH_LONG)
+                        .show()
+
+                }
+
                 addBidViewModel.response.observe(viewLifecycleOwner, Observer {
                     if (it != null) {
                         Toast.makeText(requireContext(), "bid added", Toast.LENGTH_LONG).show()
@@ -155,9 +190,7 @@ class AddBidFragment:Fragment(R.layout.place_bid) {
                             .show()
                     }
                 })
-                findNavController().navigate(
-                    R.id.action_addBidFragment_to_auctionFragment
-                )
+
 
             }
         }

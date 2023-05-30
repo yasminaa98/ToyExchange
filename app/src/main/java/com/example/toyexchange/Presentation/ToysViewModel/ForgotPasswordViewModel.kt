@@ -30,6 +30,7 @@ class ForgotPasswordViewModel @Inject constructor(
                 if(result.body()!=null){
                     _tokenMsg.postValue(result.body()) }
                 else{
+                    _tokenMsg.postValue(result.body())
                     Log.i("error msg",result.message())
 
                 }

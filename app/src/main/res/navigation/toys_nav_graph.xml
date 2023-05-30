@@ -31,7 +31,11 @@
         android:id="@+id/addToysFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.AnnoncesFragment.AddToyFragment"
         android:label="Add Toy "
-    />
+    >
+        <action
+            android:id="@+id/action_addToysFragment_to_feedToysFragment"
+            app:destination="@id/feedToysFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailsToysFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.DetailsToysFragment"

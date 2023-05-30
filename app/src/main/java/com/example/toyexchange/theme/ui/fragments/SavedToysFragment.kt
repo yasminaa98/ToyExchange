@@ -40,6 +40,8 @@ class SavedToysFragment: Fragment(R.layout.saved_toys_fragment) {
         roomViewModel = ViewModelProvider(this, roomViewModelFactory)[RoomViewModel::class.java]
         (activity as MainActivity).setBottomNavigation(true)
         (activity as MainActivity).setToolbar(true)
+        (activity as MainActivity).setSlideNavigaton(true)
+
 
 
         binding.savedToys.apply {

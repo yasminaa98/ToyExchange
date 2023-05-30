@@ -15,6 +15,7 @@ import com.example.toyexchange.Presentation.ToysViewModel.LoginViewModel
 import com.example.toyexchange.R
 import com.example.toyexchange.databinding.ForgotPasswordFragmentBinding
 import com.example.toyexchange.databinding.SignInFragmentBinding
+import com.example.toyexchange.theme.ui.MainActivity
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,13 +31,24 @@ class ForgotPasswordFragment: Fragment(R.layout.forgot_password_fragment) {
         savedInstanceState: Bundle?
     ): View {
         val binding = ForgotPasswordFragmentBinding.inflate(inflater, container, false)
+        (activity as MainActivity).setSlideNavigaton(false)
+        (activity as MainActivity).setBottomNavigation(false)
+        (activity as MainActivity).setToolbar(false)
         forgotPasswordViewModel = ViewModelProvider(this).get(ForgotPasswordViewModel::class.java)
         binding.send.setOnClickListener {
             val email = binding.email.text.toString()
-            Log.i("email", email)
-            forgotPasswordViewModel.forgotPassword(email)
+
+            if (email.isEmpty()) {
+                binding.email.error = "Email is required"
+            } else if (!email.matches(Regex("[a-zA-Z0-9._-]*@[a-z]+\\.+[a-z]+"))) {
+                binding.email.error = "Invalid email format"
+            } else {
+                Log.i("email", email)
+                forgotPasswordViewModel.forgotPassword(email)
+            }
         }
-            forgotPasswordViewModel.tokenMsg.observe(viewLifecycleOwner, Observer {
+
+        forgotPasswordViewModel.tokenMsg.observe(viewLifecycleOwner, Observer {
                 if (it != null) {
                     Toast.makeText(
                         requireContext(),

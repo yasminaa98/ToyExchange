@@ -17,6 +17,7 @@ import com.example.toyexchange.Domain.model.Request
 import com.example.toyexchange.Presentation.ToysViewModel.LoginViewModel
 import com.example.toyexchange.R
 import com.example.toyexchange.databinding.SignInFragmentBinding
+import com.example.toyexchange.theme.ui.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,14 +35,27 @@ class SignInFragment: Fragment(R.layout.sign_in_fragment) {
         val binding = SignInFragmentBinding.inflate(inflater, container, false)
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         mAuth = FirebaseAuth.getInstance()
+        (activity as MainActivity).setBottomNavigation(false)
+        (activity as MainActivity).setToolbar(false)
+        (activity as MainActivity).setSlideNavigaton(false)
+
 
         binding.signInButton.setOnClickListener {
-            val email=binding.signInEmail.text.toString()
-            Log.i("email",email)
-            val password=binding.signInPassword.text.toString()
-            Log.i("password",password)
-            val request= Request(email,password)
-        loginViewModel.userLogin(request)
+            val email = binding.signInEmail.text.toString()
+            val password = binding.signInPassword.text.toString()
+
+            if (email.isEmpty() || password.isEmpty()) {
+                // Display an error message or set an error on the corresponding EditText
+                if (email.isEmpty()) {
+                    binding.signInEmail.error = "Email is required"
+                }
+                if (password.isEmpty()) {
+                    binding.signInPassword.error = "Password is required"
+                }
+            } else {
+                val request = Request(email, password)
+                loginViewModel.userLogin(request)
+            }
             //Toast.makeText(requireContext(),"button clicked",Toast.LENGTH_LONG).show()
         }
         loginViewModel.token.observe(viewLifecycleOwner, Observer {
@@ -80,7 +94,9 @@ class SignInFragment: Fragment(R.layout.sign_in_fragment) {
 
         return binding.root
 
+
     }
+
     private fun login(email: String, password: String){
         mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->

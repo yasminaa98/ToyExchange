@@ -170,9 +170,9 @@ class MyAuctionDetailsFragment: Fragment(R.layout.my_auction_details) {
         //delete auction when clicking
         binding.delete.setOnClickListener{
             val builder = AlertDialog.Builder(context)
-            builder.setTitle("Alert")
-                .setMessage("This is an alert dialog.")
-                .setPositiveButton("OK") { dialog, which ->
+            builder.setTitle("Delete auction")
+                .setMessage("are you sure you want delete this auction definitely?")
+                .setPositiveButton("Delete") { dialog, which ->
                     auctionDetailsViewModel.deleteAuction(auctionId!!)
                     findNavController().navigate(
                         R.id.action_myAuctionDetailsFragment_to_myAuctionFragment)

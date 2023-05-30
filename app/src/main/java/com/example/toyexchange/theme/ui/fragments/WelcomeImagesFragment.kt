@@ -23,6 +23,7 @@ class WelcomeImagesFragment : Fragment(R.layout.welcome_images_slider) {
     ): View {
         val binding = WelcomeImagesSliderBinding.inflate(inflater, container, false)
         // create instance of viewmodel , the life cycle library creates it for us so if the viewmodel destroyed we don't need to recreated
+        (activity as MainActivity).setSlideNavigaton(false)
         (activity as MainActivity).setBottomNavigation(false)
         (activity as MainActivity).setToolbar(false)
         //notification

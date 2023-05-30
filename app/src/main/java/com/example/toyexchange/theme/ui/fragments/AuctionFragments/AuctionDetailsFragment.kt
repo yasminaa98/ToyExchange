@@ -79,7 +79,8 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
         val bundle = bundleOf(
             "idAuction" to auctionId,
             "end_dateTime" to endDateTime,
-            "image" to image
+            "image" to image,
+            "current" to initial_price
         )
         Log.i("bundle", bundle.toString())
         Log.i("auctionId", auctionId.toString())

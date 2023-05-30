@@ -174,7 +174,7 @@ class DetailsToysFragment : Fragment(R.layout.toy_details_fragment) {
             (activity as MainActivity).setToolbar(true)
         }
         val toyToSave =
-            ToysInformation(toyId!!, _category, description, image, name, price, "", "", "", false)
+            ToysInformation(toyId!!, _category, description, image, name, price, _state, ageChild, ageToy, false)
         binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
             sharedPreferencesRoom.edit().putBoolean("checkbox_state", isChecked).apply()
             if (isChecked) {

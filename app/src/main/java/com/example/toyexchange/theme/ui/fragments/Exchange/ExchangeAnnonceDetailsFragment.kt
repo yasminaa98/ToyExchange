@@ -32,7 +32,6 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class ExchangeAnnonceDetailsFragment:Fragment(R.layout.exchange_annonce_details) {
 
-
     private lateinit var detailsToyViewModel: DetailsToyViewModel
 
 

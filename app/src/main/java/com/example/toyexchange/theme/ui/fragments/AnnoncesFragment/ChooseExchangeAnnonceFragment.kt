@@ -1,5 +1,6 @@
 package com.example.toyexchange.theme.ui.fragments.AnnoncesFragment
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -52,8 +53,20 @@ class ChooseExchangeAnnonceFragment:Fragment(R.layout.choose_exchange_annonce_fr
                         val exchange= Exchange(0,sender.toString(),receiver.toString(),id_receiver_annonce!!,id_sender_annonce,"waiting")
                         binding.swap.visibility=View.VISIBLE
                         binding.swap.setOnClickListener{
-                        exchangeViewModel.addExchangeOffer(exchange,token.toString())
-                            findNavController().navigate(R.id.action_chooseExchangeAnnonceFragment_to_feedToysFragment)}
+                            val builder = AlertDialog.Builder(context)
+                            builder.setTitle("Exchange request")
+                                .setMessage("are you sure you to send this exchange request ?")
+                                .setPositiveButton("Send") { dialog, which ->
+                                    exchangeViewModel.addExchangeOffer(exchange,token.toString())
+                                    findNavController().navigate(R.id.action_chooseExchangeAnnonceFragment_to_feedToysFragment)
+                                }
+                                .setNegativeButton("Cancel") { dialog, which ->
+                                }
+                            val alertDialog: AlertDialog = builder.create()
+                            alertDialog.show()
+
+
+                        }
                     },lifecycleScope)
                 binding.annoncesList.adapter = selectExchangeAnnonceAdapter
             })

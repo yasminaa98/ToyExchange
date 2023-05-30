@@ -1,6 +1,7 @@
 package com.example.toyexchange.theme.ui.fragments.AnnoncesFragment
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -92,8 +93,18 @@ class MyAnnoncedetailsFragment: Fragment(R.layout.my_annonce_details) {
         else {
             binding.archive.setImageResource(R.drawable.vue)
             binding.archive.setOnClickListener {
-                binding.archive.setImageResource(R.drawable.archived)
-                detailsToyViewModel.archiveAnnonce(idAnnonce!!, token.toString())
+                val builder = AlertDialog.Builder(context)
+                builder.setTitle("Archive toy")
+                    .setMessage("are you sure you want to archive this toy ?")
+                    .setPositiveButton("Archive") { dialog, which ->
+                        binding.archive.setImageResource(R.drawable.archived)
+                        detailsToyViewModel.archiveAnnonce(idAnnonce!!, token.toString())
+                    }
+                    .setNegativeButton("Cancel") { dialog, which ->
+                    }
+
+                val alertDialog: AlertDialog = builder.create()
+                alertDialog.show()
                 detailsToyViewModel.response.observe(viewLifecycleOwner, Observer {
                     if (it != null) {
 
