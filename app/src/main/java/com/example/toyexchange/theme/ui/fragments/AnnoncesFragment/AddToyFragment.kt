@@ -79,7 +79,10 @@ class AddToyFragment: Fragment(R.layout.add_toy_fragment) {
             }
         }
         selectedImage=binding.annoncePicture
-        selectedImage.setOnClickListener{ openGallery()}
+        selectedImage.setOnClickListener{
+            selectedImage.setImageDrawable(null)
+            openGallery()
+        }
         // Inside the addButton click listener
         binding.addButton.setOnClickListener {
             val name = binding.toyName.text.toString()

@@ -21,9 +21,9 @@ val name: String,
 val price: String,
 @SerializedName("state")
 val state: String,
-@SerializedName("ageChild")
+@SerializedName("age_child")
 val age_child: String,
-@SerializedName("ageToy")
+@SerializedName("age_toy")
 val age_toy: String,
 @SerializedName("estArchive")
 val estArchive:Boolean

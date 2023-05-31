@@ -32,7 +32,7 @@ class SignUpFragment:Fragment(R.layout.sign_up_fragment) {
             val username = binding.username.text.toString()
             val address = binding.address.text.toString()
             val avg_response = binding.avgResponse.text.toString()
-            val phone = binding.phone.text
+            val phone = binding.phone.text.toString()
 
             var hasError = false
 

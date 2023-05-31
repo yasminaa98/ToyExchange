@@ -65,7 +65,7 @@
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.AuthenticationFragment.SignInFragment"
-        android:label="SignInFragment" >
+        android:label="Sign In" >
         <action
             android:id="@+id/action_signInFragment_to_feedToysFragment"
             app:destination="@id/feedToysFragment"
@@ -101,7 +101,7 @@
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.AuthenticationFragment.SignUpFragment"
-        android:label="SignUpFragment" >
+        android:label="Sign Up" >
         <action
             android:id="@+id/action_signUpFragment_to_addPasswordFragment"
             app:destination="@id/addPasswordFragment"
@@ -128,7 +128,7 @@
     <fragment
         android:id="@+id/myAnnoncesFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.AnnoncesFragment.MyAnnoncesFragment"
-        android:label="My toy annonces" >
+        android:label="My toy Ads" >
         <action
             android:id="@+id/action_myAnnoncesFragment_to_myAnnoncedetailsFragment"
             app:destination="@id/myAnnoncedetailsFragment" />
@@ -144,7 +144,7 @@
     <fragment
         android:id="@+id/auctionFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.AuctionFragments.AuctionFragment"
-        android:label="AuctionFragment" >
+        android:label="Auctions " >
 
         <action
             android:id="@+id/action_auctionFragment_to_auctionDetailsFragment"
@@ -159,7 +159,7 @@
     <fragment
         android:id="@+id/auctionDetailsFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.AuctionFragments.AuctionDetailsFragment"
-        android:label="AuctionDetailsFragment" >
+        android:label="Auction details" >
         <action
             android:id="@+id/action_auctionDetailsFragment_to_addBidFragment"
             app:destination="@id/addBidFragment" />
@@ -187,7 +187,7 @@
     <fragment
         android:id="@+id/myAuctionFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.AuctionFragments.MyAuctionFragment"
-        android:label="MyAuctionFragment" >
+        android:label="My Auctions " >
         <action
             android:id="@+id/action_myAuctionFragment_to_myAuctionDetailsFragment"
             app:destination="@id/myAuctionDetailsFragment" />
@@ -223,7 +223,7 @@
     <fragment
         android:id="@+id/addAuctionFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.AuctionFragments.AddAuctionFragment"
-        android:label="AddAuctionFragment" >
+        android:label="Add Auction" >
         <action
             android:id="@+id/action_addAuctionFragment_to_myAuctionFragment"
             app:destination="@id/myAuctionFragment" />
@@ -239,7 +239,7 @@
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.Exchange.NotificationFragment"
-        android:label="NotificationFragment" >
+        android:label="Notification" >
         <action
             android:id="@+id/action_notificationFragment_to_exchangeDecisionFragment"
             app:destination="@id/exchangeDecisionFragment" />
@@ -255,7 +255,7 @@
     <fragment
         android:id="@+id/exchangeAnnonceDetailsFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.Exchange.ExchangeAnnonceDetailsFragment"
-        android:label="ExchangeAnnonceDetailsFragment" >
+        android:label="Exchange Ad Details " >
         <action
             android:id="@+id/action_exchangeAnnonceDetailsFragment_to_chat"
             app:destination="@id/chat" />
@@ -274,7 +274,7 @@
     <fragment
         android:id="@+id/exchangeResultFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.AnnoncesFragment.ExchangeResultFragment"
-        android:label="ExchangeResultFragment" >
+        android:label="Exchange Requests" >
         <action
             android:id="@+id/action_exchangeResultFragment_to_exchangeDecisionFragment"
             app:destination="@id/exchangeDecisionFragment" />
@@ -282,11 +282,11 @@
     <fragment
         android:id="@+id/forgotPasswordFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.ForgotPasswordFragment"
-        android:label="ForgotPasswordFragment" />
+        android:label="Forgot Password" />
     <fragment
         android:id="@+id/resetPasswordFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.ResetPasswordFragment"
-        android:label="ResetPasswordFragment" >
+        android:label="Reset Password" >
         <action
             android:id="@+id/action_resetPasswordFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
@@ -294,7 +294,7 @@
     <fragment
         android:id="@+id/exchangeDecisionResultFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.Exchange.ExchangeDecisionResultFragment"
-        android:label="Exchange result" >
+        android:label="Exchange Ads " >
         <action
             android:id="@+id/action_exchangeDecisionResultFragment_to_exchangeAnnonceDetailsFragment"
             app:destination="@id/exchangeAnnonceDetailsFragment" />
@@ -302,15 +302,15 @@
     <fragment
         android:id="@+id/chatMainFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.ChatFragment.ChatMainFragment"
-        android:label="ChatMainFragment" />
+        android:label="Chat" />
     <fragment
         android:id="@+id/chat"
         android:name="com.example.toyexchange.theme.ui.fragments.ChatFragment.Chat"
-        android:label="Chat" />
+        android:label="Chat Box" />
     <fragment
         android:id="@+id/splash_Fragment"
         android:name="com.example.toyexchange.theme.ui.fragments.Splash_Fragment"
-        android:label="Splash_Fragment" >
+        android:label="Splash Screen" >
         <action
             android:id="@+id/action_splash_Fragment_to_signInFragment"
             app:destination="@id/signInFragment" />
@@ -321,7 +321,7 @@
     <fragment
         android:id="@+id/welcomeImagesFragment"
         android:name="com.example.toyexchange.theme.ui.fragments.WelcomeImagesFragment"
-        android:label="WelcomeImagesFragment" >
+        android:label="Welcome" >
         <action
             android:id="@+id/action_welcomeImagesFragment_to_signInFragment"
             app:destination="@id/signInFragment" />

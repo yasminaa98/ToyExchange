@@ -57,7 +57,8 @@ class SavedToysFragment: Fragment(R.layout.saved_toys_fragment) {
                             "id" to clickedItem.id,
                             "name" to clickedItem.name, "description" to clickedItem.description,
                             "price" to clickedItem.price, "category" to clickedItem.category,
-                            "image_url" to clickedItem.picturePath
+                            "image_url" to clickedItem.picturePath,"age_toy" to clickedItem.age_toy,
+                            "age_child" to clickedItem.age_child,"state" to clickedItem.state
                         )
                         findNavController().navigate(
                             R.id.action_savedToysFragment_to_detailsToysFragment,

@@ -43,6 +43,9 @@ class ExchangeAnnonceDetailsFragment:Fragment(R.layout.exchange_annonce_details)
     ): View {
         val binding = ExchangeAnnonceDetailsBinding.inflate(inflater, container, false)
         detailsToyViewModel = ViewModelProvider(this).get(DetailsToyViewModel::class.java)
+        (activity as MainActivity).setSlideNavigaton(false)
+        (activity as MainActivity).setBottomNavigation(false)
+        (activity as MainActivity).setToolbar(true)
 
         //get current user
         val sharedPreferences =

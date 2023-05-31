@@ -45,7 +45,7 @@ class AddPasswordFragment : Fragment(R.layout.add_password_fragment) {
         val username = arguments?.getString("username").toString()
         val address = arguments?.getString("address").toString()
         val avg_response = arguments?.getString("avg_response").toString()
-        val phone = arguments?.getInt("phone")!!
+        val phone = arguments?.getString("phone")!!
         mAuth = FirebaseAuth.getInstance()
         binding.signupButton.setOnClickListener {
             val password = binding.password.text.toString()
@@ -59,7 +59,7 @@ class AddPasswordFragment : Fragment(R.layout.add_password_fragment) {
                     lastname,
                     username,
                     password,
-                    phone,
+                    phone.toInt(),
                     avg_response,"no picture yet"
                 )
                 Log.i("info", user.apply {
@@ -91,6 +91,8 @@ class AddPasswordFragment : Fragment(R.layout.add_password_fragment) {
                 val editor = sharedPreferences.edit()
                 editor.putString("authToken", it.auth_token)
                 editor.apply()
+                findNavController().navigate(
+                    R.id.action_addPasswordFragment_to_signInFragment)
             }
             else{
                 Toast.makeText(requireContext(),"sign up failed: username or email are already taken",Toast.LENGTH_LONG).show()

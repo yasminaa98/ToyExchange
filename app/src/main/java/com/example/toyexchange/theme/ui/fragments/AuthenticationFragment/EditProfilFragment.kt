@@ -62,6 +62,7 @@ class EditProfilFragment : Fragment(R.layout.profil_edit_fragment) {
         (activity as MainActivity).setBottomNavigation(true)
         getUserInfoViewModel = ViewModelProvider(this).get(GetUserInfoViewModel::class.java)
         //decode profile image
+
         binding.profileImage.setOnClickListener {
             openGallery()
             /*sendImage()*/

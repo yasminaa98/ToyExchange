@@ -71,10 +71,10 @@ class MyAnnoncedetailsFragment: Fragment(R.layout.my_annonce_details) {
 
                 toyName.setText(name)
                 toyDescription.setText(description)
-                childAge.setText(age_child)
-                category.setText(_category)
-                state.setText(_state)
-                toyAge.setText(age_toy)
+                childAge.setText("Child age: "+age_child)
+                category.setText("Category: "+_category)
+                state.setText("State: "+_state)
+                toyAge.setText("Toy age: "+age_toy)
                 Glide.with(requireActivity())
                     .load(IMAGE_URL+_image)
                     .apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation

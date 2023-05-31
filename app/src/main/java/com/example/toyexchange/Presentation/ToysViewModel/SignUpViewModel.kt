@@ -24,6 +24,8 @@ class SignUpViewModel @Inject constructor(
     fun userSignUp(user: User){
         viewModelScope.launch {
             var result=authRepository.userSignUp(user)
+            Log.i("result",result.toString())
+
             try{
                 if(result.body()!=null){
                     _msg.postValue(result.body()) }

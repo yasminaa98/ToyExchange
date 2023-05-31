@@ -2,9 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
 <androidx.constraintlayout.widget.ConstraintLayout
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/singin">
@@ -16,7 +14,7 @@
         android:background="@drawable/user_profil_shape"
         android:ems="10"
         android:inputType="textPassword"
-        android:text="mohamed"
+        android:hint="Password"
         android:textColor="#A11E3F"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,8 +33,7 @@
         android:textColor="#A11E3F"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="yass98"
-
+        android:hint="Username"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
