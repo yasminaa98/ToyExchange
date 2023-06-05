@@ -134,6 +134,7 @@ class FeedToysFragment : Fragment(R.layout.feed_toys_fragment){
                     "outdoor" -> "outdoor"
                     "animals" -> "animals"
                     "educational" -> "educational"
+                    "dolls" -> "dolls"
                     else -> ""
                 }
 

@@ -18,8 +18,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailsToyViewModel @Inject constructor(private val toysRepositoryImpl: ToysRepositoryImpl): ViewModel() {
-
-
     private val _annonceOwner = MutableLiveData<User>()
     val annonceOwner: LiveData<User> =_annonceOwner
 
@@ -31,7 +29,6 @@ class DetailsToyViewModel @Inject constructor(private val toysRepositoryImpl: To
     val annonce: LiveData<Annonce> =_annonce
     private val _response = MutableLiveData<JsonObject>()
     val response: LiveData<JsonObject> =_response
-
 
     fun getAnnonceOwner(idAnnonce:Long){
         viewModelScope.launch {

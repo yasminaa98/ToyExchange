@@ -63,6 +63,8 @@ class ResetPasswordFragment:Fragment(R.layout.reset_password_fragment) {
                     Toast.LENGTH_LONG
                 ).show()
 
+                findNavController().navigate(R.id.signInFragment)
+
             }
         }
 

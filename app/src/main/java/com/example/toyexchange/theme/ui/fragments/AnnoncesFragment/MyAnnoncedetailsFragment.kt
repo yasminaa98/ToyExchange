@@ -68,7 +68,6 @@ class MyAnnoncedetailsFragment: Fragment(R.layout.my_annonce_details) {
 
             //Log.i("image arrived", image!!)
             binding.apply {
-
                 toyName.setText(name)
                 toyDescription.setText(description)
                 childAge.setText("Child age: "+age_child)
@@ -125,7 +124,7 @@ class MyAnnoncedetailsFragment: Fragment(R.layout.my_annonce_details) {
                 }
             }
         })
-        val bundle = bundleOf("id" to idAnnonce)
+        val bundle = bundleOf("id" to idAnnonce,"image" to _image)
 
         binding.Modifiy.setOnClickListener {
             findNavController().navigate(R.id.action_myAnnoncedetailsFragment_to_modifyAnnonceFragment,bundle)

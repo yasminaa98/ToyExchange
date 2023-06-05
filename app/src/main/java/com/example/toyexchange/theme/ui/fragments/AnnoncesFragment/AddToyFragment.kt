@@ -49,7 +49,6 @@ class AddToyFragment: Fragment(R.layout.add_toy_fragment) {
     private lateinit var addToyViewModel: AddToyViewModel
     private lateinit var selectedImage: ImageView
     private lateinit var selectedPhotoUri: Uri
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -174,7 +173,6 @@ class AddToyFragment: Fragment(R.layout.add_toy_fragment) {
             alertDialog.show()
 
         }
-
         addToyViewModel.adding_msg.observe(viewLifecycleOwner , Observer {
             if(it!=null){
                 Toast.makeText(requireContext(),"toy added successfully", Toast.LENGTH_LONG).show()
@@ -185,13 +183,11 @@ class AddToyFragment: Fragment(R.layout.add_toy_fragment) {
             }
         })
         return binding.root
-
     }
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, PICK_IMAGE_REQUEST.REQUEST_CODE_PICK_IMAGE)
     }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {

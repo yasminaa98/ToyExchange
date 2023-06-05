@@ -51,34 +51,43 @@ class AddPasswordFragment : Fragment(R.layout.add_password_fragment) {
             val password = binding.password.text.toString()
             val repeatPassword = binding.repeatPassword.text.toString()
             if (password == repeatPassword) {
-                val user = User(
-                    address,
-                    email,
-                    1,
-                    firstname,
-                    lastname,
-                    username,
-                    password,
-                    phone.toInt(),
-                    avg_response,"no picture yet"
-                )
-                Log.i("info", user.apply {
-                    firstname
-                    lastname
-                    email
-                    username
-                    address
-                    avg_response
-                    phone
-                    password
-                }.toString())
-                signUpViewModel.userSignUp(user)
-                FirebaseApp.initializeApp(requireContext());
-                signUp(username,email,password)
+                if (isStrongPassword(password)) {
+                    val user = User(
+                        address,
+                        email,
+                        1,
+                        firstname,
+                        lastname,
+                        username,
+                        password,
+                        phone.toInt(),
+                        avg_response, "no picture yet"
+                    )
+                    Log.i("info", user.apply {
+                        firstname
+                        lastname
+                        email
+                        username
+                        address
+                        avg_response
+                        phone
+                        password
+                    }.toString())
+                    signUpViewModel.userSignUp(user)
+                    FirebaseApp.initializeApp(requireContext());
+                    signUp(username, email, password)
+
+                }
+                else{
+                    Toast.makeText(requireContext(), "password not strong enough", Toast.LENGTH_LONG)
+                        .show()
+
+                }
 
             }
-            else{
-                Toast.makeText(requireContext(),"password not compatible",Toast.LENGTH_LONG).show()
+            else {
+                Toast.makeText(requireContext(), "password not compatible", Toast.LENGTH_LONG)
+                    .show()
 
             }
         }
@@ -102,6 +111,16 @@ class AddPasswordFragment : Fragment(R.layout.add_password_fragment) {
         })
         return binding.root
     }
+
+    private fun isStrongPassword(password: String): Boolean {
+        val passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+\$).{8,}\$"
+
+        // Check if the password matches the pattern
+        val pattern = Regex(passwordPattern)
+        return pattern.matches(password)
+
+    }
+
     private fun signUp(username: String, email: String, password: String){
         //logic of creating user
         //https://firebase.google.com/docs/auth/android/password-auth

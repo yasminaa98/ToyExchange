@@ -160,8 +160,7 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
                     .load(IMAGE_URL+it.picturePath)
                     //.apply(RequestOptions.circleCropTransform()) // Apply circular crop transformation
                     .into(binding.toyImage)
-                        Toast.makeText(requireContext(), "picture got successfully", Toast.LENGTH_LONG)
-                            .show()
+
                     }else {
                 Toast.makeText(requireContext(), "getting picture failed", Toast.LENGTH_LONG).show()
             }
@@ -202,7 +201,6 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
                             val jsonObject = Gson().fromJson(it, JsonObject::class.java);
                             val messageValue = jsonObject.get("message").asString
                             binding.toyPrice.text = messageValue.toString()
-                            Toast.makeText(requireContext(), "last price", Toast.LENGTH_LONG).show()
                             Log.i("last price", it.toString())
                         } else {
                             Toast.makeText(
@@ -261,7 +259,7 @@ class AuctionDetailsFragment:Fragment(R.layout.auction_details) {
         binding.sendMessage.setOnClickListener{
             val database = FirebaseDatabase.getInstance()
             val userRef = database.getReference("user")
-            val nameToFind = detailsToyViewModel.annonceOwner.value?.username.toString()
+            val nameToFind = auctionDetailsViewModel.auctionOwner.value?.username.toString()
 
             userRef.orderByChild("name").equalTo(nameToFind).addListenerForSingleValueEvent(object :
                 ValueEventListener {

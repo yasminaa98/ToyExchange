@@ -62,6 +62,8 @@ class ModifyAnnonceFragment: Fragment(R.layout.modify_annonce_fragment) {
         val token =sharedPreferences.getString("authToken",null)
         //addToyViewModel.token=token
         val idAnnonce = arguments?.getLong("id")
+        val _image= arguments?.getString("image").toString()
+
         Log.i("id annonce",idAnnonce.toString())
         // get item selected
 
@@ -116,7 +118,7 @@ class ModifyAnnonceFragment: Fragment(R.layout.modify_annonce_fragment) {
                     idAnnonce!!,
                     category,
                     description,
-                    "image!!",
+                    _image,
                     name,
                     price,
                     state,

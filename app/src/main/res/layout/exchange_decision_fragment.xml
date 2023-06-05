@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="280dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="12dp"
+            app:cardElevation="3dp"
             android:layout_margin="20dp"
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
@@ -73,8 +73,8 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp">
@@ -137,7 +137,7 @@
             android:layout_height="280dp"
             android:layout_margin="20dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="12dp"
+            app:cardElevation="3dp"
             app:cardUseCompatPadding="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -199,8 +199,8 @@
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
                     android:orientation="vertical">
